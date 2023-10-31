@@ -16,7 +16,7 @@ export default function Login(){
         {
             fieldName: "Password",
             nameAttr: "password",
-            fieldType: "TEXT"
+            fieldType: "PASSWORD"
         },
         {
             fieldName: "Log in",

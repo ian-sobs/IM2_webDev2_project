@@ -11,21 +11,29 @@ function inputField(field){
         case "TEXT":
             return (
             <>
-                <h5 className="text-black p-[3px]">{field.fieldName}</h5>
-                <input className={styles + " w-full"} type="text" name={field.nameAttr}></input>
+                <label for={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label> <br></br>
+                <input className={styles + " w-full"} type="text" id={field.nameAttr} name={field.nameAttr}></input>
+            </>)
+        case "PASSWORD":
+            return(
+            <>
+                <label for={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label> <br></br>
+                <input className={styles + " w-full"} type="password" id={field.nameAttr} name={field.nameAttr}></input>
             </>)
         case "SELECT":
             return (
-            <>
-                <h5 className="text-black p-[3px]">{field.fieldName}</h5>
-                <select className={styles} name={field.nameAttr}></select>
-            </>)
+            <div className="flex space-x-[7px]">
+                <label className="text-black p-[3px]" for={field.nameAttr}>{field.fieldName}</label>
+                <select className={styles} id={field.nameAttr} name={field.nameAttr}>
+                    <option value="" selected disabled>Select a {field.fieldName.toLowerCase()}</option>
+                </select>
+            </div>)
         case "DATE":
             return (
-            <>
-                <h5 className="text-black p-[3px]">{field.fieldName}</h5>
-                <input className={styles} type="date" name={field.nameAttr}></input>
-            </>)
+            <div className="flex space-x-[7px]">
+                <label className="text-black p-[3px]" for={field.nameAttr}>{field.fieldName}</label>
+                <input className={styles} type="date" id={field.nameAttr} name={field.nameAttr}></input>
+            </div>)
         case "SUBMIT":
             return (
             <>

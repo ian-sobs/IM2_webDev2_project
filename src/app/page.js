@@ -36,12 +36,12 @@ export default function SignUp() {
     {
       fieldName: "Password",
       nameAttr: "password",
-      fieldType: "TEXT"
+      fieldType: "PASSWORD"
     },
     {
       fieldName: "Confirm password",
       nameAttr: "confirmPassword",
-      fieldType: "TEXT"
+      fieldType: "PASSWORD"
     },
     {
       fieldName: "Birth Date",
