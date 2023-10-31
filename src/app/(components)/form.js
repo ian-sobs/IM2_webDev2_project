@@ -1,4 +1,4 @@
-const styles = "text-black caret-[#9F9F9F] p-[3px] rounded bg-orange-100"
+const styles = "text-black caret-[#9F9F9F] p-[3px] rounded bg-orange-100 focus:outline-none focus:ring-2 ring-[#FFB169]"
 
 function inputField(field){
     switch(field.fieldType){
@@ -11,28 +11,27 @@ function inputField(field){
         case "TEXT":
             return (
             <>
-                <label for={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label> <br></br>
-                <input className={styles + " w-full"} type="text" id={field.nameAttr} name={field.nameAttr}></input>
+                <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label> <br></br>
+                <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="text" id={field.nameAttr} name={field.nameAttr}></input>
             </>)
         case "PASSWORD":
             return(
             <>
-                <label for={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label> <br></br>
-                <input className={styles + " w-full"} type="password" id={field.nameAttr} name={field.nameAttr}></input>
+                <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label> <br></br>
+                <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="password" id={field.nameAttr} name={field.nameAttr}></input>
             </>)
         case "SELECT":
             return (
             <div className="flex space-x-[7px]">
-                <label className="text-black p-[3px]" for={field.nameAttr}>{field.fieldName}</label>
-                <select className={styles} id={field.nameAttr} name={field.nameAttr}>
-                    <option value="" selected disabled>Select a {field.fieldName.toLowerCase()}</option>
+                <label className="text-black p-[3px]" htmlFor={field.nameAttr}>{field.fieldName}</label>
+                <select className={styles + "focus:ring-2 ring-[#FFB169] w-28"} id={field.nameAttr} name={field.nameAttr} defaultValue="">
                 </select>
             </div>)
         case "DATE":
             return (
             <div className="flex space-x-[7px]">
-                <label className="text-black p-[3px]" for={field.nameAttr}>{field.fieldName}</label>
-                <input className={styles} type="date" id={field.nameAttr} name={field.nameAttr}></input>
+                <label className="text-black p-[3px]" htmlFor={field.nameAttr}>{field.fieldName}</label>
+                <input className={styles + "focus:ring-2 ring-[#FFB169]"} type="date" id={field.nameAttr} name={field.nameAttr}></input>
             </div>)
         case "SUBMIT":
             return (
@@ -45,7 +44,7 @@ function inputField(field){
             return (
             <>
                 <h5 className="text-black p-[3px]">{field.fieldName}</h5>
-                <input className={styles + " w-full"} type="text"></input>
+                <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="text"></input>
             </>)
     }
         
