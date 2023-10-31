@@ -77,7 +77,7 @@ export default function signUp() {
 
     <>
 
-      <div className="p-[20px] flex justify-center">
+      <div className="p-4 flex justify-center">
         {<Form fields={fields} ></Form> }
         
       </div>
