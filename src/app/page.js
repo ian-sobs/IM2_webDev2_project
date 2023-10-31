@@ -19,38 +19,47 @@ export default function signUp() {
   const fields = [
     {
       fieldName: "Email",
+      nameAttr: "email",
       fieldType: "TEXT"
     },
     {
       fieldName: "Username",
+      nameAttr: "username",
       fieldType: "TEXT"
     },
     {
       fieldName: "Password",
+      nameAttr: "password",
       fieldType: "TEXT"
     },
     {
       fieldName: "Confirm password",
+      nameAttr: "confirmPassword",
       fieldType: "TEXT"
     },
     {
       fieldName: "First name",
+      nameAttr: "firstName",
       fieldType: "TEXT"
     },
     {
       fieldName: "Middle name",
+      nameAttr: "middleName",
       fieldType: "TEXT"
     },
     {
       fieldName: "Last name",
+      nameAttr: "lastName",
       fieldType: "TEXT"
     },
     {
       fieldName: "Country",
+      nameAttr: "country",
       fieldType: "SELECT"
     },
     {
       fieldName: "Address",
+      nameAttr: "address",
       fieldType: "TEXT"
     }
   ]
