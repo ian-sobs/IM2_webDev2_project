@@ -37,12 +37,12 @@ function inputField(field){
         
 }
 
-export default function form({fields}){
+export default function form({fields, size}){
     return(
         <>
-        <form>
-        <div className="scroll-smooth container p-[10px] align-middle w-11/12 sm:w-10/12 md:w-3/4 lg:w-2/5 xl:w-2/6 bg-gray-50 rounded">
-            <div className="container mx-auto w-5/6 ">
+        <form className="container p-[10px] w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded ">
+        <div className="flex justify-center">
+            <div className="container w-5/6 ">
                 {fields.map((field)=>
                     <>
                     <div className="py-[15px] bg-transparent">
