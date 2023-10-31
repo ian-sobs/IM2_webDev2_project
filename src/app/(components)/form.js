@@ -46,7 +46,7 @@ function inputField(field){
 export default function form({fields, size}){
     return(
         <>
-        <form className="container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded ">
+        <form className="container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-t-lg">
         <div className="flex justify-center">
             <div className="container w-5/6 ">
                 {fields.map((field)=>

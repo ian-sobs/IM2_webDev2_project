@@ -14,6 +14,7 @@
 //   return classes.filter(Boolean).join(' ')
 // }
 import Form from "./(components)/form"
+import Link from 'next/link'
 
 export default function SignUp() {
   const fields = [
@@ -84,6 +85,9 @@ export default function SignUp() {
 
       <div className="p-4 h-full flex flex-col justify-center items-center bg-gradient-to-tr from-[#DC8ECB] to-[#FFF8BD] via-[#FFB169]">
         <Form fields={fields} ></Form> 
+        <div className="text-black text-center container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-b-lg">
+          Already have an account? <span className="no-underline hover:underline text-[#fc1c6e]"><Link href="/login">Log in</Link></span>
+        </div>
       </div>
 
       
