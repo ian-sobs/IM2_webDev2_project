@@ -15,8 +15,13 @@
 // }
 import Form from "./(components)/form"
 
-export default function signUp() {
+export default function SignUp() {
   const fields = [
+    {
+      fieldName: "Sign Up",
+      nameAttr: "signUpHeading",
+      fieldType: "H1"
+    },
     {
       fieldName: "Email",
       nameAttr: "email",

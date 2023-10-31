@@ -2,6 +2,12 @@ const styles = "text-black caret-[#9F9F9F] p-[3px] rounded bg-orange-100"
 
 function inputField(field){
     switch(field.fieldType){
+        case "H1":
+            return(
+                <h1 className="text-center text-2xl text-black font-semibold">
+                    {field.fieldName}
+                </h1>
+            )
         case "TEXT":
             return (
             <>
@@ -24,7 +30,7 @@ function inputField(field){
             return (
             <>
                 <div className="flex justify-center">
-                    <button className="text-2xl w-32 font-semibold p-[5px] rounded-full text-center bg-gradient-to-r from-[#DC8ECB] to-[#FFB169]" type="submit">{field.fieldName}</button>
+                    <button className="text-xl w-32 font-medium p-[5px] rounded-full text-center bg-gradient-to-r from-[#DC8ECB] to-[#FFB169]" type="submit">{field.fieldName}</button>
                 </div>
             </> )
         default:
