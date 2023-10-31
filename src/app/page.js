@@ -38,6 +38,11 @@ export default function signUp() {
       fieldType: "TEXT"
     },
     {
+      fieldName: "Birth Date",
+      nameAttr: "birthDate",
+      fieldType: "DATE"
+    },
+    {
       fieldName: "First name",
       nameAttr: "firstName",
       fieldType: "TEXT"
