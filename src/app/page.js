@@ -66,6 +66,11 @@ export default function signUp() {
       fieldName: "Address",
       nameAttr: "address",
       fieldType: "TEXT"
+    },
+    {
+      fieldName: "Sign up",
+      nameAttr: "signUp",
+      fieldType: "SUBMIT"
     }
   ]
   return ( 
