@@ -82,8 +82,8 @@ export default function SignUp() {
 
     <>
 
-      <div className="p-4 h-full flex justify-center bg-gradient-to-tr from-[#DC8ECB] to-[#FFF8BD] via-[#FFB169]">
-        {<Form fields={fields} ></Form> }
+      <div className="p-4 h-full flex flex-col justify-center items-center bg-gradient-to-tr from-[#DC8ECB] to-[#FFF8BD] via-[#FFB169]">
+        <Form fields={fields} ></Form> 
       </div>
 
       
