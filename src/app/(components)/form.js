@@ -24,7 +24,7 @@ function inputField(field){
             return (
             <>
                 <div className="flex justify-center">
-                    <button className="text-2xl w-32 font-semibold p-[5px] rounded-full text-center bg-amber-500" type="submit">{field.fieldName}</button>
+                    <button className="text-2xl w-32 font-semibold p-[5px] rounded-full text-center bg-gradient-to-r from-[#DC8ECB] to-[#FFB169]" type="submit">{field.fieldName}</button>
                 </div>
             </> )
         default:

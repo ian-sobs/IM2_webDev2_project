@@ -77,7 +77,7 @@ export default function signUp() {
 
     <>
 
-      <div className="p-4 flex justify-center">
+      <div className="p-4 flex justify-center bg-gradient-to-tr from-[#DC8ECB] to-[#FFF8BD] via-[#FFB169]">
         {<Form fields={fields} ></Form> }
         
       </div>
