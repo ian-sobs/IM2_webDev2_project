@@ -1,98 +1,31 @@
-// "use client";
-// import { Fragment } from 'react'
-// import { Disclosure, Menu, Transition } from '@headlessui/react'
-// import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
+import welcomePhoto from './(icons)/welcomePhoto.jpg'
 
-// const navigation = [
-//   { name: 'Dashboard', href: '#', current: true },
-//   { name: 'Team', href: '#', current: false },
-//   { name: 'Projects', href: '#', current: false },
-//   { name: 'Calendar', href: '#', current: false },
-// ]
+export default function home(){
+    return(
+        <>
+            <div className="min-h-screen bg-white px-10 flex flex-wrap content-center">
+                <div className="flex flex-wrap flex-col justify-center md:flex-row lg:flex-row xl:flex-row">
+                        <div className="flex flex-wrap flex-col content-center justify-center first-letter:w-fit text-3xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl  text-black">
+                            <div className="w-fit">
+                                <p className="w-fit font-medium mb-[6px]">
+                                    Welcome to
+                                </p>
+                                <div className="w-fit p-[6px] bg-black">
+                                    <span className="font-bold bg-clip-text text-transparent bg-gradient-to-tr from-[#DC8ECB] from-30% via-[#FFB169] via-60% to-[#FFF8BD] to-90%">Bookii</span>
+                                </div>
+                            </div>
+                            <p className="my-[8px] text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl w-full md:w-9/12 lg:w-2/3 xl:w-1/2">
+                                Read more, learn more, and buy more with the convenience of having the book arrive at your doorstep with just a tap of your finger.
+                            </p>
 
-// function classNames(...classes) {
-//   return classes.filter(Boolean).join(' ')
-// }
-import Form from "./(components)/form"
-import Link from 'next/link'
+                            
+                        </div>
+                       <Image src={welcomePhoto} width={800} height={600}></Image>
+                </div>
+            </div>
+            
+        </>
+    )
 
-export default function SignUp() {
-  const fields = [
-    {
-      fieldName: "Sign Up",
-      nameAttr: "signUpHeading",
-      fieldType: "H1"
-    },
-    {
-      fieldName: "Email",
-      nameAttr: "email",
-      fieldType: "TEXT"
-    },
-    {
-      fieldName: "Username",
-      nameAttr: "username",
-      fieldType: "TEXT"
-    },
-    {
-      fieldName: "Password",
-      nameAttr: "password",
-      fieldType: "PASSWORD"
-    },
-    {
-      fieldName: "Confirm password",
-      nameAttr: "confirmPassword",
-      fieldType: "PASSWORD"
-    },
-    {
-      fieldName: "Birth Date",
-      nameAttr: "birthDate",
-      fieldType: "DATE"
-    },
-    {
-      fieldName: "First name",
-      nameAttr: "firstName",
-      fieldType: "TEXT"
-    },
-    {
-      fieldName: "Middle name",
-      nameAttr: "middleName",
-      fieldType: "TEXT"
-    },
-    {
-      fieldName: "Last name",
-      nameAttr: "lastName",
-      fieldType: "TEXT"
-    },
-    {
-      fieldName: "Country",
-      nameAttr: "country",
-      fieldType: "SELECT"
-    },
-    {
-      fieldName: "Address",
-      nameAttr: "address",
-      fieldType: "TEXT"
-    },
-    {
-      fieldName: "Sign up",
-      nameAttr: "signUp",
-      fieldType: "SUBMIT"
-    }
-  ]
-  return ( 
-
-    <>
-
-      <div className="p-4 min-h-screen flex flex-col justify-center items-center bg-gradient-to-tr from-[#DC8ECB] from-30% via-[#FFB169] via-60% to-[#FFF8BD] to-90%">
-        <Form fields={fields} ></Form> 
-        <div className="text-black text-center container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-b-lg">
-          Already have an account? <span className="no-underline hover:underline text-[#fc1c6e]"><Link href="/login">Log in</Link></span>
-        </div>
-      </div>
-
-      
-    </>
-  )
-   
 }
-
