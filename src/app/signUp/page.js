@@ -17,6 +17,13 @@ import Form from "../(components)/form"
 import Link from 'next/link'
 
 export default function SignUp() {
+  async function create(formData) {
+    // 'use server'
+ 
+    // mutate data
+    // revalidate cache
+  }
+
   const fields = [
     {
       fieldName: "Sign Up",
@@ -26,7 +33,7 @@ export default function SignUp() {
     {
       fieldName: "Email",
       nameAttr: "email",
-      fieldType: "TEXT"
+      fieldType: "EMAIL"
     },
     {
       fieldName: "Username",
