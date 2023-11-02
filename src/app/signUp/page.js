@@ -13,7 +13,7 @@
 // function classNames(...classes) {
 //   return classes.filter(Boolean).join(' ')
 // }
-import Form from "../(components)/form"
+import Form from "@/(components)/form"
 import Link from 'next/link'
 
 export default function SignUp() {

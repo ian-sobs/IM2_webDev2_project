@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import welcomePhoto from './(icons)/welcomePhoto.png'
+import welcomePhoto from '@/(icons)/welcomePhoto.png'
 import Link from 'next/link'
 
 export default function home(){
