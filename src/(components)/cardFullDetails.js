@@ -1,0 +1,1 @@
+//the full details of the book along with the reviews by the users (the reviews by the users might not part of this component to experiment with templates)

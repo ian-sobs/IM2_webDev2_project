@@ -1,12 +1,22 @@
 import Image from 'next/image'
 import welcomePhoto from '@/(icons)/welcomePhoto.png'
 import Link from 'next/link'
+import pool from '@/dbConn'
 
-export default function home(){
+export default async function home(){
+    const poolPromise = pool.promise()
+    const db =  await poolPromise.getConnection()
+    console.log(db)
+    // pool.promise().getConnection().then(
+    //     (value)=>{return new Promise(function(resolve, reject){
+    //         resolve(200)
+    //     })}
+    // ).then(console.log)
+
     return(
         <>
             {/* <div className="min-h-screen bg-white px-10 flex flex-wrap content-center justify-center md:flex-row lg:flex-row xl:flex-row text-3xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl  text-black">
-                        <div className="flex flex-col">
+                        <div className="flex flex-col"> 
                             <div className="flex flex-wrap flex-col content-center">
                                 <p className="font-medium mb-[6px]">
                                     Welcome to

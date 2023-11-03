@@ -1,0 +1,1 @@
+//the book "thumbnail" to display in the market and favorites section
