@@ -2,7 +2,6 @@
 import Form from "@/(components)/form"
 import Link from 'next/link'
 import pool from '@/dbConn'
-import form from "@/(components)/form"
 
 export default function SignUp() {
 
