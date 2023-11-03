@@ -2,6 +2,7 @@
 import Form from "@/(components)/form"
 import Link from 'next/link'
 import pool from '@/dbConn'
+import form from "@/(components)/form"
 
 export default function SignUp() {
 
@@ -74,14 +75,47 @@ export default function SignUp() {
 
     const poolPromise = pool.promise()
     const db =  await poolPromise.getConnection()
-    console.log(test)
-    
-    const results = await db.execute('select * from country where countryID = ?', [1])
-    console.log(results)
-    console.log(formData)
 
+    formData.delete("signUp")
+    const email = formData.get("email")
+    const username = formData.get("username")
+    const password = formData.get("password")
+    const birthDate = formData.get("birthDate")
+    const firstName = formData.get("firstName")
+    const middleName = formData.get("middleName")
+    const lastName = formData.get("lastName")
+    const address = formData.get("address")
+    
+    const [rows, fields] = await db.execute('SELECT COUNT(email), COUNT(username) FROM user WHERE email = ? AND username = ?', [email, username])
+    const [queriedForObj] = rows
+
+    // console.log(password)
+    // console.log(formData.get("confirmPassword"))
+
+    const bcrypt = require('bcrypt');
+    const saltRounds = 10;
+
+    if(queriedForObj["COUNT(email)"] < 1 && queriedForObj["COUNT(username)"] < 1 && password == formData.get("confirmPassword")){
+      // console.log("hello")
+      // console.log("COUNT(email)", queriedForObj["COUNT(email)"]) 
+      // console.log("COUNT(username)", queriedForObj["COUNT(username)"]) 
+      bcrypt.hash(password, saltRounds, function(err, hash) {
+          // Store hash in your password DB.
+          db.execute(
+            'INSERT INTO table_name (email, username, password,  birthDate, firstName, middleName, lastName, country, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [email, username, password, birthDate, firstName, middleName, lastName, 1, address],
+            function(err, results, fields) {
+              console.log(results); // results contains rows returned by server
+              console.log(fields); // fields contains extra meta data about results, if available
+          
+              // If you execute same statement again, it will be picked from a LRU cache
+              // which will save query preparation time and give better performance
+            }
+          );
+      })
+    }
   }
-  
+
   return ( 
 
     <>

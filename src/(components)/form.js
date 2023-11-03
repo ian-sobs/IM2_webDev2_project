@@ -1,6 +1,6 @@
 
 function inputField(field){
-    const styles = "text-black caret-[#9F9F9F] p-[3px] rounded bg-orange-100 focus:outline-none focus:ring-2 ring-[#FFB169]"
+    const styles = "text-black caret-[#9F9F9F] p-[3px] rounded bg-orange-100 focus:outline-none focus:ring-2 ring-[#FFB169] "
 
     switch(field.fieldType){
         case "H1":

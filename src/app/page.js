@@ -4,11 +4,11 @@ import Link from 'next/link'
 import pool from '@/dbConn'
 
 export default async function home(){
-    const poolPromise = pool.promise()
-    const db =  await poolPromise.getConnection()
+    // const poolPromise = pool.promise()
+    // const db =  await poolPromise.getConnection()
     
-    const results = await db.execute('select * from country where countryID = ?', [1])
-    console.log(results)
+    // const results = await db.execute('select * from country where countryID = ?', [1])
+    // console.log(results)
 
     return(
         <>
