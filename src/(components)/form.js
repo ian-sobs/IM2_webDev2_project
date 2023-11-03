@@ -1,6 +1,7 @@
-const styles = "text-black caret-[#9F9F9F] p-[3px] rounded bg-orange-100 focus:outline-none focus:ring-2 ring-[#FFB169]"
 
 function inputField(field){
+    const styles = "text-black caret-[#9F9F9F] p-[3px] rounded bg-orange-100 focus:outline-none focus:ring-2 ring-[#FFB169]"
+
     switch(field.fieldType){
         case "H1":
             return(
@@ -56,11 +57,11 @@ function inputField(field){
         
 }
 
-export default function form({fields, size, ...props}){
+export default function form({fields, size, action}){
     return(
         <>
-        <form {...props} className="container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-t-lg">
-        <div className="flex justify-center">
+        <form className="container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-t-lg" action={action}>
+        <div className="flex flex-wrap justify-center">
             <div className="container w-5/6 ">
                 {fields.map((field)=>
                     <>

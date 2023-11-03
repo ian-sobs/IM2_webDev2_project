@@ -1,28 +1,10 @@
-// "use client";
-// import { Fragment } from 'react'
-// import { Disclosure, Menu, Transition } from '@headlessui/react'
-// import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
-// const navigation = [
-//   { name: 'Dashboard', href: '#', current: true },
-//   { name: 'Team', href: '#', current: false },
-//   { name: 'Projects', href: '#', current: false },
-//   { name: 'Calendar', href: '#', current: false },
-// ]
-
-// function classNames(...classes) {
-//   return classes.filter(Boolean).join(' ')
-// }
 import Form from "@/(components)/form"
 import Link from 'next/link'
+import pool from '@/dbConn'
 
 export default function SignUp() {
-  async function create(formData) {
-    // 'use server'
- 
-    // mutate data
-    // revalidate cache
-  }
+
 
   const fields = [
     {
@@ -86,12 +68,26 @@ export default function SignUp() {
       fieldType: "SUBMIT"
     }
   ]
+
+  async function create(formData) {
+    'use server'
+
+    const poolPromise = pool.promise()
+    const db =  await poolPromise.getConnection()
+    console.log(test)
+    
+    const results = await db.execute('select * from country where countryID = ?', [1])
+    console.log(results)
+    console.log(formData)
+
+  }
+  
   return ( 
 
     <>
 
       <div className="p-4 min-h-screen flex flex-col justify-center items-center bg-gradient-to-tr from-[#DC8ECB] from-30% via-[#FFB169] via-60% to-[#FFF8BD] to-90%">
-        <Form fields={fields} ></Form> 
+        <Form  action={create} fields={fields} ></Form> 
         <div className="text-black text-center container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-b-lg">
           Already have an account? <span className="no-underline hover:underline text-[#fc1c6e]"><Link href="/login">Log in</Link></span>
         </div>
