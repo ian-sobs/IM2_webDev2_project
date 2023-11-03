@@ -102,8 +102,8 @@ export default function SignUp() {
       bcrypt.hash(password, saltRounds, function(err, hash) {
           // Store hash in your password DB.
           db.execute(
-            'INSERT INTO table_name (email, username, password,  birthDate, firstName, middleName, lastName, country, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [email, username, password, birthDate, firstName, middleName, lastName, 1, address],
+            'INSERT INTO user (email, username, password_bcrypt,  birthdate, firstName, midName, lastName, countryID, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [email, username, hash, birthDate, firstName, middleName, lastName, 1, address],
             function(err, results, fields) {
               console.log(results); // results contains rows returned by server
               console.log(fields); // fields contains extra meta data about results, if available
