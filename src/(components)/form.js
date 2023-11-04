@@ -1,5 +1,5 @@
 
-function inputField(field){
+function inputField(field, options){
     const styles = "text-black caret-[#9F9F9F] p-[3px] rounded bg-orange-100 focus:outline-none focus:ring-2 ring-[#FFB169] "
 
     switch(field.fieldType){
@@ -32,6 +32,7 @@ function inputField(field){
             <div className="flex space-x-[7px]">
                 <label className="text-black p-[3px]" htmlFor={field.nameAttr}>{field.fieldName}</label>
                 <select className={styles + "focus:ring-2 ring-[#FFB169] w-28"} id={field.nameAttr} name={field.nameAttr} defaultValue="">
+                    {options}
                 </select>
             </div>)
         case "DATE":
@@ -57,7 +58,7 @@ function inputField(field){
         
 }
 
-export default function form({fields, size, action}){
+export default function form({fields, options, action}){
     return(
         <>
         <form className="container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-t-lg" action={action}>
@@ -67,7 +68,7 @@ export default function form({fields, size, action}){
                     <>
                     <div className="py-[15px] bg-transparent">
                         
-                        {inputField(field)}
+                        {inputField(field, options)}
                     </div>
                     </>
                 )}

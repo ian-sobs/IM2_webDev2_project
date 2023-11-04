@@ -3,9 +3,7 @@ import Form from "@/(components)/form"
 import Link from 'next/link'
 import pool from '@/dbConn'
 
-export default function SignUp() {
-
-
+export default async function SignUp() {
   const fields = [
     {
       fieldName: "Sign Up",
@@ -69,6 +67,14 @@ export default function SignUp() {
     }
   ]
 
+  const poolPromise = pool.promise()
+  const db =  await poolPromise.getConnection()
+  const [cntryResults, cntryFields] = await db.execute("SELECT countryID, name FROM country ORDER BY name ASC")
+  console.log(cntryResults)
+  const options = cntryResults.map((cntry)=><option value={cntry.countryID}>{cntry.name}</option>)
+
+  poolPromise.releaseConnection(db)
+
   async function create(formData) {
     'use server'
 
@@ -84,10 +90,11 @@ export default function SignUp() {
     const middleName = formData.get("middleName")
     const lastName = formData.get("lastName")
     const address = formData.get("address")
+    const country = formData.get("country")
     
     const [rows, fields] = await db.execute('SELECT COUNT(email), COUNT(username) FROM user WHERE email = ? AND username = ?', [email, username])
     const [queriedForObj] = rows
-
+    console.log("formdata", formData)
     // console.log(password)
     // console.log(formData.get("confirmPassword"))
 
@@ -101,8 +108,8 @@ export default function SignUp() {
       bcrypt.hash(password, saltRounds, function(err, hash) {
           // Store hash in your password DB.
           db.execute(
-            'INSERT INTO user (email, username, password_bcrypt,  birthdate, firstName, midName, lastName, countryID, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [email, username, hash, birthDate, firstName, middleName, lastName, 1, address],
+            'INSERT INTO user (email, username, password_bcrypt,  birthdate, firstName, midName, lastName, address, countryID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [email, username, hash, birthDate, firstName, middleName, lastName, address, country],
             function(err, results, fields) {
               console.log(results); // results contains rows returned by server
               console.log(fields); // fields contains extra meta data about results, if available
@@ -113,6 +120,8 @@ export default function SignUp() {
           );
       })
     }
+
+    poolPromise.releaseConnection(db)
   }
 
   return ( 
@@ -120,7 +129,7 @@ export default function SignUp() {
     <>
 
       <div className="p-4 min-h-screen flex flex-col justify-center items-center bg-gradient-to-tr from-[#DC8ECB] from-30% via-[#FFB169] via-60% to-[#FFF8BD] to-90%">
-        <Form  action={create} fields={fields} ></Form> 
+        <Form  options={options} action={create} fields={fields} ></Form> 
         <div className="text-black text-center container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-b-lg">
           Already have an account? <span className="no-underline hover:underline text-[#fc1c6e]"><Link href="/login">Log in</Link></span>
         </div>
