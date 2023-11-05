@@ -1,5 +1,5 @@
 
-import Form from "@/(components)/form"
+import Form from "@/components/form"
 import Link from 'next/link'
 import pool from '@/dbConn'
 
