@@ -98,15 +98,11 @@ export default async function SignUp() {
     const [rows, fields] = await db.execute('SELECT COUNT(email), COUNT(username) FROM user WHERE email = ? AND username = ?', [email, username])
     const [queriedForObj] = rows
     console.log("formdata", formData)
-    // console.log(password)
-    // console.log(formData.get("confirmPassword"))
 
-
+    //modify the code to allow redirects and check if the input fields are empty
 
     if(queriedForObj["COUNT(email)"] < 1 && queriedForObj["COUNT(username)"] < 1 && password == formData.get("confirmPassword")){
-      // console.log("hello")
-      // console.log("COUNT(email)", queriedForObj["COUNT(email)"]) 
-      // console.log("COUNT(username)", queriedForObj["COUNT(username)"]) 
+
       bcrypt.hash(password, saltRounds, function(err, hash) {
           // Store hash in your password DB.
           db.execute(
