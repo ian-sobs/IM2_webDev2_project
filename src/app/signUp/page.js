@@ -78,6 +78,9 @@ export default async function SignUp() {
   async function create(formData) {
     'use server'
 
+    const bcrypt = require('bcrypt');
+    const saltRounds = 10;
+
     const poolPromise = pool.promise()
     const db =  await poolPromise.getConnection()
 
@@ -98,8 +101,7 @@ export default async function SignUp() {
     // console.log(password)
     // console.log(formData.get("confirmPassword"))
 
-    const bcrypt = require('bcrypt');
-    const saltRounds = 10;
+
 
     if(queriedForObj["COUNT(email)"] < 1 && queriedForObj["COUNT(username)"] < 1 && password == formData.get("confirmPassword")){
       // console.log("hello")

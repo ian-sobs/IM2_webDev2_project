@@ -1,5 +1,8 @@
+'use client'
 import Form from "@/components/form";
 import Link from 'next/link'
+import {submitLogin} from "./action";
+
 
 export default function Login(){
     const fields = [
@@ -28,7 +31,7 @@ export default function Login(){
     return(
         <>
         <div className="p-4 min-h-screen flex flex-col justify-center items-center bg-gradient-to-tr from-[#DC8ECB] from-30% via-[#FFB169] via-60% to-[#FFF8BD] to-90%">
-            <Form fields={fields} ></Form> 
+            <Form fields={fields} action={submitLogin}></Form> 
             <div className="text-black text-center container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-b-lg">
                 Don't have an account? <span className="no-underline hover:underline text-[#fc1c6e]"><Link href="/signUp">Sign up</Link></span>
             </div>
@@ -36,3 +39,6 @@ export default function Login(){
         </>
     )
 }
+
+// newTest@test.com
+// newTesterPassword
