@@ -1,4 +1,4 @@
-import NextAuth from "next-auth"
+// import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 
 export const authOptions = {
@@ -21,6 +21,7 @@ export const authOptions = {
           // that is false/null if the credentials are invalid.
           // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
           // You can also use the `req` object to obtain additional parameters
+          console.log(credentials)
           // (i.e., the request IP address)
           const res = await fetch("/your/endpoint", {
             method: 'POST',
@@ -61,7 +62,15 @@ export const authOptions = {
     generateSessionToken: () => {
       return randomUUID?.() ?? randomBytes(32).toString("hex")
     }
+  },
+
+  pages: {
+    signIn: '/login',
+    // signOut: '/auth/signout',
+    // error: '/auth/error', // Error code passed in query string as ?error=
+    // verifyRequest: '/auth/verify-request', // (used for check email message)
+    newUser: '/market' // New users will be directed here on first sign in (leave the property out if not of interest)
   }
 }
 
-export default NextAuth(authOptions)
+// export default NextAuth(authOptions)
