@@ -1,5 +1,5 @@
 
-'use client'
+// 'use client'
 function inputField(field, options){
     const styles = "text-black caret-[#9F9F9F] p-[3px] rounded bg-orange-100 focus:outline-none focus:ring-2 ring-[#FFB169] "
 
@@ -49,6 +49,12 @@ function inputField(field, options){
                     <button className="text-xl w-32 font-medium p-[5px] rounded-full text-center bg-gradient-to-r from-[#DC8ECB] to-[#FFB169]" id={field.nameAttr} name={field.nameAttr} type="submit">{field.fieldName}</button>
                 </div>
             </> )
+        case "hidden":
+            return(
+                <>
+                    <input name={field.nameAttr} type="hidden" value={field.value}></input>
+                </>
+            )
         default:
             return (
             <>
@@ -59,10 +65,10 @@ function inputField(field, options){
         
 }
 
-export default function form({fields, options, action}){
+export default function form({fields, options, action, ...props}){
     return(
         <>
-        <form className="container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-t-lg" action={action}>
+        <form {...props} className="container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-t-lg" action={action}>
         <div className="flex flex-wrap justify-center">
             <div className="container w-5/6 ">
                 {fields.map((field)=>
