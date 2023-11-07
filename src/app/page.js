@@ -41,7 +41,7 @@ export default async function home(){
                                 Sign Up
                             </button>
                         </Link>
-                        <Link href="/login">
+                        <Link href="/api/auth/signin">
                             <button className="text-xl w-32 font-medium p-[5px] rounded-full text-center bg-gradient-to-r from-[#DC8ECB] to-[#FFB169] text-white">
                                 Log in
                             </button>

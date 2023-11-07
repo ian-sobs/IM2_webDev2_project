@@ -1,4 +1,4 @@
-
+'use client'
 // 'use client'
 function inputField(field, options){
     const styles = "text-black caret-[#9F9F9F] p-[3px] rounded bg-orange-100 focus:outline-none focus:ring-2 ring-[#FFB169] "
@@ -84,6 +84,7 @@ function inputField(field, options){
 }
 
 export default function form({fields, options, action, ...props}){
+    
     return(
         <>
         <form {...props} className="container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-t-lg" action={action}>
