@@ -6,59 +6,77 @@ function inputField(field, options){
     switch(field.fieldType){
         case "H1":
             return(
-                <h1 className="text-center text-2xl text-black font-semibold">
-                    {field.fieldName}
-                </h1>
+                    <div className="py-[15px] bg-transparent">
+                        <h1 className="text-center text-2xl text-black font-semibold">
+                            {field.fieldName}
+                        </h1>
+                    </div>
             )
         case "TEXT":
             return (
             <>
-                <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label> <br></br>
-                <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="text" id={field.nameAttr} name={field.nameAttr}></input>
+                <div className="py-[15px] bg-transparent">
+                    <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label> <br></br>
+                    <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="text" id={field.nameAttr} name={field.nameAttr}></input>
+                </div>
             </>)
         case "EMAIL":
             return (
             <>
-                <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label> <br></br>
-                <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="email" id={field.nameAttr} name={field.nameAttr}></input>
+                <div className="py-[15px] bg-transparent">
+                    <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label> <br></br>
+                    <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="email" id={field.nameAttr} name={field.nameAttr} label={field.label}></input>
+                </div>
             </>)
         case "PASSWORD":
             return(
             <>
-                <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label> <br></br>
-                <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="password" id={field.nameAttr} name={field.nameAttr}></input>
+                <div className="py-[15px] bg-transparent">
+                    <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label> <br></br>
+                    <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="password" id={field.nameAttr} name={field.nameAttr} label={field.label}></input>
+                </div>
             </>)
         case "SELECT":
             return (
-            <div className="flex space-x-[7px]">
-                <label className="text-black p-[3px]" htmlFor={field.nameAttr}>{field.fieldName}</label>
-                <select className={styles + "focus:ring-2 ring-[#FFB169] w-28"} id={field.nameAttr} name={field.nameAttr} defaultValue="">
-                    {options}
-                </select>
-            </div>)
+                <div className="py-[15px] bg-transparent">
+                    <div className="flex space-x-[7px]">
+                        <label className="text-black p-[3px]" htmlFor={field.nameAttr}>{field.fieldName}</label>
+                        <select className={styles + "focus:ring-2 ring-[#FFB169] w-28"} id={field.nameAttr} name={field.nameAttr} defaultValue="">
+                            {options}
+                        </select>
+                    </div>
+                </div>)
         case "DATE":
             return (
-            <div className="flex space-x-[7px]">
-                <label className="text-black p-[3px]" htmlFor={field.nameAttr}>{field.fieldName}</label>
-                <input className={styles + "focus:ring-2 ring-[#FFB169]"} type="date" id={field.nameAttr} name={field.nameAttr}></input>
-            </div>)
+                <div className="py-[15px] bg-transparent">
+                    <div className="flex space-x-[7px]">
+                        <label className="text-black p-[3px]" htmlFor={field.nameAttr}>{field.fieldName}</label>
+                        <input className={styles + "focus:ring-2 ring-[#FFB169]"} type="date" id={field.nameAttr} name={field.nameAttr}></input>
+                    </div>
+                </div>
+            )
+            
         case "SUBMIT":
             return (
             <>
-                <div className="flex justify-center">
-                    <button className="text-xl w-32 font-medium p-[5px] rounded-full text-center bg-gradient-to-r from-[#DC8ECB] to-[#FFB169]" id={field.nameAttr} name={field.nameAttr} type="submit">{field.fieldName}</button>
+                <div className="py-[15px] bg-transparent">
+                    <div className="flex justify-center">
+                        <button className="text-xl w-32 font-medium p-[5px] rounded-full text-center bg-gradient-to-r from-[#DC8ECB] to-[#FFB169]" type="submit">{field.fieldName}</button>
+                    </div>
                 </div>
             </> )
         case "hidden":
             return(
                 <>
+                    
                     <input name={field.nameAttr} type="hidden" value={field.value}></input>
                 </>
             )
         default:
             return (
             <>
-                <h5 className="text-black p-[3px]">{field.fieldName}</h5>
+                <div className="py-[15px] bg-transparent"></div>
+                    <h5 className="text-black p-[3px]">{field.fieldName}</h5>
                 <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="text"></input>
             </>)
     }
@@ -73,10 +91,10 @@ export default function form({fields, options, action, ...props}){
             <div className="container w-5/6 ">
                 {fields.map((field)=>
                     <>
-                    <div className="py-[15px] bg-transparent">
+                    
                         
                         {inputField(field, options)}
-                    </div>
+                    
                     </>
                 )}
             </div>

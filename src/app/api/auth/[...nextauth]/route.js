@@ -92,6 +92,7 @@
 
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
+import pool from '@/dbConn'
 
 const handler = NextAuth({
   // Configure one or more authentication providers
@@ -115,7 +116,7 @@ const handler = NextAuth({
           // You can also use the `req` object to obtain additional parameters
           console.log(credentials)
           // (i.e., the request IP address)
-          const res = await fetch("/your/endpoint", {
+          const res = await fetch("/your/endpoint/", {
             method: 'POST',
             body: JSON.stringify(credentials),
             headers: { "Content-Type": "application/json" }
@@ -156,9 +157,14 @@ const handler = NextAuth({
       return randomUUID?.() ?? randomBytes(32).toString("hex")
     },
   },
-//   pages: {
-//     // signIn: "/api/auth/login"
-//   }
+
+  pages: {
+    signIn: '/login',
+    // signOut: '/auth/signout',
+    // error: '/auth/error', // Error code passed in query string as ?error=
+    // verifyRequest: '/auth/verify-request', // (used for check email message)
+    // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
+  }
 
 });
 
