@@ -1,6 +1,7 @@
 'use server'
 import pool from '@/dbConn'
 import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
 
 export async function submitLogin(formData) {
         
@@ -15,9 +16,11 @@ export async function submitLogin(formData) {
 
     const password = formData.get("password")
 
-    const [rows, fields] = await db.execute('SELECT email, password_bcrypt FROM user WHERE email = ?', [formData.get("email")])
+    const [rows, fields] = await db.execute("SELECT `user`.`userID`, `user`.`email`, `user`.`username` , `user`.`firstName` , `user`.`midName`, `user`.`lastName`, `user`.`password_bcrypt` AS `password`, `user`.`address` , `user`.`birthdate` , `country`.`name` AS `country`,    `country`.`abbreviation` AS `country_a2`,`country`.`crrncyCode` , `country`.`localCurrPerUSD`  FROM (`user` INNER JOIN `country` ON `country`.countryID = `user`.countryID) WHERE `email`= ?;", [formData.get("email")])
     const [queryObj] = rows
-    // console.log("queryObj", queryObj)
+
+    console.log("rows", rows)
+    console.log("queryObj", queryObj)
 
     if(rows.length <= 0){
         return
@@ -27,12 +30,15 @@ export async function submitLogin(formData) {
     // console.log("User exists!")
     // console.log(queryObj["password_bcrypt"])
 
-    const result = await bcrypt.compare(password, queryObj["password_bcrypt"])
+    const result = await bcrypt.compare(password, queryObj["password"])
 
     if(!result){
         return
     } 
 
+    const userCredentials = cookies()
+    userCredentials.set('userCredentials', queryObj)
+
     poolPromise.releaseConnection(db)
-    redirect('/user/market')
+    redirect(`/${queryObj['username']}/market`)
   }

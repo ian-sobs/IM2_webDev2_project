@@ -38,6 +38,8 @@ export default async function Login(){
         }
     ]
     // action='/api/auth/callback/credentials'
+    const cookieStore = cookies()
+    console.log(cookieStore.getAll("next-auth.callback-url"))
     return(
         <>
         <div className="p-4 min-h-screen flex flex-col justify-center items-center bg-gradient-to-tr from-[#DC8ECB] from-30% via-[#FFB169] via-60% to-[#FFF8BD] to-90%">
