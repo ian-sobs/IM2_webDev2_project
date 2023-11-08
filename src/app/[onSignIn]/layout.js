@@ -11,7 +11,7 @@ export default function BookiiLayout({children}){
             linkTo: `/${user["username"]}/market`
         },
         {
-            name: "FAVORITES",
+            name: "WISH LIST",
             linkTo: `/${user["username"]}/favorites`
         },
         {

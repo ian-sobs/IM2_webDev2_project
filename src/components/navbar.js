@@ -9,7 +9,7 @@ export default function Navbar({fields, styles}){
     return (
         <>
             
-                <div className={styles + "  absolute top-0 left-0 right-0 flex flex-wrap flex-row"}>
+                <div className={styles + " flex flex-wrap flex-row"}>
                     {fields.map((field)=><Link href={field.linkTo} className={tabStyle}><button >{field.name}</button></Link>)}
                     
 

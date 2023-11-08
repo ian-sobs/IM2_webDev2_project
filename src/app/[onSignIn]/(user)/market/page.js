@@ -7,9 +7,9 @@ export default function Page(){
 
     return (
     <>
-        <section className="min-h-screen bg-white pt-[75px] px-20">
-            <div className="flex flex-wrap">
-sfgsg
+        <section className="min-h-screen bg-white pt-[25px] px-20">
+            <div className="flex flex-wrap ">
+            
             </div>
         </section>
     
