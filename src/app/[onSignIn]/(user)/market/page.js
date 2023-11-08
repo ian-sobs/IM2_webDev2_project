@@ -5,5 +5,14 @@ export default function Page(){
     const user = JSON.parse(userCookie.value)
     console.log(JSON.parse(userCookie.value))
 
-    return (<p>Welcome to the market</p>)
+    return (
+    <>
+        <section className="min-h-screen bg-white pt-[75px] px-20">
+            <div className="flex flex-wrap">
+sfgsg
+            </div>
+        </section>
+    
+    </>
+    )
 }

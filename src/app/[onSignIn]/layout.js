@@ -7,27 +7,29 @@ export default function BookiiLayout({children}){
     console.log("in layout", user)
     const navFields = [
         {
-            name: "Market",
+            name: "MARKET",
             linkTo: `/${user["username"]}/market`
         },
         {
-            name: "Favorites",
+            name: "FAVORITES",
             linkTo: `/${user["username"]}/favorites`
         },
         {
-            name: "Shopping Cart",
+            name: "SHOPPING CART",
             linkTo: `/${user["username"]}/shoppingCart`
         },
         {
-            name: `${user["username"]}`,
+            name: `${user["username"].toUpperCase()}`,
             linkTo: `/${user["username"]}/userInfo`
         },
     ]
     return (
         <div>
-            <Navbar fields={navFields} styles="h-14 bg-orange-400 px-[10px]"> </Navbar>
+            
+            <Navbar fields={navFields} styles="h-14 bg-[#ffa052]"> </Navbar>
 
             {children}
+            
         </div>
     )
 }
