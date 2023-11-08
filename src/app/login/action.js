@@ -35,9 +35,17 @@ export async function submitLogin(formData) {
     if(!result){
         return
     } 
+    console.log("Password was correct") 
 
     const userCredentials = cookies()
-    userCredentials.set('userCredentials', queryObj)
+    userCredentials.set({
+        name: "userCredentials",
+        value: JSON.stringify(queryObj),
+        httpOnly: true
+    })
+    // userCredentials.set('userCredentials', JSON.stringify(queryObj))
+
+    console.log("userCredentials", userCredentials, )
 
     poolPromise.releaseConnection(db)
     redirect(`/${queryObj['username']}/market`)
