@@ -34,5 +34,5 @@ export async function submitLogin(formData) {
     } 
 
     poolPromise.releaseConnection(db)
-    redirect('/market')
+    redirect('/user/market')
   }
