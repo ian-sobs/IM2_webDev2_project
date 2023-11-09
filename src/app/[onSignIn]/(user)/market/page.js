@@ -29,10 +29,11 @@ export default function Page(){
     <>
     {/* space-x-9 space-y-9 */}
         <section className="min-h-screen bg-white pt-[25px] px-9 sm:px-11 md:px-14 lg:px-20">
-            <div className="flex flex-wrap justify-center lg:justify-between alg:justify-center alg2:justify-between">
+            <div className="flex justify-center">
+                <div className="flex flex-wrap justify-start">
+                    {books.map((book, index)=><Card key={index} details={book}></Card>)}
+                </div>
                 
-                {books.map((book, index)=><Card key={index} details={book}></Card>)}
-
                 {/* <Card></Card>
                 <Card></Card>
                 <Card></Card>
