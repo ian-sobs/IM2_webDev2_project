@@ -18,10 +18,10 @@ export default function Card({details}){
                     </div>
                     <div name="bookShortDetails" className="pt-[15px] text-black">
                         <div className="flex flex-col justify-center pb-[16px]">
-                            <span name="bookTitle" className='text-center font-semibold	text-xl	'>
+                            <span name="bookTitle" className='text-center font-semibold	text-xl	truncate'>
                                 {details.title}
                             </span>
-                            <span name="bookAuthor" className='text-center'>
+                            <span name="bookAuthor" className='text-center truncate'>
                                 {details.author}
                             </span>
                         </div>
