@@ -20,15 +20,21 @@ module.exports = {
 
       'md': '768px',
       // => @media (min-width: 768px) { ... }
+      'amd': '842px',
 
       'lg': '1024px',
       // => @media (min-width: 1024px) { ... }
       'alg': '1188px',
-      
+
       'alg2': '1255px',
 
       'xl': '1280px',
+
+      'axl': '1300px',
+
+      'axl1': '1412px',
       // => @media (min-width: 1280px) { ... }
+      'axl2': '1435px',
 
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
