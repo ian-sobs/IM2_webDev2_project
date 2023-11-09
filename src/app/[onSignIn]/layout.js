@@ -1,10 +1,9 @@
 import Navbar from "@/components/navbar"
-import { cookies } from 'next/headers'
+import userCookie  from '@/components/getUsrCookie'
 
 export default function BookiiLayout({children}){
-    const userCookie = cookies().get("userCredentials")
-    const user = JSON.parse(userCookie.value)
-    console.log("in layout", user)
+    const user = userCookie()
+    console.log("in layout", userCookie())
     const navFields = [
         {
             name: "MARKET",
