@@ -44,7 +44,7 @@ export default function Page(){
     return (
     <>
     {/* space-x-9 space-y-9 */}
-        <section className="min-h-screen bg-white pt-[25px] px-9 sm:px-11 md:px-14 lg:px-20">
+        <section className="min-h-screen bg-white pt-[25px] px-9 sm:px-11 md:px-14 lg:px-20  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center gap-6">
 
                     {books.map((book, index)=><Card key={index} details={book}></Card>)}
                 

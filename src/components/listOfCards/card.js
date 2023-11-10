@@ -11,7 +11,7 @@ export default function Card({details}){
     }
     return (
         <>
-            <div className="flex flex-wrap  bg-inherit shadow-lg  w-[365px] h-[650px] p-[20px] mb-[25px] mx-4">
+            <div className="flex flex-wrap  bg-inherit shadow-lg  w-[256px] h-[455px] p-[20px] ">
                 <div className="bg-inherit w-full h-full">
                     <div className="h-fit relative" name="bookPhoto">
                         <Image width={612} height={939} src={details.imgSrc}></Image>
