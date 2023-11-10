@@ -9,9 +9,16 @@ export default function Card({details}){
     const startStyle = {
         filter: "invert(87%) sepia(34%) saturate(1760%) hue-rotate(330deg) brightness(103%) contrast(101%)"
     }
+    const cardStyle = {
+        allWidth: "flex flex-wrap  bg-inherit shadow-lg ",
+        mobile: "w-[146px] h-[260px] p-[10px]",
+        md: "md:w-[175px] md:h-[312px] md:p-[12px]",
+        lg: "lg:w-[193px] lg:h-[343px] lg:p-[14px]",
+        xl: "xl:w-[263px] xl:h-[468px] xl:p-[16px]"
+    }
     return (
         <>
-            <div className="flex flex-wrap  bg-inherit shadow-lg  w-[256px] h-[455px] p-[20px] ">
+            <div name="card" className={`${cardStyle.allWidth} ${cardStyle.mobile} ${cardStyle.md} ${cardStyle.lg} ${cardStyle.xl}`}>
                 <div className="bg-inherit w-full h-full">
                     <div className="h-fit relative" name="bookPhoto">
                         <Image width={612} height={939} src={details.imgSrc}></Image>
