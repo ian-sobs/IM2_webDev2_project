@@ -1,11 +1,11 @@
-export default function cardsDisplay({children}){
+'use client'
+import { useState, useEffect } from "react"
+
+export default function cardsDisplay(){
+    const bookCards = books.map((book, index)=><Card key={index} details={book}></Card>)
     return(
         <>
-            <div className="flex flex-wrap justify-between">
-
-                {children}
-                
-            </div>
+            {bookCards}
         </>
     )
 }
