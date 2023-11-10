@@ -45,16 +45,11 @@ export default function Page(){
     <>
     {/* space-x-9 space-y-9 */}
         <section className="min-h-screen bg-white pt-[25px] px-9 sm:px-11 md:px-14 lg:px-20">
-            <div className="flex justify-center">
-                <div className="flex flex-wrap justify-start">
+
                     {books.map((book, index)=><Card key={index} details={book}></Card>)}
-                </div>
                 
-                {/* <Card></Card>
-                <Card></Card>
-                <Card></Card>
-                <Card></Card> */}
-            </div>
+                
+
         </section>
     
     </>
