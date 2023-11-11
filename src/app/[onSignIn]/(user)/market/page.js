@@ -20,15 +20,7 @@ export default function Page(){
         xl:"xl:px-22 xl:grid-cols-4"
     }
 
-    class Book {
-        constructor(title, author, ratings, imgSrc, price) {
-          this.title = title;
-          this.author = author;
-          this.ratings = ratings;
-          this.imgSrc = imgSrc;
-          this.price = price;
-        }
-    }
+
 
     // const getBooks = async()=>{
     //     const pool = dbConn.promise()
