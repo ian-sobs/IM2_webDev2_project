@@ -20,23 +20,7 @@ export default function Page(){
         xl:"xl:px-22 xl:grid-cols-4"
     }
 
-
-
-    // const getBooks = async()=>{
-    //     const pool = dbConn.promise()
-    //     const promiseConn = await pool.getConnection()
-    //     const [data, fields] = await promiseConn.execute('SELECT * from `book`')
-    //     return data
-    // }
-
-    // getBooks().then(
-        
-
-    // )
    
-    
-
-    
     // const books = [
     //     new Book("The Lord of the Rings", "J.R.R. Tolkien", 4.8, "https://cdn.kobo.com/book-images/4929af70-799a-4e4f-a274-9ed39580a532/353/569/90/False/the-lord-of-the-rings-the-fellowship-of-the-ring-the-two-towers-the-return-of-the-king.jpg", 799),
     //     new Book("The Hobbit", "J.R.R. Tolkien", 4.8, "https://m.media-amazon.com/images/I/710+HcoP38L._SY466_.jpg", 499),

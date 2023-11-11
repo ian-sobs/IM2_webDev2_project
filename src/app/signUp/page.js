@@ -73,7 +73,7 @@ export default async function SignUp() {
   // console.log(cntryResults)
   const options = cntryResults.map((cntry)=><option value={cntry.countryID}>{cntry.name}</option>)
 
-  poolPromise.releaseConnection(db)
+  await poolPromise.releaseConnection(db)
 
   async function create(formData) {
     'use server'
@@ -119,7 +119,7 @@ export default async function SignUp() {
       })
     }
 
-    poolPromise.releaseConnection(db)
+    await poolPromise.releaseConnection(db)
   }
 
   return ( 

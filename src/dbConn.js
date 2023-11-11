@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 export default mysql.createPool({
-    connectionLimit : 10,
+    connectionLimit : 100,
     host            : '127.0.0.1',
     user            : 'bookii',
     password        : 'iikooB258#',

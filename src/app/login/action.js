@@ -47,6 +47,6 @@ export async function submitLogin(formData) {
 
     console.log("userCredentials", userCredentials, )
 
-    poolPromise.releaseConnection(db)
+    await poolPromise.releaseConnection(db)
     redirect(`/${queryObj['username']}/market`)
   }
