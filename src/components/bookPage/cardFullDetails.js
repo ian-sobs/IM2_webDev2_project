@@ -5,8 +5,11 @@ import Reviews from './reviews'
 export default function bookPage({genInfoRH, reviewsRH}){
     return(
         <>
-            <GenInfo routeHand={genInfoRH}></GenInfo>
-            <Reviews routeHand={reviewsRH}></Reviews>
+            <div className="flex flex-wrap flex-col items-center w-full">
+                <GenInfo routeHand={genInfoRH}></GenInfo>
+                <Reviews routeHand={reviewsRH}></Reviews>
+            </div>
+
         </>
     )
 }

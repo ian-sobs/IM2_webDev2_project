@@ -26,7 +26,7 @@ export default function BookiiLayout({children}){
     return (
         <div>
             
-            <Navbar fields={navFields} styles="h-14 bg-[#ffa052] fixed w-full z-50"> </Navbar>
+            <Navbar fields={navFields} styles="h-14 bg-orange-300 fixed w-full z-50"> </Navbar>
             <div className="h-14 "></div>
             {/* <div className="h-[25px] bg-white"></div> */}
             
