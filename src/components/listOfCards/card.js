@@ -6,14 +6,14 @@ import starIcon from '@/icons/starIcon.svg'
 
 export default function Card({details, currency}){
     const startStyle = {
-        filter: "invert(87%) sepia(34%) saturate(1760%) hue-rotate(330deg) brightness(103%) contrast(101%)"
+        filter: "invert(87%) sepia(34%) saturate(1760%) hue-rotate(330deg) brightness(103%) contrast(101%)",
     }
     const cardStyle = {
-        allWidth: "flex flex-wrap  bg-inherit shadow-lg ",
-        mobile: "w-[146px] h-[260px]  p-[10px]",//h-[260px] 
-        md: "md:w-[175px] md:h-[312px] md:p-[12px]", // md:h-[312px]
-        lg: "lg:w-[193px] lg:h-[343px] lg:p-[14px]", //lg:h-[343px]
-        xl: "xl:w-[263px] xl:h-[468px] xl:p-[16px]" // xl:h-[468px]
+        allWidth: "flex flex-wrap  bg-inherit shadow-lg h-fit",
+        mobile: "w-[146px]  p-[10px]",//h-[260px] 
+        md: "md:w-[175px] md:p-[12px]", // md:h-[312px]
+        lg: "lg:w-[193px] lg:p-[14px]", //lg:h-[343px]
+        xl: "xl:w-[263px] xl:p-[16px]" // xl:h-[468px]
     }
     return (
         <>
@@ -27,15 +27,15 @@ export default function Card({details, currency}){
                             <span name="bookTitle" className='text-center font-semibold	text-xl	truncate'>
                                 {details.title}
                             </span>
-                            <span name="bookAuthor" className='text-center truncate'>
+                            <span name="bookAuthor" className='text-center truncate font-normal text-base'>
                                 {details.author}
                             </span>
                         </div>
                         <div className="flex flex-row justify-between">
-                            <div name="bookRatings" className="flex flex-row content-center">
-                                <Image src={starIcon} style={startStyle}></Image> <span>{details.ratings}</span>
+                            <div name="bookRatings" className="flex flex-row items-center">
+                                <Image src={starIcon} style={startStyle}></Image> <span className='align-middle font-light	h-fit'>{details.ratings}</span>
                             </div>
-                            <div name="bookPrice">
+                            <div name="bookPrice" className="font-light	">
                                 {`${currency}${details.price}`}
                             </div>
                         </div>
