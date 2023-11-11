@@ -1,7 +1,7 @@
 
 import Form from "@/components/form"
 import Link from 'next/link'
-import pool from '@/dbConn'
+import {pool} from '@/dbConn'
 
 export default async function SignUp() {
   const fields = [

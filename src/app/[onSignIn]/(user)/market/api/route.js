@@ -1,8 +1,8 @@
-import dbConn from "@/dbConn";
+import {pool} from "@/dbConn";
 
 export async function GET(request) {
     console.log("request", request.url)
-    const promisePool = dbConn.promise()
+    const promisePool = pool.promise()
     const conn = await promisePool.getConnection()
     const [results, fields] = await conn.execute('SELECT * FROM `book`')
     await promisePool.releaseConnection(conn)

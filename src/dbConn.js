@@ -1,11 +1,13 @@
 const mysql = require('mysql2');
-export default mysql.createPool({
+const pool = mysql.createPool({
     connectionLimit : 10,
     host            : '127.0.0.1',
     user            : 'bookii',
     password        : 'iikooB258#',
     database        : 'bookii'
   });
+
+  module.exports = pool;
 
 
 // export async function queryToDb(qeury, queryValues){

@@ -3,7 +3,6 @@ import Card from '@/components/listOfCards/card'
 import user  from '@/components/getUsrCookie'
 import CardsDisplay from '@/components/listOfCards/cardsDisplay';
 // import cardsDisplay from '@/components/listOfCards/cardsDisplay';
-import dbConn from '@/dbConn';
 
 export default function Page(){
     // const userCookie = cookies().get("userCredentials")

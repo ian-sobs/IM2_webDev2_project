@@ -1,7 +1,7 @@
 'use server'
-import pool from '@/dbConn'
 import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
+import {pool} from '@/dbConn'
 
 export async function submitLogin(formData) {
         
