@@ -4,7 +4,7 @@ import Card from "./card"
 import {Book} from '@/components/listOfCards/bookClass'
 import { Tab } from '@headlessui/react'
 //{currency, tabStyles, requestURL}
-export default function cardsDisplay({currency, tabStyles, requestURL}){
+export default function cardsDisplay({currency, tabStyles, requestURL, username}){
     const [books, setBooks] = useState([])
 
     useEffect(() => {
@@ -13,7 +13,7 @@ export default function cardsDisplay({currency, tabStyles, requestURL}){
         .then((data)=>setBooks(data.map((datum)=>new Book(datum.title, datum.author, datum.avgRating, datum.img, datum.priceUSD))))
       }, [])
 
-    const bookCards = books.map((book, index)=><Card key={index} details={book} currency={currency}></Card>)// currency={currency}
+    const bookCards = books.map((book, index)=><Card key={index} details={book} currency={currency} username={username}></Card>)// currency={currency}
     
     return(
         <>

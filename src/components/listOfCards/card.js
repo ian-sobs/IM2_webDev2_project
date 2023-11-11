@@ -1,18 +1,20 @@
 //the book "thumbnail" to display in the market and favorites section
 //try to implement streaming using <suspense></suspense>
+'use client'
 import Image from 'next/image'
 import starIcon from '@/icons/starIcon.svg'
+import { useRouter } from 'next/navigation'
 
 
-export default function Card({details, currency}){
-    console.log(details)
+export default function Card({details, currency, username}){
+    const router = useRouter()
     const startStyle = {
         filter: "invert(87%) sepia(34%) saturate(1760%) hue-rotate(330deg) brightness(103%) contrast(101%)",
         width: "47%",
         height: "auto"
     }
     const cardStyle = {
-        allWidth: "flex flex-wrap  bg-inherit shadow-lg h-fit",
+        allWidth: "flex flex-wrap  bg-inherit shadow-lg h-fit hover:cursor-pointer",
         mobile: "w-[146px]  p-[9px]",//h-[260px] 
         md: "md:w-[175px] md:p-[10px]", // md:h-[312px]
         lg: "lg:w-[193px] lg:p-[11px]", //lg:h-[343px]
@@ -20,7 +22,7 @@ export default function Card({details, currency}){
     }
     return (
         <>
-            <div name="card" className={`${cardStyle.allWidth} ${cardStyle.mobile} ${cardStyle.md} ${cardStyle.lg} ${cardStyle.xl}`}>
+            <div name="card" className={`${cardStyle.allWidth} ${cardStyle.mobile} ${cardStyle.md} ${cardStyle.lg} ${cardStyle.xl}`} onClick={()=>router.push(`/${username}/${details.title}`)}>
                 <div className="bg-inherit w-full h-full">
                     <div className="h-fit relative" name="bookPhoto">
                         <Image width={612} height={939} src={details.imgSrc} priority={true}></Image>
