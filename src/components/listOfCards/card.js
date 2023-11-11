@@ -10,10 +10,10 @@ export default function Card({details, currency}){
     }
     const cardStyle = {
         allWidth: "flex flex-wrap  bg-inherit shadow-lg ",
-        mobile: "w-[146px] p-[10px]",//h-[260px] 
-        md: "md:w-[175px]md:p-[12px]", // md:h-[312px]
-        lg: "lg:w-[193px]  lg:p-[14px]", //lg:h-[343px]
-        xl: "xl:w-[263px] xl:p-[16px]" // xl:h-[468px]
+        mobile: "w-[146px] h-[260px]  p-[10px]",//h-[260px] 
+        md: "md:w-[175px] md:h-[312px] md:p-[12px]", // md:h-[312px]
+        lg: "lg:w-[193px] lg:h-[343px] lg:p-[14px]", //lg:h-[343px]
+        xl: "xl:w-[263px] xl:h-[468px] xl:p-[16px]" // xl:h-[468px]
     }
     return (
         <>
