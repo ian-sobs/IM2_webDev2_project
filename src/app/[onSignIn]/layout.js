@@ -22,7 +22,7 @@ export default function BookiiLayout({children}){
             linkTo: `/${user["username"]}/userInfo`
         },
     ]
-
+    
     
     return (
         <div>

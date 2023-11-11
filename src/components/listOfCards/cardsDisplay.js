@@ -7,6 +7,7 @@ import { Tab } from '@headlessui/react'
 export default function cardsDisplay({currency, tabStyles, requestURL, username}){
     const [books, setBooks] = useState([])
     console.log(username)
+    console.log(window.innerWidth)
     useEffect(() => {
         fetch(requestURL)
         .then((results)=>results.json())

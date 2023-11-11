@@ -1,5 +1,5 @@
 // The navbar for the pages in (user)
-// 'use client'
+'use client'
 import Link from 'next/link'
 
 

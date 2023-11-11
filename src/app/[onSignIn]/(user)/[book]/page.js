@@ -1,3 +1,5 @@
+import CardFullDetails from '@/components/bookPage/cardFullDetails'
+
 export default function book(){
     const sectionGridStyle = {
         allWidth: "min-h-screen bg-white pt-[25px] pb-[20px] ",
@@ -12,10 +14,8 @@ export default function book(){
         <>
             {/* space-x-9 space-y-9 */}
                 <section name="sectionGrid" className={`${sectionGridStyle.allWidth} ${sectionGridStyle.mobile} ${sectionGridStyle.sm} ${sectionGridStyle.md} ${sectionGridStyle.lg} ${sectionGridStyle.xl}`}>
+                    <CardFullDetails></CardFullDetails>
                     
-                        
-                    
-
                 </section>
             
             </>
