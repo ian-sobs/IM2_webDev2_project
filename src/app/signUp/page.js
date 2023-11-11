@@ -1,7 +1,7 @@
 
 import Form from "@/components/form"
 import Link from 'next/link'
-import {pool} from '@/dbConn'
+import pool from '@/dbConn'
 
 export default async function SignUp() {
   const fields = [
@@ -66,19 +66,26 @@ export default async function SignUp() {
       fieldType: "SUBMIT"
     }
   ]
+  console.log("signUp pool config", pool.config.connectionConfig)
+  let options
 
   const poolPromise = pool.promise()
-
+  
   const db =  await poolPromise.getConnection()
+  
   const [cntryResults, cntryFields] = await db.execute("SELECT countryID, name FROM country ORDER BY name ASC")
+    
   await poolPromise.releaseConnection(db)
+    
+  options = cntryResults.map((cntry, index)=><option key={index} value={cntry.countryID}>{cntry.name}</option>)
+
 
   // console.log(cntryResults)
-  const options = cntryResults.map((cntry)=><option value={cntry.countryID}>{cntry.name}</option>)
+  // const options = cntryResults.map((cntry)=><option value={cntry.countryID}>{cntry.name}</option>)
 
   async function create(formData) {
     'use server'
-
+    console.log("signUp server action pool config", pool.config.connectionConfig)
     const bcrypt = require('bcrypt');
     const saltRounds = 10;
 
@@ -97,6 +104,7 @@ export default async function SignUp() {
     const country = formData.get("country")
     
     const [rows, fields] = await db.execute('SELECT COUNT(email), COUNT(username) FROM user WHERE email = ? AND username = ?', [email, username])
+    await poolPromise.releaseConnection(db)
     const [queriedForObj] = rows
     // console.log("formdata", formData)
 
@@ -109,18 +117,20 @@ export default async function SignUp() {
 
     bcrypt.hash(password, saltRounds, function(err, hash) {
           // Store hash in your password DB.
-      db.execute(
-        'INSERT INTO user (email, username, password_bcrypt,  birthdate, firstName, midName, lastName, address, countryID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-          [email, username, hash, birthDate, firstName, middleName, lastName, address, country],
-            function(err, results, fields) {
-              console.log(results); // results contains rows returned by server
-              console.log(fields); // fields contains extra meta data about results, if available
-              poolPromise.releaseConnection(db)
-              // If you execute same statement again, it will be picked from a LRU cache
-              // which will save query preparation time and give better performance
-            }
+      pool.getConnection(function(err, conn){
+          conn.execute(
+            'INSERT INTO user (email, username, password_bcrypt,  birthdate, firstName, midName, lastName, address, countryID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+              [email, username, hash, birthDate, firstName, middleName, lastName, address, country],
+                function(err, results, fields) {
+                  console.log(results); // results contains rows returned by server
+                  console.log(fields); // fields contains extra meta data about results, if available
+                  pool.releaseConnection(conn)
+                  // If you execute same statement again, it will be picked from a LRU cache
+                  // which will save query preparation time and give better performance
+                }
           );
       })
+    })
     // }
 
     await poolPromise.releaseConnection(db)

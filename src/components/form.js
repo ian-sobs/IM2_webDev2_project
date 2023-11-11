@@ -90,13 +90,13 @@ export default function form({fields, options, action, ...props}){
         <form {...props} className="container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-t-lg" action={action}>
         <div className="flex flex-wrap justify-center">
             <div className="container w-5/6 ">
-                {fields.map((field)=>
-                    <>
+                {fields.map((field, index)=>
+                    <div key={index}>
                     
                         
                         {inputField(field, options)}
                     
-                    </>
+                    </div>
                 )}
             </div>
 

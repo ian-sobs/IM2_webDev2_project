@@ -1,10 +1,10 @@
 'use server'
 import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
-import {pool} from '@/dbConn'
+import pool from '@/dbConn'
 
 export async function submitLogin(formData) {
-        
+    console.log("login pool config: action.js", pool.config.connectionConfig)   
     const bcrypt = require('bcrypt');
     const saltRounds = 10;
 
