@@ -35,7 +35,7 @@ export default function genInfo(){
     return (
         <>
             {/* <p className="text-black">{JSON.stringify(bookInfo)}</p> */}
-            <div className="flex flex-wrap flex-row justify-evenly bg-red-400 p-[30px] text-black ">
+            <div className="flex flex-wrap flex-row justify-evenly bg-red-400 p-[30px] text-black w-6/12">
                 <Suspense fallback={<p>Loading feed...</p>}>
                     <Image className={`${imgStyle.allWidth} ${imgStyle.lg}`} src={bookInfo.img} width={612} height={939}></Image> 
                 </Suspense>
