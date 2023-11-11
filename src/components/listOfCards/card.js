@@ -22,7 +22,7 @@ export default function Card({details, currency, username}){
     }
     return (
         <>
-            <div name="card" className={`${cardStyle.allWidth} ${cardStyle.mobile} ${cardStyle.md} ${cardStyle.lg} ${cardStyle.xl}`} onClick={()=>router.push(`/${username}/${details.title}`)}>
+            <div name="card" className={`${cardStyle.allWidth} ${cardStyle.mobile} ${cardStyle.md} ${cardStyle.lg} ${cardStyle.xl}`} onClick={()=>router.push(`/${username}/${details.title}?bookID=${details.bookID}`)}>
                 <div className="bg-inherit w-full h-full">
                     <div className="h-fit relative" name="bookPhoto">
                         <Image width={612} height={939} src={details.imgSrc} priority={true}></Image>

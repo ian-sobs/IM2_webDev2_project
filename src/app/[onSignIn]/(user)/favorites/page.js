@@ -10,7 +10,7 @@ export default function Page(){
     const userInfo = user()
 
     const sectionGridStyle = {
-        allWidth: "min-h-screen  bg-white pt-[25px] pb-[20px] grid place-items-center gap-6",
+        allWidth: "min-h-screen  pt-[25px]  bg-white pb-[20px] grid place-items-center gap-6",
         mobile:"grid-cols-2 px-9",
         sm:"sm:px-11 sm:grid-cols-2",
         md:"md:px-14 md:grid-cols-3",
