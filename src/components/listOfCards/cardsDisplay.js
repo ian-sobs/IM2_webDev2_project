@@ -17,8 +17,8 @@ export default function cardsDisplay({currency, tabStyles}){
     
     return(
         <>
-            <div className={tabStyles}>
-
+            <div className={tabStyles + " flex flex-wrap justify-center"}>
+                Hi
             </div>
             {bookCards}
         </>

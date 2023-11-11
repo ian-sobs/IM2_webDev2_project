@@ -68,12 +68,13 @@ export default async function SignUp() {
   ]
 
   const poolPromise = pool.promise()
+
   const db =  await poolPromise.getConnection()
   const [cntryResults, cntryFields] = await db.execute("SELECT countryID, name FROM country ORDER BY name ASC")
+  await poolPromise.releaseConnection(db)
+
   // console.log(cntryResults)
   const options = cntryResults.map((cntry)=><option value={cntry.countryID}>{cntry.name}</option>)
-
-  await poolPromise.releaseConnection(db)
 
   async function create(formData) {
     'use server'
@@ -100,14 +101,17 @@ export default async function SignUp() {
     // console.log("formdata", formData)
 
     //modify the code to allow redirects and check if the input fields are empty
+    if(queriedForObj["COUNT(email)"] >= 1 || queriedForObj["COUNT(username)"] >= 1 || password != formData.get("confirmPassword")){
+      await poolPromise.releaseConnection(db)
+      return
+    }
+    // if(queriedForObj["COUNT(email)"] < 1 && queriedForObj["COUNT(username)"] < 1 && password == formData.get("confirmPassword")){
 
-    if(queriedForObj["COUNT(email)"] < 1 && queriedForObj["COUNT(username)"] < 1 && password == formData.get("confirmPassword")){
-
-      bcrypt.hash(password, saltRounds, function(err, hash) {
+    bcrypt.hash(password, saltRounds, function(err, hash) {
           // Store hash in your password DB.
-          db.execute(
-            'INSERT INTO user (email, username, password_bcrypt,  birthdate, firstName, midName, lastName, address, countryID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [email, username, hash, birthDate, firstName, middleName, lastName, address, country],
+      db.execute(
+        'INSERT INTO user (email, username, password_bcrypt,  birthdate, firstName, midName, lastName, address, countryID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+          [email, username, hash, birthDate, firstName, middleName, lastName, address, country],
             function(err, results, fields) {
               console.log(results); // results contains rows returned by server
               console.log(fields); // fields contains extra meta data about results, if available
@@ -117,7 +121,7 @@ export default async function SignUp() {
             }
           );
       })
-    }
+    // }
 
     await poolPromise.releaseConnection(db)
   }
