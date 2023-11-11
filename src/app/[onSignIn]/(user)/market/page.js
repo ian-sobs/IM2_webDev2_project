@@ -1,6 +1,7 @@
 // import { cookies } from 'next/headers'
 import Card from '@/components/listOfCards/card'
 import user  from '@/components/getUsrCookie'
+import CardsDisplay from '@/components/listOfCards/cardsDisplay';
 // import cardsDisplay from '@/components/listOfCards/cardsDisplay';
 import dbConn from '@/dbConn';
 
@@ -8,10 +9,10 @@ export default function Page(){
     // const userCookie = cookies().get("userCredentials")
     // const user = JSON.parse(userCookie.value)
     // console.log("userCookie", user) 
-    console.log("inMarket", user())
+    const userCookie = user()
 
     const sectionGridStyle = {
-        allWidth: "min-h-full bg-white pt-[25px] pb-[20px] grid justify-items-center gap-5",
+        allWidth: "min-h-screen  bg-white pt-[25px] pb-[20px] grid justify-items-center gap-5",
         mobile:"grid-cols-2 px-9",
         sm:"sm:px-11 sm:grid-cols-2",
         md:"md:px-14 md:grid-cols-3",
@@ -29,17 +30,17 @@ export default function Page(){
         }
     }
 
-    const getBooks = async()=>{
-        const pool = dbConn.promise()
-        const promiseConn = await pool.getConnection()
-        const [data, fields] = await promiseConn.execute('SELECT * from `book`')
-        return data
-    }
+    // const getBooks = async()=>{
+    //     const pool = dbConn.promise()
+    //     const promiseConn = await pool.getConnection()
+    //     const [data, fields] = await promiseConn.execute('SELECT * from `book`')
+    //     return data
+    // }
 
-    getBooks().then(
+    // getBooks().then(
         
 
-    )
+    // )
    
     
 
@@ -74,7 +75,7 @@ export default function Page(){
             
                     {/* {books.map((book, index)=><Card key={index} details={book}></Card>)} */}
                 
-                
+            <CardsDisplay currency={userCookie["crrncyCode"]}></CardsDisplay>
 
         </section>
     
