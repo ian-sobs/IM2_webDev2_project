@@ -3,7 +3,6 @@ import userCookie  from '@/components/getUsrCookie'
 
 export default function BookiiLayout({children}){
     const user = userCookie()
-    console.log("in layout", userCookie())
     const navFields = [
         {
             name: "MARKET",
