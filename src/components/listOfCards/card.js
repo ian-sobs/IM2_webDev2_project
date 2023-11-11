@@ -5,6 +5,7 @@ import starIcon from '@/icons/starIcon.svg'
 
 
 export default function Card({details, currency}){
+    console.log(details)
     const startStyle = {
         filter: "invert(87%) sepia(34%) saturate(1760%) hue-rotate(330deg) brightness(103%) contrast(101%)",
         width: "47%",
@@ -22,7 +23,7 @@ export default function Card({details, currency}){
             <div name="card" className={`${cardStyle.allWidth} ${cardStyle.mobile} ${cardStyle.md} ${cardStyle.lg} ${cardStyle.xl}`}>
                 <div className="bg-inherit w-full h-full">
                     <div className="h-fit relative" name="bookPhoto">
-                        <Image width={612} height={939} src={details.imgSrc}></Image>
+                        <Image width={612} height={939} src={details.imgSrc} priority={true}></Image>
                     </div>
                     <div name="bookShortDetails" className="pt-[12px] text-black">
                         <div className="flex flex-col justify-center pb-[12px]">

@@ -22,11 +22,13 @@ export default function BookiiLayout({children}){
             linkTo: `/${user["username"]}/userInfo`
         },
     ]
+
+    
     return (
         <div>
             
             <Navbar fields={navFields} styles="h-14 bg-[#ffa052]"> </Navbar>
-
+            
             {children}
             
         </div>
