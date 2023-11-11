@@ -5,10 +5,10 @@ import CardsDisplay from '@/components/listOfCards/cardsDisplay';
 // import cardsDisplay from '@/components/listOfCards/cardsDisplay';
 
 export default function Page(){
-    // const userCookie = cookies().get("userCredentials")
-    // const user = JSON.parse(userCookie.value)
-    // console.log("userCookie", user) 
-    const userCookie = user()
+    // const userInfo = cookies().get("userCredentials")
+    // const user = JSON.parse(userInfo.value)
+    // console.log("userInfo", user) 
+    const userInfo = user()
 
     const sectionGridStyle = {
         allWidth: "min-h-screen  bg-white pt-[25px] pb-[20px] grid place-items-center gap-6",
@@ -49,7 +49,7 @@ export default function Page(){
             
                     {/* {books.map((book, index)=><Card key={index} details={book}></Card>)} */}
                 
-            <CardsDisplay currency={userCookie["crrncyCode"]} tabStyles="col-span-2 md:col-span-3 lg:col-span-4 " requestURL="/user/market/api"></CardsDisplay>
+            <CardsDisplay currency={userInfo["crrncyCode"]} tabStyles="col-span-2 md:col-span-3 lg:col-span-4 " requestURL="/user/market/api" username={userInfo["username"]}></CardsDisplay>
 
         </section>
     
