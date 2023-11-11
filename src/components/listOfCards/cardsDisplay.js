@@ -2,8 +2,9 @@
 import { useState, useEffect } from "react"
 import Card from "./card"
 import {Book} from '@/components/listOfCards/bookClass'
+import { Tab } from '@headlessui/react'
 
-export default function cardsDisplay({currency}){
+export default function cardsDisplay({currency, tabStyles}){
     const [books, setBooks] = useState([])
 
     useEffect(() => {
@@ -16,6 +17,9 @@ export default function cardsDisplay({currency}){
     
     return(
         <>
+            <div className={tabStyles}>
+
+            </div>
             {bookCards}
         </>
     )

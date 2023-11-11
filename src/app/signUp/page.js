@@ -111,7 +111,7 @@ export default async function SignUp() {
             function(err, results, fields) {
               console.log(results); // results contains rows returned by server
               console.log(fields); // fields contains extra meta data about results, if available
-          
+              poolPromise.releaseConnection(db)
               // If you execute same statement again, it will be picked from a LRU cache
               // which will save query preparation time and give better performance
             }

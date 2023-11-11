@@ -23,6 +23,7 @@ export async function submitLogin(formData) {
     console.log("queryObj", queryObj)
 
     if(rows.length <= 0){
+        await poolPromise.releaseConnection(db)
         return
     }
     
@@ -33,6 +34,7 @@ export async function submitLogin(formData) {
     const result = await bcrypt.compare(password, queryObj["password"])
 
     if(!result){
+        await poolPromise.releaseConnection(db)
         return
     } 
     console.log("Password was correct") 
@@ -45,7 +47,7 @@ export async function submitLogin(formData) {
     })
     // userCredentials.set('userCredentials', JSON.stringify(queryObj))
 
-    console.log("userCredentials", userCredentials, )
+    console.log("userCredentials", userCredentials)
 
     await poolPromise.releaseConnection(db)
     redirect(`/${queryObj['username']}/market`)

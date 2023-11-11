@@ -51,7 +51,7 @@ export default function Page(){
             
                     {/* {books.map((book, index)=><Card key={index} details={book}></Card>)} */}
                 
-            <CardsDisplay currency={userCookie["crrncyCode"]}></CardsDisplay>
+            <CardsDisplay currency={userCookie["crrncyCode"]} tabStyles=""></CardsDisplay>
 
         </section>
     
