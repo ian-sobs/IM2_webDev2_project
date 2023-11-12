@@ -14,7 +14,7 @@ export default function Card({details, currency, username}){
         height: "auto"
     }
     const cardStyle = {
-        allWidth: "flex flex-wrap  bg-inherit shadow-lg h-fit hover:cursor-pointer",
+        allWidth: "flex flex-wrap  bg-white shadow-lg h-fit hover:cursor-pointer",
         mobile: "w-[146px]  p-[9px]",//h-[260px] 
         md: "md:w-[175px] md:p-[10px]", // md:h-[312px]
         lg: "lg:w-[193px] lg:p-[11px]", //lg:h-[343px]

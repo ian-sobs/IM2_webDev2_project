@@ -1,14 +1,13 @@
 'use client'
 import { useState, useEffect } from "react"
 import { useSearchParams } from 'next/navigation'
-import { Suspense } from 'react'
 import Image from 'next/image'
 
 // async function getBookId(){
 //     let searchParams = useSearchParams()
 // }
 
-export default function genInfo(){
+export default function genInfoDesc(){
     let searchParams = useSearchParams()
     let id = searchParams.get('bookID')
     const [bookID, setBookID] = useState(0)
@@ -46,8 +45,8 @@ export default function genInfo(){
     return (
         <>
             {/* <p className="text-black">{JSON.stringify(bookInfo)}</p> */}
-            <div className={`${containerStyle.allWidth} ${containerStyle.sm} ${containerStyle.mobile}`}>
-                <Image className={`${imgStyle.allWidth} ${imgStyle.sm} ${imgStyle.lg}`} src={bookInfo.img} width={612} height={939}></Image> 
+            {/* <div className={`${containerStyle.allWidth} ${containerStyle.sm} ${containerStyle.mobile}`}>
+                <Image className={`${imgStyle.allWidth} ${imgStyle.sm} ${imgStyle.lg}`} src={bookInfo.img} width={612} height={939}></Image>  */}
                 <div className={`${contentStyle.allWidth} ${contentStyle.sm}`}>
                     <div className="flex flex-col mb-[15px]">
                         <span className="font-semibold text-base tracking-wide">{bookInfo.title}</span>
@@ -69,7 +68,7 @@ export default function genInfo(){
                     </div>
                 </div>
     
-            </div>
+            {/* </div> */}
         </>
     )
 }
