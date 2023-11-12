@@ -78,7 +78,7 @@ export default async function genInfo({searchParams}){
                             <span className="font-light text-lg sm:text-base italic">by {bookInfo.author}</span> 
                         </div>
 
-                        <div className="flex flex-col mb-[15px] max-h-[24rem]">
+                        <div className="flex flex-col mb-[15px] max-h-[20rem]">
                             <div className="overflow-y-auto">
                                 <p className="font-light text-lg sm:text-base indent-6 text-justify mr-[4px]">{bookInfo.description}</p> 
                             </div>
@@ -90,14 +90,14 @@ export default async function genInfo({searchParams}){
                             <span className="font-light text-lg sm:text-base text-justify">{bookInfo.genreName}</span> 
                         </div>
 
-                        <div className="flex flex-col mb-[15px]">
-                            <span className="font-medium text-ratings text-lg">Ratings</span>
+                        <div className="flex flex-row mb-[24px]">
+                            <span className="font-medium text-ratings text-lg mr-[8px]">Ratings</span>
                             <div className="flex flex-row">
-                                <span className="font-light text-lg sm:text-base text-justify">{bookInfo.avgRating}</span> 
+                                <span className="font-light text-lg text-justify">{bookInfo.avgRating}</span> 
                             </div>
                         </div>
 
-                        <div className="flex flex-row justify-evenly">
+                        <div className="flex flex-row flex-wrap justify-between">
                             <button className="bg-red-400 font-light">Add to favorite</button>
                             <button className="bg-green-400 font-light">Add to shopping cart</button>
                         </div>

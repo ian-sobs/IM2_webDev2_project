@@ -4,7 +4,7 @@ import Card from "./card"
 import {Book} from '@/components/listOfCards/bookClass'
 import { Tab } from '@headlessui/react'
 //{currency, tabStyles, requestURL}
-export default function cardsDisplay({currency, tabStyles, requestURL, username}){
+export default function cardsDisplay({currency, localCurrPerUSD, tabStyles, requestURL, username}){
     const [books, setBooks] = useState([])
     console.log(username)
     console.log(window.innerWidth)
@@ -21,7 +21,7 @@ export default function cardsDisplay({currency, tabStyles, requestURL, username}
             {/* <div className={tabStyles + " flex flex-wrap justify-center"}>
                 Hi
             </div> */}
-            {books.map((book, index)=><Card key={index} details={book} currency={currency} username={username}></Card>)}
+            {books.map((book, index)=><Card key={index} details={book} currency={currency} username={username} localCurrPerUSD={localCurrPerUSD}></Card>)}
         </>
     )
 }

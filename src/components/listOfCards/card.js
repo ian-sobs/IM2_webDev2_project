@@ -6,7 +6,8 @@ import starIcon from '@/icons/starIcon.svg'
 import { useRouter } from 'next/navigation'
 
 
-export default function Card({details, currency, username}){
+
+export default function Card({details, localCurrPerUSD, currency, username}){
     const router = useRouter()
     const startStyle = {
         filter: "invert(87%) sepia(34%) saturate(1760%) hue-rotate(330deg) brightness(103%) contrast(101%)",
@@ -20,6 +21,7 @@ export default function Card({details, currency, username}){
         lg: "lg:w-[193px] lg:p-[11px]", //lg:h-[343px]
         xl: "xl:w-[263px] xl:p-[12px]" // xl:h-[468px]
     }
+
     return (
         <>
             <div name="card" className={`${cardStyle.allWidth} ${cardStyle.mobile} ${cardStyle.md} ${cardStyle.lg} ${cardStyle.xl}`} onClick={()=>router.push(`/${username}/${details.title}?bookID=${details.bookID}`)}>
@@ -41,7 +43,7 @@ export default function Card({details, currency, username}){
                                 <Image src={starIcon} style={startStyle} alt="star"></Image> <span className='w-fit align-middle font-light h-fit'>{details.ratings}</span>
                             </div>
                             <div name="bookPrice" className="font-light	">
-                                {`${currency}${details.price}`}
+                                {`${currency}${56 * parseFloat(details.price)}`}
                             </div>
                         </div>
                     </div>
