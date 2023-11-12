@@ -13,3 +13,4 @@ export async function GET(request, {params}) {
     // console.log(`favorite books of user with ID ${userInfo.userID}`,results)
     return Response.json(results)
 }
+//not needed

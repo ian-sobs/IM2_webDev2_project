@@ -25,7 +25,7 @@ export default function Card({details, currency, username}){
             <div name="card" className={`${cardStyle.allWidth} ${cardStyle.mobile} ${cardStyle.md} ${cardStyle.lg} ${cardStyle.xl}`} onClick={()=>router.push(`/${username}/${details.title}?bookID=${details.bookID}`)}>
                 <div className="bg-inherit w-full h-full">
                     <div className="h-fit relative" name="bookPhoto">
-                        <Image width={612} height={939} src={details.imgSrc} priority={true}></Image>
+                        <Image width={612} height={939} src={details.imgSrc} priority={true} alt={details.title}></Image>
                     </div>
                     <div name="bookShortDetails" className="pt-[12px] text-black">
                         <div className="flex flex-col justify-center pb-[12px]">
@@ -38,7 +38,7 @@ export default function Card({details, currency, username}){
                         </div>
                         <div className="flex flex-row justify-between">
                             <div name="bookRatings" className="flex flex-row items-center">
-                                <Image src={starIcon} style={startStyle}></Image> <span className='w-fit align-middle font-light h-fit'>{details.ratings}</span>
+                                <Image src={starIcon} style={startStyle} alt="star"></Image> <span className='w-fit align-middle font-light h-fit'>{details.ratings}</span>
                             </div>
                             <div name="bookPrice" className="font-light	">
                                 {`${currency}${details.price}`}
