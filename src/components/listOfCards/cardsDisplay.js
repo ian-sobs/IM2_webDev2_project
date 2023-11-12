@@ -21,7 +21,7 @@ export default function cardsDisplay({currency, tabStyles, requestURL, username}
             {/* <div className={tabStyles + " flex flex-wrap justify-center"}>
                 Hi
             </div> */}
-            {bookCards}
+            {books.map((book, index)=><Card key={index} details={book} currency={currency} username={username}></Card>)}
         </>
     )
 }

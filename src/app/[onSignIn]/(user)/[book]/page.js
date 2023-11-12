@@ -2,12 +2,13 @@ import CardFullDetails from '@/components/bookPage/cardFullDetails'
 
 export default function book({searchParams}){
     const sectionGridStyle = {
-        allWidth: "min-h-screen bg-slate-100 pt-[25px] pb-[20px] ",
+        allWidth: "min-h-screen bg-slate-100 pt-[25px] pb-[20px] flex flex-row justify-center",
         mobile:"px-9 ",
-        sm:"sm:px-11 ",
-        md:"md:px-14 ",
-        lg:"lg:px-20 ",
-        xl:"xl:px-22 "
+        sm:"sm:px-16 ",
+        md:"md:px-20 ",
+        lg:"lg:px-24 ",
+        alg: "alg:px-28",
+        xl:"xl:px-32 "
     }
 
     return (

@@ -1,37 +1,48 @@
 // 'use client'
 // import { useState, useEffect } from "react"
 // import { useSearchParams } from 'next/navigation'
-import GenInfoDesc from './genInfoDesc'
+// import GenInfoDesc from './genInfoDesc'
 import { Suspense } from 'react'
 import Image from 'next/image'
 import pool from '@/dbConn'
+
 // async function getBookId(){
 //     let searchParams = useSearchParams()
+// }
+
+// function Loading(){
+//     console.log("loading")
+//     return(
+//         <>
+//             <p className="text-black text-2xl">LOADING....</p>
+//         </>
+//     )
 // }
 
 export default async function genInfo({searchParams}){
     // let searchParams = useSearchParams()
     // let id = searchParams.get('bookID')
     // const [bookID, setBookID] = useState(0)
-    // const [bookInfo, setBookInfo] = useState({})
+
 
     // // useEffect(()=> {
     // //     setBookID(parseInt(searchParams.get('bookID'))) 
     // // }
     // // , [])
 
+    // const [bookInfo, setBookInfo] = useState({})
     // useEffect(()=>{
     //     fetch(`/user/book/api/genInfo/${id}`)
     //     .then((bookInfo)=>bookInfo.json())
     //     .then((output)=>setBookInfo(output))
     // }
     // , [id])
-    // const poolPromise = pool.promise()
-    // const conn = await poolPromise.getConnection()
+
     const poolPromise = pool.promise()
     const conn = await poolPromise.getConnection()
-
-    const [data, fields] = await conn.execute(`SELECT bk.bookID, bk.title, bk.description, bk.img, bk.priceUSD, bk.avgRating, bk.author, GROUP_CONCAT(gnr.name ORDER BY bk.bookID SEPARATOR ', ') AS genreName  FROM ((book bk INNER JOIN book_genre_relation bgr ON bk.bookID = bgr.bookID) INNER JOIN genre gnr ON gnr.genreID=bgr.genreID ) WHERE bk.bookID=? GROUP BY bk.bookID;`, [searchParams.bookID])
+    console.log(parseInt(searchParams.bookID))
+    const [data, fields] = await conn.execute(`SELECT bk.bookID, bk.title, bk.description, bk.img, bk.priceUSD, bk.avgRating, bk.author, GROUP_CONCAT(gnr.name ORDER BY bk.bookID SEPARATOR ', ') AS genreName FROM ((book bk LEFT JOIN book_genre_relation bgr ON bk.bookID = bgr.bookID) LEFT JOIN genre gnr ON gnr.genreID = bgr.genreID) WHERE bk.bookID=? GROUP BY bk.bookID;`, [parseInt(searchParams.bookID)])
+    console.log("dataBook", data)
     const [bookInfo] = data
     await poolPromise.releaseConnection(conn)
     console.log("Book information async", bookInfo)
@@ -57,31 +68,55 @@ export default async function genInfo({searchParams}){
         <>
             {/* <p className="text-black">{JSON.stringify(bookInfo)}</p> */}
             <div className={`${containerStyle.allWidth} ${containerStyle.sm} ${containerStyle.mobile}`}>
-                <Image className={`${imgStyle.allWidth} ${imgStyle.sm} ${imgStyle.lg}`} src={bookInfo.img} width={612} height={939}></Image> 
-                <div className={`${contentStyle.allWidth} ${contentStyle.sm}`}>
-                
-                    <div className="flex flex-col mb-[15px]">
-                        <span className="font-semibold text-base tracking-wide">{bookInfo.title}</span>
-                        <span className="font-light text-xs sm:text-sm italic">by {bookInfo.author}</span> {/*text-xs sm:text-sm*/}
-                    </div>
 
-                    <div className="flex flex-col mb-[15px]">
-                        <p className="font-light text-xs sm:text-sm indent-6 text-justify">{bookInfo.description}</p> 
-                    </div>
+                    <Image className={`${imgStyle.allWidth} ${imgStyle.sm} ${imgStyle.lg}`} src={bookInfo.img} width={612} height={939}></Image> 
 
-                    <div className="flex flex-col mb-[15px]">
-                        <span className="font-medium text-sm">Genres</span>
-                        <span className="font-light text-xs sm:text-sm text-justify">{bookInfo.genreName}</span> 
-                    </div>
-
-                    <div className="flex flex-col mb-[15px]">
-                        <span className="font-medium text-sm">Ratings</span>
-                        <div className="flex flex-row">
-                            <span className="font-light text-xs sm:text-sm text-justify">{bookInfo.avgRating}</span> 
+                    <div className={`${contentStyle.allWidth} ${contentStyle.sm}`}>
+                        
+                        <div className="flex flex-col mb-[15px]">
+                            <span className="font-semibold text-lg tracking-wide">{bookInfo.title}</span>
+                            <span className="font-light text-lg sm:text-base italic">by {bookInfo.author}</span> 
                         </div>
-                    </div>
-                    
-                </div>
+
+                        <div className="flex flex-col mb-[15px]">
+                            <p className="font-light text-lg sm:text-base indent-6 text-justify">{bookInfo.description}</p> 
+                        </div>
+
+                        <div className="flex flex-col mb-[15px]">
+                            <span className="font-medium text-lg">Genres</span>
+                            <span className="font-light text-lg sm:text-base text-justify">{bookInfo.genreName}</span> 
+                        </div>
+
+                        <div className="flex flex-col mb-[15px]">
+                            <span className="font-medium text-ratings text-lg">Ratings</span>
+                            <div className="flex flex-row">
+                                <span className="font-light text-lg sm:text-base text-justify">{bookInfo.avgRating}</span> 
+                            </div>
+                        </div>
+                        
+
+                        {/* <div className="flex flex-col mb-[15px]">
+                            <span className="font-semibold text-lg tracking-wide"></span>
+                            <span className="font-light text-lg sm:text-base italic">by </span> 
+                        </div>
+
+                        <div className="flex flex-col mb-[15px]">
+                            <p className="font-light text-lg sm:text-base indent-6 text-justify"></p> 
+                        </div>
+
+                        <div className="flex flex-col mb-[15px]">
+                            <span className="font-medium text-lg">Genres</span>
+                            <span className="font-light text-lg sm:text-base text-justify"></span> 
+                        </div>
+
+                        <div className="flex flex-col mb-[15px]">
+                            <span className="font-medium text-ratings text-lg">Ratings</span>
+                            <div className="flex flex-row">
+                                <span className="font-light text-lg sm:text-base text-justify"></span> 
+                            </div>
+                        </div> */}
+                        
+                    </div>                
     
             </div>
         </>

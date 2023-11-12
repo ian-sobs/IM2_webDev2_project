@@ -5,7 +5,7 @@ import Reviews from './reviews'
 export default function bookPage({genInfoRH, reviewsRH, searchParams}){
     return(
         <>
-            <div className="flex flex-wrap flex-col items-center w-full">
+            <div className="flex flex-wrap flex-col items-center w-full max-w-screen-lg">
                 <GenInfo searchParams={searchParams} routeHand={genInfoRH}></GenInfo>
                 <Reviews searchParams={searchParams} routeHand={reviewsRH}></Reviews>
             </div>
