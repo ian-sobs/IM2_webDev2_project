@@ -73,7 +73,7 @@ export default async function genInfo({searchParams}){
 
                     <div className={`${contentStyle.allWidth} ${contentStyle.sm}`}>
                         
-                        <div className="flex flex-col mb-[15px]">
+                        <div className="flex flex-col items-center sm:items-start mb-[15px]">
                             <span className="font-semibold text-lg tracking-wide">{bookInfo.title}</span>
                             <span className="font-light text-lg sm:text-base italic">by {bookInfo.author}</span> 
                         </div>
