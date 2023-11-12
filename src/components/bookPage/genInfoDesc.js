@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from "react"
 import { useSearchParams } from 'next/navigation'
-import Image from 'next/image'
+// import Image from 'next/image'
 
 // async function getBookId(){
 //     let searchParams = useSearchParams()
