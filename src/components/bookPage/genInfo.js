@@ -95,7 +95,7 @@ export default async function genInfo({searchParams}){
                             <span className="font-medium text-ratings text-lg mr-[8px]">Ratings</span>
                             <div className="flex flex-row">
                             {/* className="flex flex-row" */}
-                      
+                                {/* <Rating></Rating> */}
                                 <span className="font-light text-lg text-justify">{bookInfo.avgRating}</span> 
                             </div>
                         </div>

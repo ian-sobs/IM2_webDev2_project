@@ -15,7 +15,7 @@ export default function MyComponent() {
 
   return (
     <>
-        <Rating onClick={handleRating}></Rating>
+        <Rating onClick={handleRating} ></Rating>
     </>
   )
 }
