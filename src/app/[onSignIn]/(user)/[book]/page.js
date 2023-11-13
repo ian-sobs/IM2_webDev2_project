@@ -1,4 +1,5 @@
 import CardFullDetails from '@/components/bookPage/cardFullDetails'
+// import Rating from '@/components/bookPage/rating'
 
 export default function book({searchParams}){
     const sectionGridStyle = {
@@ -15,6 +16,7 @@ export default function book({searchParams}){
         <>
             {/* space-x-9 space-y-9 */}
                 <section name="sectionGrid" className={`${sectionGridStyle.allWidth} ${sectionGridStyle.mobile} ${sectionGridStyle.sm} ${sectionGridStyle.md} ${sectionGridStyle.lg} ${sectionGridStyle.xl}`}>
+                    
                     <CardFullDetails searchParams={searchParams}></CardFullDetails>
                     
                 </section>

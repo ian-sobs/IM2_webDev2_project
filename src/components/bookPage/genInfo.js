@@ -5,6 +5,7 @@
 import { Suspense } from 'react'
 import Image from 'next/image'
 import pool from '@/dbConn'
+// import Rating from './rating'
 
 // async function getBookId(){
 //     let searchParams = useSearchParams()
@@ -93,6 +94,8 @@ export default async function genInfo({searchParams}){
                         <div className="flex flex-row mb-[24px]">
                             <span className="font-medium text-ratings text-lg mr-[8px]">Ratings</span>
                             <div className="flex flex-row">
+                            {/* className="flex flex-row" */}
+                      
                                 <span className="font-light text-lg text-justify">{bookInfo.avgRating}</span> 
                             </div>
                         </div>
@@ -101,28 +104,6 @@ export default async function genInfo({searchParams}){
                             <button className="bg-red-400 font-light">Add to favorite</button>
                             <button className="bg-green-400 font-light">Add to shopping cart</button>
                         </div>
-                        
-
-                        {/* <div className="flex flex-col mb-[15px]">
-                            <span className="font-semibold text-lg tracking-wide"></span>
-                            <span className="font-light text-lg sm:text-base italic">by </span> 
-                        </div>
-
-                        <div className="flex flex-col mb-[15px]">
-                            <p className="font-light text-lg sm:text-base indent-6 text-justify"></p> 
-                        </div>
-
-                        <div className="flex flex-col mb-[15px]">
-                            <span className="font-medium text-lg">Genres</span>
-                            <span className="font-light text-lg sm:text-base text-justify"></span> 
-                        </div>
-
-                        <div className="flex flex-col mb-[15px]">
-                            <span className="font-medium text-ratings text-lg">Ratings</span>
-                            <div className="flex flex-row">
-                                <span className="font-light text-lg sm:text-base text-justify"></span> 
-                            </div>
-                        </div> */}
                         
                     </div>                
     
