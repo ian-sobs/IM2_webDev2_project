@@ -86,12 +86,12 @@ export default async function genInfo({searchParams}){
                             
                         </div>
 
-                        <div className="flex flex-col mb-[15px]">
+                        <div className="flex flex-col mb-[15px]  items-center sm:items-start">
                             <span className="font-medium text-lg">Genres</span>
                             <span className="font-light text-lg sm:text-base text-justify">{bookInfo.genreName}</span> 
                         </div>
 
-                        <div className="flex flex-row mb-[24px]">
+                        <div className="flex flex-col sm:flex-row items-center sm:items-start mb-[24px]">
                             <span className="font-medium text-ratings text-lg mr-[8px]">Ratings</span>
                             <div className="flex flex-row">
                             {/* className="flex flex-row" */}
