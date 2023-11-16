@@ -100,7 +100,7 @@ export default async function genInfo({searchParams}){
                             </div>
                         </div>
 
-                        <div className="flex flex-row flex-wrap justify-between">
+                        <div className="flex flex-row flex-wrap justify-evenly">
                             <button className="bg-red-400 font-light">Add to favorite</button>
                             <button className="bg-green-400 font-light">{(56 * bookInfo.priceUSD).toFixed(2)}</button>
                         </div>
