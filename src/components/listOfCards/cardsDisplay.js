@@ -15,22 +15,26 @@ export default function cardsDisplay({currency, localCurrPerUSD, tabStyles, requ
       }, [])
 
     // const bookCards = books.map((book, index)=><Card key={index} details={book} currency={currency} username={username}></Card>)// currency={currency}
-    if(books.length > 0){
-        return(
-            <>
-                {/* <div className={tabStyles + " flex flex-wrap justify-center"}>
-                    Hi
-                </div> */}
-                {books.map((book, index)=><Card key={index} details={book} currency={currency} username={username} localCurrPerUSD={localCurrPerUSD}></Card>)}
-            </>
-        )
-    }
+    
+    // if(books.length == 0){
+    //     return(
+    //         <>
+    //             {/* <div className={tabStyles + " flex flex-wrap justify-center"}>
+    //                 Hi
+    //             </div> */}
+    //             <h1 className="text-black">No books</h1>
+    //         </>
+    //     )
+    // }
+    const bookCards = books.map((book, index)=><Card key={index} details={book} currency={currency} username={username} localCurrPerUSD={localCurrPerUSD}></Card>)
     return(
         <>
             {/* <div className={tabStyles + " flex flex-wrap justify-center"}>
-                Hi
+                    Hi
             </div> */}
-            <h1 className="text-black">No books</h1>
-        </>
+            {bookCards}
+         </>
     )
+    
+
 }

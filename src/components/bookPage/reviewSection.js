@@ -3,9 +3,9 @@
 import { useState , useEffect} from 'react'
 import Review from './review'
 
-export default function reviews({searchParams}){
+export default function reviews({userInfo, searchParams}){
     const [reviews, setReviews] = useState([])
-    
+    console.log(userInfo)
     useEffect(()=>{
         console.log("testing")
         fetch(`/user/book/api/reviews/${searchParams.bookID}`)
@@ -17,6 +17,11 @@ export default function reviews({searchParams}){
 
     function handleClick(e){
         e.preventDefault()
+        if(e.target.id != "reviewButton") return
+        const formData = new FormData(e.currentTarget)
+        
+        console.log("hi")
+        fetch(`/user/book/api/makeReview?bookID=${parseInt(searchParams.bookID)}`, {method: "POST", body: formData})
     }
 
     const containerStyle = {
@@ -31,9 +36,9 @@ export default function reviews({searchParams}){
                 <p className="mb-[10px] sm:mb-[20px]">Reviews</p>
 
                 <div className="w-full flex flex-col p-[20px] border-t border-slate-500" >
-                    <form>
-                        <textarea className="w-full bg-gray-200 h-auto p-[8px]" placeholder='Make a review...'></textarea>
-                        <button onClick={handleClick} className="bg-green-500 p-[4px] text-white font-semibold rounded-md text-center w-[50px]" type="submit">Post</button>
+                    <form onClick={handleClick}>
+                        <textarea name="review" className="w-full bg-gray-200 h-auto p-[8px]" placeholder='Make a review...'></textarea>
+                        <button id='reviewButton' className="bg-green-500 p-[4px] text-white font-semibold rounded-md text-center w-[50px]" type="submit">Post</button>
                     </form>
                 </div>
                 <section name="reviews ">
