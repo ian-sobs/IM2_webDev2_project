@@ -15,6 +15,10 @@ export default function reviews({searchParams}){
 
     const userReviews = reviews.map((review)=><Review info={review}></Review>)
 
+    function handleClick(e){
+        e.preventDefault()
+    }
+
     const containerStyle = {
         allWidth: "flex bg-white shadow-lg text-black rounded-md ",
         mobile: "flex-col justify-start w-full p-[20px] ",
@@ -29,7 +33,7 @@ export default function reviews({searchParams}){
                 <div className="w-full flex flex-col p-[20px] border-t border-slate-500" >
                     <form>
                         <textarea className="w-full bg-gray-200 h-auto p-[8px]" placeholder='Make a review...'></textarea>
-                        <button className="bg-green-500 p-[4px] text-white font-semibold rounded-md text-center w-[50px]" type="submit">Post</button>
+                        <button onClick={handleClick} className="bg-green-500 p-[4px] text-white font-semibold rounded-md text-center w-[50px]" type="submit">Post</button>
                     </form>
                 </div>
                 <section name="reviews ">
