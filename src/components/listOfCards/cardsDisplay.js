@@ -11,7 +11,9 @@ export default function cardsDisplay({currency, localCurrPerUSD, tabStyles, requ
     useEffect(() => {
         fetch(requestURL)
         .then((results)=>results.json())
-        .then((data)=>setBooks(data.map((datum)=>new Book(datum.bookID, datum.title, datum.author, datum.avgRating, datum.img, datum.priceUSD))))
+        .then((data)=>{
+            setBooks(data.map((datum)=>new Book(datum.bookID, datum.title, datum.author, datum.avgRating, datum.img, datum.priceUSD)))
+        })
       }, [])
 
     // const bookCards = books.map((book, index)=><Card key={index} details={book} currency={currency} username={username}></Card>)// currency={currency}
