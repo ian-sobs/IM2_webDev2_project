@@ -1,11 +1,11 @@
 'use client'
-export default function review({content, username}){
+export default function review({info}){
 
     return(
         <>
             <div className="w-full flex flex-col p-[20px] border-t border-slate-500">
-                <p className="mb-[7px]"><span className="font-semibold">@{username}</span> reviewed on 2023-02-05:</p>
-                <p>{content}</p>
+                <p className="mb-[7px]"><span className="font-semibold">@{info.username}</span> reviewed on {info.datePosted}:</p>
+                <p>{info.content}</p>
                 
             </div>
         </>

@@ -5,12 +5,15 @@ import Review from './review'
 
 export default function reviews({searchParams}){
     const [reviews, setReviews] = useState([])
+    
     useEffect(()=>{
         console.log("testing")
-        fetch(`user/book/api/reviews/${searchParams}`)
-        // .then(()=>)
-        // .then(()=>)
+        fetch(`/user/book/api/reviews/${searchParams.bookID}`)
+        .then((result)=>result.json())
+        .then((parsedResult)=>setReviews(parsedResult))
     }, [])
+
+    const userReviews = reviews.map((review)=><Review info={review}></Review>)
 
     const containerStyle = {
         allWidth: "flex bg-white shadow-lg text-black",
@@ -30,13 +33,14 @@ export default function reviews({searchParams}){
                     </form>
                 </div>
                 <section name="reviews ">
-                    <Review content="I love this book. It changed my life." username="Sobberns"></Review>
+                    {/* <Review content="I love this book. It changed my life." username="Sobberns"></Review>
                     <Review content="The birth of the industrial revolution was a mistake that would change the course of humankind throughout history. From it a multitute of atrocities were commited such as child labor and unjust wages just to make more profit." username="Sobberns"></Review>
                     <Review content="Now draw her giving birth" username="Sobberns"></Review>
                     <Review content="I love fanfiction." username="Sobberns"></Review>
                     <Review content="More of this pls" username="Sobberns"></Review>
                     <Review content="I have no enemies." username="Sobberns"></Review>
-                    <Review content="I hated the ending" username="Sobberns"></Review>
+                    <Review content="I hated the ending" username="Sobberns"></Review> */}
+                    {userReviews}
                 </section>
             </div>
         </>
