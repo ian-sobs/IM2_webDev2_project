@@ -16,9 +16,9 @@ export default function reviews({searchParams}){
     const userReviews = reviews.map((review)=><Review info={review}></Review>)
 
     const containerStyle = {
-        allWidth: "flex bg-white shadow-lg text-black",
-        mobile: "flex-col justify-start w-full p-[20px]",
-        sm: "sm:p-[30px]"
+        allWidth: "flex bg-white shadow-lg text-black rounded-md ",
+        mobile: "flex-col justify-start w-full p-[20px] ",
+        sm: "sm:p-[30px] "
     }
 
     return(

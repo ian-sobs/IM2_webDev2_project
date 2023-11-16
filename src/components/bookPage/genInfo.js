@@ -56,9 +56,9 @@ export default async function genInfo({searchParams}){
     }//src={bookInfo.img}
 
     const containerStyle = {
-        allWidth: "flex bg-white shadow-lg text-black",
-        mobile: "flex-col justify-start w-full p-[20px]",
-        sm: "sm:flex-row sm:justify-between sm:p-[30px]"
+        allWidth: "flex bg-white shadow-lg text-black rounded-md ",
+        mobile: "flex-col justify-start w-full p-[20px] ",
+        sm: "sm:flex-row sm:justify-between sm:p-[30px] "
     }
 
     const contentStyle = {

@@ -15,11 +15,11 @@ export default function Card({details, localCurrPerUSD, currency, username}){
         height: "auto"
     }
     const cardStyle = {
-        allWidth: "flex flex-wrap  bg-white shadow-lg h-fit hover:cursor-pointer",
+        allWidth: "flex flex-wrap  bg-white shadow-lg h-fit hover:cursor-pointer rounded-md ",
         mobile: "w-[146px]  p-[9px] ",//h-[260px] 
-        md: "md:w-[175px] md:p-[10px]", // md:h-[312px]
-        lg: "lg:w-[193px] lg:p-[11px]", //lg:h-[343px]
-        xl: "xl:w-[263px] xl:p-[12px]" // xl:h-[468px]
+        md: "md:w-[175px] md:p-[10px] ", // md:h-[312px]
+        lg: "lg:w-[193px] lg:p-[11px] ", //lg:h-[343px]
+        xl: "xl:w-[263px] xl:p-[12px] " // xl:h-[468px]
     }
 
     return (
