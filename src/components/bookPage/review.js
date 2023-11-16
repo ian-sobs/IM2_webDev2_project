@@ -1,5 +1,6 @@
 'use client'
 export default function review({content, username}){
+
     return(
         <>
             <div className="w-full flex flex-col p-[20px] border-t border-slate-500">

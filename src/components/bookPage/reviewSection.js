@@ -3,7 +3,15 @@
 import { useState , useEffect} from 'react'
 import Review from './review'
 
-export default function reviews(){
+export default function reviews({searchParams}){
+    const [reviews, setReviews] = useState([])
+    useEffect(()=>{
+        console.log("testing")
+        fetch(`user/book/api/reviews/${searchParams}`)
+        // .then(()=>)
+        // .then(()=>)
+    }, [])
+
     const containerStyle = {
         allWidth: "flex bg-white shadow-lg text-black",
         mobile: "flex-col justify-start w-full p-[20px]",
