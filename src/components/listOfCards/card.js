@@ -11,7 +11,7 @@ export default function Card({details, localCurrPerUSD, currency, username}){
     const router = useRouter()
     const startStyle = {
         filter: "invert(87%) sepia(34%) saturate(1760%) hue-rotate(330deg) brightness(103%) contrast(101%)",
-        width: "47%",
+        // width: "20px",
         height: "auto"
     }
     const cardStyle = {
@@ -21,6 +21,8 @@ export default function Card({details, localCurrPerUSD, currency, username}){
         lg: "lg:w-[193px] lg:p-[11px] ", //lg:h-[343px]
         xl: "xl:w-[263px] xl:p-[12px] " // xl:h-[468px]
     }
+
+    console.log(parseFloat(details.price).toFixed(2))
 
     return (
         <>
@@ -38,12 +40,12 @@ export default function Card({details, localCurrPerUSD, currency, username}){
                                 {details.author}
                             </span>
                         </div>
-                        <div className="flex flex-row justify-between">
+                        <div className="flex flex-col items-center md:flex-row justify-between">
                             <div name="bookRatings" className="flex flex-row items-center">
-                                <Image src={starIcon} style={startStyle} alt="star"></Image> <span className='w-fit align-middle font-light h-fit'>{details.ratings}</span>
+                                <Image className="w-[20px] md:w-[24px]" src={starIcon} style={startStyle} alt="star"></Image> <span className='w-fit align-middle font-light h-fit'>{details.ratings}</span>
                             </div>
-                            <div name="bookPrice" className="font-light	">
-                                {`${currency}${56 * parseFloat(details.price)}`}
+                            <div name="bookPrice" className="font-light flex flex-row truncate">
+                                <span className=' mr-[4px]'>{`${currency}`}</span> {`${(56 * parseFloat(details.price)).toFixed(2)}`}
                             </div>
                         </div>
                     </div>
