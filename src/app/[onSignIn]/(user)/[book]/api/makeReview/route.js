@@ -9,7 +9,7 @@ export async function POST(request) {
     const review = formData.get('review')
     // console.log("postReview", review)
     // console.log("postBookID", bookID)
-
+    if(review.trim().length <= 0) return Response.json({})
 
     const poolPromise = pool.promise()
     const conn = await poolPromise.getConnection()

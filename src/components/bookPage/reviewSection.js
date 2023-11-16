@@ -20,6 +20,7 @@ export default function reviews({userInfo, searchParams}){
     function handleClick(e){
         let temp = [...reviews]
         e.preventDefault()
+        
         if(e.target.id != "reviewButton") return
         const formData = new FormData(e.currentTarget)
         
@@ -27,10 +28,14 @@ export default function reviews({userInfo, searchParams}){
         fetch(`/user/book/api/makeReview?bookID=${parseInt(searchParams.bookID)}`, {method: "POST", body: formData})
         .then((result)=>result.json())
         .then((output)=>{
-            console.log("output", output)
-            temp.unshift(output)
-            setReviews(temp)
+            if(Object.keys(output).length > 0){
+                console.log("output", output)
+                temp.unshift(output)
+                setReviews(temp)
+            }
+            
         })
+        e.currentTarget.reset()
     }
 
     const containerStyle = {
