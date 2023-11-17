@@ -8,18 +8,17 @@ export default function faveButton(props){
 
     async function faveState(request, method){
         const retVal = await fetch(request, {method: method})
-        console.log(retVal)
+        console.log("retVal", retVal)
         return retVal.json()
     }
 
     useEffect(()=>{
-        fetch(`/user/book/api/favoriteFirstRender?userID=${props.userInfo.userID}&bookID=${props.bookInfo.bookID}`)
-        .then((result)=>result.json())
-        .then((parsedResult)=>{
-            if(parsedResult.faved > 0){
-                setFaved(true)
-            }
-        })
+        let result = faveState(`/user/book/api/favoriteFirstRender?userID=${props.userInfo.userID}&bookID=${props.bookInfo.bookID}`, "GET")
+        // fetch(`/user/book/api/favoriteFirstRender?userID=${props.userInfo.userID}&bookID=${props.bookInfo.bookID}`)
+        // .then((result)=>result.json())
+        if(result.faved > 0){
+            setFaved(true)  
+        }
     }, [])
 
     let style = {
