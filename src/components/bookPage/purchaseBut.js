@@ -8,7 +8,7 @@ export default function purchase(props){
     }
     return (
         <>
-            <button className="bg-green-500 p-[4px] px-[9px] rounded-full text-white font-semibold flex flex-row items-center">
+            <button className="bg-green-500 p-[4px] px-[9px] rounded-full text-white font-semibold flex flex-row justify-center items-center">
                 <Image src={cartAdd} className="mr-[4px]" style={style} alt="AddToCart"></Image>
                 <div className="flex flex-row">
                     <span className="mr-[4px]">{`${props.userInfo.crrncyCode}`}</span>
