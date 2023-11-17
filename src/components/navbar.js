@@ -1,18 +1,33 @@
 // The navbar for the pages in (user)
 'use client'
+import { Fragment } from 'react'
 import Link from 'next/link'
 import { Tab } from '@headlessui/react'
 
 export default function Navbar({fields, styles}){
-    const tabStyle = "flex flex-wrap flex-row content-center  px-8 justify-center w-fit text-2xl hover:bg-[#e38a40] font-medium	"
+    const tabStyle = "flex flex-wrap flex-row content-center  px-8 justify-center w-fit h-full text-2xl hover:bg-[#e38a40] font-medium focus:ring-[0px]"
     console.log(fields)
     return (
         <>
             
                 <div className={styles + " flex flex-wrap flex-row"}>
-                    <Tab.Group>
-                        <Tab.List className=" flex flex-row"> 
-                            {fields.map((field, index)=><Link key={index} href={field.linkTo} className="flex flex-row"><Tab className={tabStyle}>{field.name}</Tab></Link>)}
+                    <Tab.Group manual>
+                        <Tab.List className=" flex flex-wrap flex-row"> 
+                            {fields.map((field, index)=>{return <Link key={index} href={field.linkTo} className="flex flex-row">
+                                <Tab as={Fragment} className="focus:ring-[0px]"> 
+                                    {({ selected }) => (
+                                        /* Use the `selected` state to conditionally style the selected tab. */
+                                        <button
+                                        className={
+                                            selected ? `${tabStyle} bg-[#e38a40] text-white` : `${tabStyle}`
+                                        }
+                                        >
+                                        {field.name}
+                                        </button>
+                                    )}
+                                </Tab>
+                                </Link>})
+                            }
                         </Tab.List>
                     </Tab.Group>
                 </div>

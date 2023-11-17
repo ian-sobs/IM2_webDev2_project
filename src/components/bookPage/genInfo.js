@@ -106,9 +106,9 @@ export default async function genInfo({searchParams}){
                             </div>
                         </div>
 
-                        <div className="flex flex-col sm:flex-row  justify-between sm:justify-evenly">
+                        <div className="flex flex-col md1:flex-row  md1:px-9 lg:px-10 xl:px-20 md1:justify-between">
                             <FaveButton userInfo={userInfo} bookInfo={bookInfo}></FaveButton>
-                            <div className="h-[10px] sm:h-0"></div>
+                            <div className="h-[10px] md1:h-0"></div>
                             <BuyButton userInfo={userInfo} bookInfo={bookInfo}></BuyButton>
                         </div>
                         
