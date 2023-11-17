@@ -32,10 +32,10 @@ export default function faveButton(props){
         .then((parsedResult)=>{
             if(parsedResult.length > 0){
                 console.log("parsedResultOnClick", parsedResult)
-                setFaved(true)
+                
             }
         })
-        
+        setFaved(true)
     }
 
     function unFave(){
@@ -44,9 +44,10 @@ export default function faveButton(props){
         .then((parsedResult)=>{
             if(parsedResult.length <= 0){
                 console.log("unFaved", parsedResult)
-                setFaved(false)
+                
             }
         })
+        setFaved(false)
     }
 
     if(faved){
