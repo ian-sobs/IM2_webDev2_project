@@ -11,10 +11,9 @@ export async function GET(request, {params}) {
 
     const poolPromise = pool.promise()
     const conn = await poolPromise.getConnection()
-    const [rows, fields] = await conn.execute("SELECT COUNT(f.userID) AS faved FROM favorites f WHERE f.userID=? AND f.bookID=?", [userID, bookID])
+    const [rows, fields] = await conn.execute("INSERT INTO favorites(userID, bookID) VALUES (?, ?)", [userID, bookID])
+    const [result, resFields] = await conn.execute("SELECT f.favoriteID FROM favorites f WHERE f.userID=? AND f.bookID=?", [userID, bookID])
     await poolPromise.releaseConnection(conn)
-    const [result] = rows
-    console.log("myFavorites", result)
 
     return Response.json(result)
 }

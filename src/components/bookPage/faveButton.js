@@ -30,11 +30,12 @@ export default function faveButton(props){
         fetch(`/user/book/api/fave?userID=${props.userInfo.userID}&bookID=${props.bookInfo.bookID}`)
         .then((result)=>result.json())
         .then((parsedResult)=>{
-            if(parsedResult.faved > 0){
+            if(parsedResult.length > 0){
+                console.log("parsedResultOnClick", parsedResult)
                 setFaved(true)
             }
         })
-        setFaved(true)
+        
     }
 
     function unFave(){
