@@ -5,6 +5,9 @@
 import { Suspense } from 'react'
 import Image from 'next/image'
 import pool from '@/dbConn'
+import FaveButton from './faveButton'
+import BuyButton from './purchaseBut'
+import getUsrCookie from '../getUsrCookie'
 // import Rating from './rating'
 
 // async function getBookId(){
@@ -65,12 +68,15 @@ export default async function genInfo({searchParams}){
         allWidth: "pt-[24px] flex flex-col ", //w-5/12 justify-between
         sm: "sm:grow sm:pl-[35px] sm:pt-0"
     }
+
+    const userInfo = getUsrCookie()
+    console.log("genInfoUserInfo", userInfo)
     return (
         <>
             {/* <p className="text-black">{JSON.stringify(bookInfo)}</p> */}
             <div className={`${containerStyle.allWidth} ${containerStyle.sm} ${containerStyle.mobile}`}>
 
-                    <Image className={`${imgStyle.allWidth} ${imgStyle.sm} ${imgStyle.lg}`} src={bookInfo.img} width={612} height={939}></Image> 
+                    <Image className={`${imgStyle.allWidth} ${imgStyle.sm} ${imgStyle.lg}`} src={bookInfo.img} width={612} height={939} alt={`${bookInfo.title}`}></Image> 
 
                     <div className={`${contentStyle.allWidth} ${contentStyle.sm}`}>
                         
@@ -101,8 +107,9 @@ export default async function genInfo({searchParams}){
                         </div>
 
                         <div className="flex flex-row flex-wrap justify-evenly">
-                            <button className="bg-red-400 font-light">Add to favorite</button>
-                            <button className="bg-green-400 font-light">{(56 * bookInfo.priceUSD).toFixed(2)}</button>
+                            <FaveButton userInfo={userInfo} bookInfo={bookInfo}></FaveButton>
+                            
+                            <BuyButton userInfo={userInfo} bookInfo={bookInfo}></BuyButton>
                         </div>
                         
                     </div>                
