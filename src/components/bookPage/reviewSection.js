@@ -51,7 +51,7 @@ export default function reviews({userInfo, searchParams}){
 
                 <div className="w-full flex flex-col p-[20px] border-t border-slate-500" >
                     <form onClick={handleClick}>
-                        <textarea name="review" className="w-full bg-gray-200 h-auto p-[8px]" placeholder='Make a review...'></textarea>
+                        <textarea name="review" className="text-slate-600 w-full bg-slate-200 placeholder:text-slate-600 h-auto p-[8px]" placeholder='Make a review...'></textarea>
                         <button id='reviewButton' className="bg-green-500 p-[4px] text-white font-semibold rounded-md text-center w-[50px]" type="submit">Post</button>
                     </form>
                 </div>

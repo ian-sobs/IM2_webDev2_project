@@ -6,22 +6,11 @@ import { Suspense } from 'react'
 import Image from 'next/image'
 import pool from '@/dbConn'
 import FaveButton from './faveButton'
-import BuyButton from './purchaseBut'
 import getUsrCookie from '../getUsrCookie'
-// import Rating from './rating'
+import BuyButton from './purchaseBut'
+// import dynamic from 'next/dynamic'
 
-// async function getBookId(){
-//     let searchParams = useSearchParams()
-// }
-
-// function Loading(){
-//     console.log("loading")
-//     return(
-//         <>
-//             <p className="text-black text-2xl">LOADING....</p>
-//         </>
-//     )
-// }
+// const BuyButton = dynamic(() => import('./purchaseBut'))
 
 export default async function genInfo({searchParams}){
     // let searchParams = useSearchParams()
@@ -79,39 +68,42 @@ export default async function genInfo({searchParams}){
                     <Image className={`${imgStyle.allWidth} ${imgStyle.sm} ${imgStyle.lg}`} src={bookInfo.img} width={612} height={939} alt={`${bookInfo.title}`}></Image> 
 
                     <div className={`${contentStyle.allWidth} ${contentStyle.sm}`}>
-                        
-                        <div className="flex flex-col items-center sm:items-start mb-[15px]">
-                            <span className="font-semibold text-lg tracking-wide">{bookInfo.title}</span>
-                            <span className="font-light text-lg sm:text-base italic">by {bookInfo.author}</span> 
-                        </div>
-
-                        <div className="flex flex-col mb-[15px] max-h-[20rem]">
-                            <div className="overflow-y-auto">
-                                <p className="font-light text-lg sm:text-base indent-6 text-justify mr-[4px]">{bookInfo.description}</p> 
+                        <div>
+                            <div className="flex flex-col items-center sm:items-start mb-[15px]">
+                                <span className="font-semibold text-lg tracking-wide">{bookInfo.title}</span>
+                                <span className="font-light text-lg sm:text-base italic">by {bookInfo.author}</span> 
                             </div>
-                            
-                        </div>
 
-                        <div className="flex flex-col mb-[15px]  items-center sm:items-start">
-                            <span className="font-medium text-lg">Genres</span>
-                            <span className="font-light text-lg sm:text-base text-center sm:text-justify">{bookInfo.genreName}</span> 
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row items-center sm:items-start mb-[24px]">
-                            <span className="font-medium text-ratings text-lg mr-[8px]">Ratings</span>
-                            <div className="flex flex-row">
-                            {/* className="flex flex-row" */}
-                                {/* <Rating></Rating> */}
-                                <span className="font-light text-lg text-justify">{bookInfo.avgRating}</span> 
+                            <div className="flex flex-col mb-[20px] max-h-[20rem]">
+                                <div className="overflow-y-auto">
+                                    <p className="font-light text-lg sm:text-base indent-6 text-justify mr-[4px] ">{bookInfo.description}</p> 
+                                </div>
+                                
                             </div>
                         </div>
 
-                        <div className="flex flex-col md1:flex-row  md1:px-9 lg:px-10 xl:px-20 md1:justify-between">
-                            <FaveButton userInfo={userInfo} bookInfo={bookInfo}></FaveButton>
-                            <div className="h-[10px] md1:h-0"></div>
-                            <BuyButton userInfo={userInfo} bookInfo={bookInfo}></BuyButton>
+                        <div className='flex flex-col justify-evenly'>
+                            <div className="flex flex-col mb-[15px]  items-center sm:items-start">
+                                <span className="font-medium text-lg">Genres</span>
+                                <span className="font-light text-lg sm:text-base text-center sm:text-justify">{bookInfo.genreName}</span> 
+                            </div>
+
+                            <div className="flex flex-col sm:flex-row items-center sm:items-start mb-[24px]">
+                                <span className="font-medium text-ratings text-lg mr-[8px]">Ratings</span>
+                                <div className="flex flex-row">
+                                {/* className="flex flex-row" */}
+                                    {/* <Rating></Rating> */}
+                                    <span className="font-light text-lg text-justify">{bookInfo.avgRating}</span> 
+                                </div>
+                            </div>
+
+                            <div className="flex flex-col md1:flex-row  md1:px-9 lg:px-10 xl:px-20 md1:justify-between">
+                                <FaveButton userInfo={userInfo} bookInfo={bookInfo}></FaveButton>
+                                <div className="h-[10px] md1:h-0"></div>
+                                <BuyButton userInfo={userInfo} bookInfo={bookInfo}></BuyButton>
+                            </div>
                         </div>
-                        
+
                     </div>                
     
             </div>
