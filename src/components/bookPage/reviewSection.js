@@ -13,7 +13,7 @@ export default function reviews({userInfo, searchParams}){
         .then((parsedResult)=>setReviews(parsedResult))
     }, [])
 
-    const userReviews = reviews.map((review)=><Review info={review}></Review>)
+    const userReviews = reviews.map((review, index)=><Review key={index} info={review}></Review>)
 
     
 
