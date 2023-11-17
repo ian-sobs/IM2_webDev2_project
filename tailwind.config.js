@@ -21,7 +21,7 @@ module.exports = {
       'md': '768px',
       // => @media (min-width: 768px) { ... }
       'md1': '792px',
-      
+
       'lg': '1024px',
       // => @media (min-width: 1024px) { ... }
       'alg': '1188px',
@@ -35,5 +35,10 @@ module.exports = {
       // => @media (min-width: 1536px) { ... }
     }
   },
-  plugins: [],
+  plugins: [
+    require("tailwindcss-radix")({
+      // Default: `radix`
+      variantPrefix: "rdx",
+    }),
+  ],
 }

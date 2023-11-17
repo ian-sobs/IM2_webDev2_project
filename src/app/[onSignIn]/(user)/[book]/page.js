@@ -3,7 +3,7 @@ import CardFullDetails from '@/components/bookPage/cardFullDetails'
 
 export default function book({searchParams}){
     const sectionGridStyle = {
-        allWidth: "min-h-screen bg-slate-100 pt-[25px] pb-[20px] flex flex-row justify-center",
+        allWidth: "min-h-screen bg-slate-100 pt-[25px] pb-[20px] flex flex-row w-full justify-center",
         mobile:"px-9 ",
         sm:"sm:px-3 ",
         md:"md:px-4 ",
