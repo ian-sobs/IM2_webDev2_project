@@ -82,7 +82,7 @@ export default async function genInfo({searchParams}){
                             </div>
                         </div>
 
-                        <div className='flex flex-col justify-evenly'>
+                        <div className='flex flex-col justify-evenly grow'>
                             <div className="flex flex-col mb-[15px]  items-center sm:items-start">
                                 <span className="font-medium text-lg">Genres</span>
                                 <span className="font-light text-lg sm:text-base text-center sm:text-justify">{bookInfo.genreName}</span> 
