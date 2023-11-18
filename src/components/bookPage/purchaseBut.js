@@ -2,7 +2,8 @@
 import Image from 'next/image'
 import cartAdd from '@/icons/addToCart.svg'
 import { useState } from 'react' 
-import * as Dialog from '@radix-ui/react-dialog';
+import * as Dialog from '@radix-ui/react-dialog'
+import * as Form from '@radix-ui/react-form'
 
 export default function purchase(props){
     const [isOpen, setIsOpen] = useState(false)
@@ -27,12 +28,29 @@ export default function purchase(props){
             zIndex: "70"
     }
 
-    function handleSubmit(){
+    function handleSubmit(e){
+        e.preventDefault()
         fetch("user/book/api/addToCart", {method: 'POST'})
     }
 
     return (
         <>
+
+                            {/* <form >
+                                <div className='flex flex-row items-center mb-[8px]'>
+                                    <label htmlFor='prodQuant' className=' mr-[10px]'>Quantity</label>
+                                    <input id='prodQuant' name='prodQuant' value={prodQuant} type="number" className='w-[60px] bg-slate-200 p-[4px] rounded-sm' onChange={(e)=>setProdQuant(e.target.value)}></input>
+                                </div>
+                                <div className='flex flex-row items-center mb-[14px]'>
+                                    <p className='mr-[7px]'>Total price: </p> <span className='text-green-500 font-semibold'>{`${props.userInfo.crrncyCode} ${(props.bookInfo.priceUSD * prodQuant * 56).toFixed(2)}`}</span>
+                                </div>
+                                <div className='flex flex-col justify-center mb-[8px]'>
+                                    <label htmlFor='address' className=' mr-[10px]' >Address</label>
+                                    <input id='address' name='address' type="text" className=' bg-slate-200 p-[4px] rounded-sm' ></input>
+                                </div>
+
+                            </form> */}
+
             <Dialog.Root open={isOpen} modal={true}>
 
                 <Dialog.Trigger asChild>
@@ -46,45 +64,54 @@ export default function purchase(props){
                 </Dialog.Trigger>  
 
                 <Dialog.Portal >
-                <Dialog.Overlay className="fixed inset-0 bg-black opacity-75 z-40" style={{}}>
-                    {/* <div  aria-hidden="true" /> */}
-                </Dialog.Overlay>
-                <Dialog.Content className="flex flex-col text-black" style={dialogContent}>
+                    <Dialog.Overlay className="fixed inset-0 bg-black opacity-75 z-40" style={{}}> </Dialog.Overlay>
 
-                    
+                    <Dialog.Content className="flex flex-col text-black" style={dialogContent}>
+                        
                         <Dialog.Title className="text-center font-semibold mb-[10px] text-lg tracking-wide">
                             Order details
                         </Dialog.Title>
 
-                        <form >
-                            <div className='flex flex-row items-center mb-[8px]'>
-                                <label htmlFor='prodQuant' className=' mr-[10px]'>Quantity</label>
-                                <input id='prodQuant' name='prodQuant' value={prodQuant} type="number" className='w-[60px] bg-slate-200 p-[4px] rounded-sm' onChange={(e)=>setProdQuant(e.target.value)}></input>
-                            </div>
+                            
+                        <Form.Root className='flex flex-row items-center mb-[8px]' onSubmit={handleSubmit}>
+                            <Form.Field className='flex flex-row items-center mb-[8px]' name="prodQuant">
+                                    <Form.Label className='mr-[10px]'>Quantity</Form.Label>
+                                    <Form.Control className='w-[60px] bg-slate-200 p-[4px] rounded-sm' asChild><input type="number" value={prodQuant} onChange={(e)=>setProdQuant(e.target.value)}></input></Form.Control>
+                            </Form.Field>
+
                             <div className='flex flex-row items-center mb-[14px]'>
                                 <p className='mr-[7px]'>Total price: </p> <span className='text-green-500 font-semibold'>{`${props.userInfo.crrncyCode} ${(props.bookInfo.priceUSD * prodQuant * 56).toFixed(2)}`}</span>
                             </div>
-                            <div className='flex flex-col justify-center mb-[8px]'>
-                                <label htmlFor='address' className=' mr-[10px]' >Address</label>
-                                <input id='address' name='address' type="text" className=' bg-slate-200 p-[4px] rounded-sm' ></input>
+
+                            <Form.Field className='flex flex-col justify-center mb-[8px]' name="address">
+                                <div className="flex flex-row justify-between items-center">
+                                    <Form.Label className=' mr-[10px]'>Quantity</Form.Label>
+                                    <Form.Message className="text-sm font-light" match="valueMissing"> Address should not be empty </Form.Message>
+                                </div>
+
+                                <Form.Control asChild> <input type="text" className=' bg-slate-200 p-[4px] rounded-sm' ></input></Form.Control>
+                            </Form.Field>
+
+                            <div className="flex flex-row justify-end mt-[8px]">
+                                <Dialog.Close className="bg-stone-300 p-[7px] rounded-md" onClick={()=>setIsOpen(false)}> 
+                                    Cancel
+                                </Dialog.Close>
+                                <Form.Submit className="bg-green-500 p-[7px] text-white rounded-md ml-[15px]">
+                                    Add to cart
+                                </Form.Submit>
                             </div>
 
-                        </form>
-
-                        <div className="flex flex-row justify-end mt-[8px]">
-                            <Dialog.Close className="bg-stone-300 p-[7px] rounded-md" onClick={()=>setIsOpen(false)}> 
-                                Cancel
-                            </Dialog.Close>
-                            <Dialog.Close className="bg-green-500 p-[7px] text-white rounded-md ml-[15px]" onClick={handleSubmit}> 
-                                Add to cart
-                            </Dialog.Close>
-                            {/* <button className="bg-green-500 p-[7px] text-white rounded-md ml-[15px]"></button> */}
-                        </div>
-
-                    
-
-                </Dialog.Content>
-                </Dialog.Portal>
+                        </Form.Root>
+                            {/* <div className="flex flex-row justify-end mt-[8px]">
+                                <Dialog.Close className="bg-stone-300 p-[7px] rounded-md" onClick={()=>setIsOpen(false)}> 
+                                    Cancel
+                                </Dialog.Close>
+                                <Dialog.Close className="bg-green-500 p-[7px] text-white rounded-md ml-[15px]" onClick={handleSubmit}> 
+                                    Add to cart
+                                </Dialog.Close>
+                            </div> */}
+                    </Dialog.Content>
+                </Dialog.Portal>    
             </Dialog.Root>
         </>
     )

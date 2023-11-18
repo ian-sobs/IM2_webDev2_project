@@ -1,4 +1,4 @@
-// import { cookies } from 'next/headers'
+import { cookies } from 'next/headers'
 import Card from '@/components/listOfCards/card'
 import user  from '@/components/getUsrCookie'
 import CardsDisplay from '@/components/listOfCards/cardsDisplay';
@@ -49,7 +49,7 @@ export default function Page(){
             
                     {/* {books.map((book, index)=><Card key={index} details={book}></Card>)} */}
                 
-            <CardsDisplay currency={userInfo["crrncyCode"]} localCurrPerUSD={userInfo["localCurrPerUSD"]} CtabStyles="col-span-2 md:col-span-3 lg:col-span-4 " requestURL="/user/market/api" username={userInfo["username"]}></CardsDisplay>
+           {(cookies().has("userCredentials")) ? <CardsDisplay currency={userInfo["crrncyCode"]} localCurrPerUSD={userInfo["localCurrPerUSD"]} CtabStyles="col-span-2 md:col-span-3 lg:col-span-4 " requestURL="/user/market/api" username={userInfo["username"]}></CardsDisplay> : <h1>error</h1>}
 
         </section>
     
