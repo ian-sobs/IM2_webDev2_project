@@ -1,6 +1,7 @@
 import pool from '@/dbConn'
 
 export async function GET(request, {params}) {
+    console.log("request.url", request.url)
     console.log(params)
     console.log("Params.slug", parseInt(params.slug))
     const poolPromise = pool.promise()

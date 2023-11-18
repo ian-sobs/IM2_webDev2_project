@@ -26,10 +26,13 @@ export default function purchase(props){
             animation: "contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1)",
             zIndex: "70"
     }
+
+    function handleSubmit(){
+        fetch("user/book/api/addToCart", {method: 'POST'})
+    }
+
     return (
         <>
-
-
             <Dialog.Root open={isOpen} modal={true}>
 
                 <Dialog.Trigger asChild>
@@ -43,12 +46,12 @@ export default function purchase(props){
                 </Dialog.Trigger>  
 
                 <Dialog.Portal >
-                <Dialog.Overlay asChild>
-                    <div className="fixed inset-0 bg-black opacity-75 z-40" aria-hidden="true" />
+                <Dialog.Overlay className="fixed inset-0 bg-black opacity-75 z-40" style={{}}>
+                    {/* <div  aria-hidden="true" /> */}
                 </Dialog.Overlay>
-                <Dialog.Content asChild style={dialogContent}>
+                <Dialog.Content className="flex flex-col text-black" style={dialogContent}>
 
-                    <div className="flex flex-col text-black">
+                    
                         <Dialog.Title className="text-center font-semibold mb-[10px] text-lg tracking-wide">
                             Order details
                         </Dialog.Title>
@@ -72,10 +75,13 @@ export default function purchase(props){
                             <Dialog.Close className="bg-stone-300 p-[7px] rounded-md" onClick={()=>setIsOpen(false)}> 
                                 Cancel
                             </Dialog.Close>
-                            <button className="bg-green-500 p-[7px] text-white rounded-md ml-[15px]">Add to cart</button>
+                            <Dialog.Close className="bg-green-500 p-[7px] text-white rounded-md ml-[15px]" onClick={handleSubmit}> 
+                                Add to cart
+                            </Dialog.Close>
+                            {/* <button className="bg-green-500 p-[7px] text-white rounded-md ml-[15px]"></button> */}
                         </div>
 
-                    </div>
+                    
 
                 </Dialog.Content>
                 </Dialog.Portal>
