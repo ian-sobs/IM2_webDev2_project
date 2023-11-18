@@ -7,8 +7,8 @@ export async function POST(request) {
     const conn = await poolPromise.getConnection()
 
     const [rows, fields] = await conn.execute(
-      "INSERT INTO shopping_cart(userID, bookID, qty, totalPrice) VALUES (?, ?, ?, ?)", 
-      [parseInt(res.userID), parseInt(res.bookID), parseInt(res.prodQuant), parseFloat(res.totalPrice).toFixed(2)]
+      "INSERT INTO shopping_cart(userID, bookID, qty, totalPrice, address) VALUES (?, ?, ?, ?, ?)", 
+      [parseInt(res.userID), parseInt(res.bookID), parseInt(res.prodQuant), parseFloat(res.totalPrice).toFixed(2), res.address]
     )
     console.log("shopping cart rows", rows)
     poolPromise.releaseConnection(conn)

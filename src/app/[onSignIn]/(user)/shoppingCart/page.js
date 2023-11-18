@@ -1,11 +1,11 @@
 import getUsrCookie from "@/components/getUsrCookie"
-import cartItemDisplay from "@/components/shoppingCart/cartItemDisplay"
+import CartItemDisplay from "@/components/shoppingCart/cartItemDisplay"
 
 export default function cart(){
-    
+    const userInfo = getUsrCookie()
 
     const sectionGridStyle = {
-        allWidth: "min-h-screen bg-slate-100 pt-[25px] pb-[20px] flex flex-row w-full justify-center",
+        allWidth: "min-h-screen bg-slate-100 pt-[25px] pb-[20px] flex flex-col w-full items-center",
         mobile:"px-9 ",
         sm:"sm:px-3 ",
         md:"md:px-4 ",
@@ -17,7 +17,7 @@ export default function cart(){
     return (
         <>
             <section name="sectionGrid" className={`${sectionGridStyle.allWidth} ${sectionGridStyle.mobile} ${sectionGridStyle.sm} ${sectionGridStyle.md} ${sectionGridStyle.lg} ${sectionGridStyle.xl}`}>
-                                          
+                <CartItemDisplay userInfo={userInfo}></CartItemDisplay>               
             </section>
                
         </>
