@@ -3,7 +3,7 @@
 // // This function can be marked `async` if using `await` inside
 // export function middleware(request) {
     
-//   return NextResponse.redirect(new URL('http://localhost:3000/'))
+//   return NextResponse.redirect(new URL('/', request.url))
 // }
  
 // // See "Matching Paths" below to learn more
