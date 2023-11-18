@@ -30,27 +30,26 @@ export default function purchase(props){
 
     function handleSubmit(e){
         e.preventDefault()
-        fetch("user/book/api/addToCart", {method: 'POST'})
+        const data = Object.fromEntries(new FormData(e.currentTarget))
+
+        console.log(data)
+
+        fetch("book/api/addToCart", {    
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)})
+        .then((result)=>result.json())
+        .then((output)=> {
+            console.log("purchaseButOutput", output)
+            setIsOpen(false)
+        })
     }
 
     return (
         <>
-
-                            {/* <form >
-                                <div className='flex flex-row items-center mb-[8px]'>
-                                    <label htmlFor='prodQuant' className=' mr-[10px]'>Quantity</label>
-                                    <input id='prodQuant' name='prodQuant' value={prodQuant} type="number" className='w-[60px] bg-slate-200 p-[4px] rounded-sm' onChange={(e)=>setProdQuant(e.target.value)}></input>
-                                </div>
-                                <div className='flex flex-row items-center mb-[14px]'>
-                                    <p className='mr-[7px]'>Total price: </p> <span className='text-green-500 font-semibold'>{`${props.userInfo.crrncyCode} ${(props.bookInfo.priceUSD * prodQuant * 56).toFixed(2)}`}</span>
-                                </div>
-                                <div className='flex flex-col justify-center mb-[8px]'>
-                                    <label htmlFor='address' className=' mr-[10px]' >Address</label>
-                                    <input id='address' name='address' type="text" className=' bg-slate-200 p-[4px] rounded-sm' ></input>
-                                </div>
-
-                            </form> */}
-
             <Dialog.Root open={isOpen} modal={true}>
 
                 <Dialog.Trigger asChild>
@@ -67,33 +66,47 @@ export default function purchase(props){
                     <Dialog.Overlay className="fixed inset-0 bg-black opacity-75 z-40" style={{}}> </Dialog.Overlay>
 
                     <Dialog.Content className="flex flex-col text-black" style={dialogContent}>
-                        
+                        <>
                         <Dialog.Title className="text-center font-semibold mb-[10px] text-lg tracking-wide">
                             Order details
                         </Dialog.Title>
 
                             
-                        <Form.Root className='flex flex-row items-center mb-[8px]' onSubmit={handleSubmit}>
+                        <Form.Root className='flex flex-col justify-center mb-[8px]' onSubmit={handleSubmit}>
                             <Form.Field className='flex flex-row items-center mb-[8px]' name="prodQuant">
                                     <Form.Label className='mr-[10px]'>Quantity</Form.Label>
-                                    <Form.Control className='w-[60px] bg-slate-200 p-[4px] rounded-sm' asChild><input type="number" value={prodQuant} onChange={(e)=>setProdQuant(e.target.value)}></input></Form.Control>
+                                    <Form.Control className='w-[60px] bg-slate-200 p-[4px] rounded-sm' asChild><input type="number" min="1" value={prodQuant} onChange={(e)=>setProdQuant(e.target.value)}></input></Form.Control>
                             </Form.Field>
 
                             <div className='flex flex-row items-center mb-[14px]'>
                                 <p className='mr-[7px]'>Total price: </p> <span className='text-green-500 font-semibold'>{`${props.userInfo.crrncyCode} ${(props.bookInfo.priceUSD * prodQuant * 56).toFixed(2)}`}</span>
                             </div>
 
-                            <Form.Field className='flex flex-col justify-center mb-[8px]' name="address">
-                                <div className="flex flex-row justify-between items-center">
-                                    <Form.Label className=' mr-[10px]'>Quantity</Form.Label>
+                             <Form.Field className='flex flex-row items-center mb-[8px]' name="address">
+                                <div className="flex flex-row justify-between items-center">    
+                                    <Form.Label className='mr-[10px]'>Address</Form.Label>
                                     <Form.Message className="text-sm font-light" match="valueMissing"> Address should not be empty </Form.Message>
                                 </div>
+                                <Form.Control className='w-full bg-slate-200 p-[4px] rounded-sm' asChild><input type="text"></input></Form.Control>
+                            </Form.Field>
 
-                                <Form.Control asChild> <input type="text" className=' bg-slate-200 p-[4px] rounded-sm' ></input></Form.Control>
+                            <Form.Field name="totalPrice" asChild>
+                                <Form.Control asChild><input type="number" value={(props.bookInfo.priceUSD * prodQuant).toFixed(2)} hidden></input></Form.Control>
+                            </Form.Field>
+
+                            <Form.Field name="userID" asChild>
+                                <Form.Control asChild><input type="number" value={parseInt(props.userInfo.userID)} hidden></input></Form.Control>
+                            </Form.Field>
+
+                            <Form.Field name="bookID" asChild>
+                                <Form.Control asChild><input type="number" value={parseInt(props.bookInfo.bookID)} hidden></input></Form.Control>
                             </Form.Field>
 
                             <div className="flex flex-row justify-end mt-[8px]">
-                                <Dialog.Close className="bg-stone-300 p-[7px] rounded-md" onClick={()=>setIsOpen(false)}> 
+                                <Dialog.Close className="bg-stone-300 p-[7px] rounded-md" onClick={()=>{
+                                    setIsOpen(false)
+                                    setProdQuant(1)
+                                }}> 
                                     Cancel
                                 </Dialog.Close>
                                 <Form.Submit className="bg-green-500 p-[7px] text-white rounded-md ml-[15px]">
@@ -102,6 +115,7 @@ export default function purchase(props){
                             </div>
 
                         </Form.Root>
+                        </>
                             {/* <div className="flex flex-row justify-end mt-[8px]">
                                 <Dialog.Close className="bg-stone-300 p-[7px] rounded-md" onClick={()=>setIsOpen(false)}> 
                                     Cancel
