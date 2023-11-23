@@ -8,7 +8,7 @@ import GiveRating from './GiveRating'
 
 export default function RateBut({bookID, userID}){
     const [isOpen, setIsOpen] = useState(false)
-    const [starCount, setStarCount] = useState(3)
+    const [starCount, setStarCount] = useState(0)
     useEffect(()=>{
         fetch(`/user/book/api/rateBook?bookID=${bookID}&userID=${userID}`)
         .then((result)=>result.json())
