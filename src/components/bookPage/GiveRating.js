@@ -42,7 +42,7 @@ export default function StarRating({bookID, userID, starRating}){
     }
 
     function starRate(star) {
-        setStarCount(star)
+        // setStarCount(star)
         for (let i = 0; i < star; i++) {
             starArr[i].current.style.color = 'orange'
         }
@@ -68,7 +68,7 @@ export default function StarRating({bookID, userID, starRating}){
       function handleRate(){
 
       } 
-      
+
     return (
         <>
             <div className="flex" onMouseLeave={()=>{
