@@ -4,10 +4,10 @@ import * as Dialog from '@radix-ui/react-dialog'
 import * as Form from '@radix-ui/react-form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
+import GiveRating from './GiveRating'
 
 export default function RateBut(props){
     const [isOpen, setIsOpen] = useState(false)
-    const [prodQuant, setProdQuant] = useState(1)
 
 
     let dialogContent = {
@@ -36,25 +36,25 @@ export default function RateBut(props){
         fontSize: '20px'        
     }
 
-    function handleSubmit(e){
-        e.preventDefault()
-        const data = Object.fromEntries(new FormData(e.currentTarget))
+    // function handleSubmit(e){
+    //     e.preventDefault()
+    //     const data = Object.fromEntries(new FormData(e.currentTarget))
 
-        console.log(data)
+    //     console.log(data)
 
-        fetch("book/api/addToCart", {    
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)})
-        .then((result)=>result.json())
-        .then((output)=> {
-            console.log("purchaseButOutput", output)
-            setIsOpen(false)
-        })
-    }
+    //     fetch("book/api/addToCart", {    
+    //         method: 'POST',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(data)})
+    //     .then((result)=>result.json())
+    //     .then((output)=> {
+    //         console.log("purchaseButOutput", output)
+    //         setIsOpen(false)
+    //     })
+    // }
 
     return (
         <>
@@ -67,17 +67,30 @@ export default function RateBut(props){
                     </button>
                 </Dialog.Trigger>  
 
-                {/* <Dialog.Portal >
+                <Dialog.Portal >
                     <Dialog.Overlay className="fixed inset-0 bg-black opacity-75 z-40" style={{}}> </Dialog.Overlay>
 
-                    <Dialog.Content className="flex flex-col text-black" style={dialogContent}>
+                    <Dialog.Content className="flex flex-col text-black items-center" style={dialogContent}>
                         <>
                         <Dialog.Title className="text-center font-semibold mb-[10px] text-lg tracking-wide">
-                            Order details
+                            Rate the book
                         </Dialog.Title>
+                       
+                        <div className="mt-[10px]">
+                          <GiveRating></GiveRating>
+                        </div>
+                        
+                        <div className="flex flex-row justify-end mt-[28px]">
+                                <Dialog.Close className="bg-stone-300 p-[7px] rounded-md" onClick={()=>{
+                                    setIsOpen(false)
+                                    
+                                }}> 
+                                    Cancel
+                                </Dialog.Close>
 
+                        </div>
                             
-                        <Form.Root className='flex flex-col justify-center mb-[8px]' onSubmit={handleSubmit}>
+                        {/* <Form.Root className='flex flex-col justify-center mb-[8px]' onSubmit={handleSubmit}>
                             <Form.Field className='flex flex-row items-center mb-[8px]' name="prodQuant">
                                     <Form.Label className='mr-[10px]'>Quantity</Form.Label>
                                     <Form.Control className='w-[60px] bg-slate-200 p-[4px] rounded-sm' asChild><input type="number" min="1" value={prodQuant} onChange={(e)=>setProdQuant(e.target.value)}></input></Form.Control>
@@ -110,7 +123,7 @@ export default function RateBut(props){
                             <div className="flex flex-row justify-end mt-[8px]">
                                 <Dialog.Close className="bg-stone-300 p-[7px] rounded-md" onClick={()=>{
                                     setIsOpen(false)
-                                    setProdQuant(1)
+                                    
                                 }}> 
                                     Cancel
                                 </Dialog.Close>
@@ -119,11 +132,11 @@ export default function RateBut(props){
                                 </Form.Submit>
                             </div>
 
-                        </Form.Root>
+                        </Form.Root> */}
                         </>
 
                     </Dialog.Content>
-                </Dialog.Portal>     */}
+                </Dialog.Portal>    
             </Dialog.Root>
         </>
     )
