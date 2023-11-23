@@ -36,7 +36,7 @@ export default function StarRating({rating}){
 
     return (
         <>
-            <div class="flex">
+            <div className="flex">
                 {/* <FontAwesomeIcon icon={faStar} style={uncolored} />
                 <FontAwesomeIcon icon={faStar} style={uncolored} />
                 <FontAwesomeIcon icon={faStar} style={uncolored} />
