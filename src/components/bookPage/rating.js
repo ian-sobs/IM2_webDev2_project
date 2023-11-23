@@ -61,9 +61,9 @@ export default function RateBut(props){
             <Dialog.Root open={isOpen} modal={true}>
 
                 <Dialog.Trigger asChild>
-                    <button className="bg-gray-200 p-[4px] px-[9px] rounded-full text-white font-semibold flex flex-row justify-center items-center" onClick={()=>setIsOpen(true)}>
-                      <FontAwesomeIcon className="m-[3px] w-[20px]" icon={faStar} style={colored} />
-                      <p className="text-black m-[3px]">Rate</p>
+                    <button className="bg-gray-200 p-[4px] px-[9px] rounded-full text-amber-500 hover:bg-amber-500 hover:text-white font-semibold flex flex-row justify-center items-center" onClick={()=>setIsOpen(true)}>
+                      <FontAwesomeIcon className="m-[3px] w-[20px]" icon={faStar} />
+                      <p className="m-[3px]">Rate</p>
                     </button>
                 </Dialog.Trigger>  
 
