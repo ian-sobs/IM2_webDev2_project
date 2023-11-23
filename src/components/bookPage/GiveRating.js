@@ -70,23 +70,31 @@ export default function StarRating(){
         // if (stars[starIdx - 1].rated) {
         //   return
         // }
-        for (let i = 5; i > count - 1; i--) {
-        //   document.getElementsByClassName('star-' + (i + 1))[0].style = "color:gray"
-            if(starArr[i - 1].current){
-                starArr[i - 1].current.style.color = '#9CA3AF'
-            }
-        }
+        // for (let i = 5; i > count - 1; i--) {
+        // //   document.getElementsByClassName('star-' + (i + 1))[0].style = "color:gray"
+        //     if(starArr[i - 1].current){
+        //         starArr[i - 1].current.style.color = '#9CA3AF'
+        //     }
+        // }
         // setStarCount(0)
+
+        for (let i = 0; i < count; i++) {
+            //   document.getElementsByClassName('star-' + (i + 1))[0].style = "color:orange"
+                if(starArr[i].current){ 
+                    starArr[i].current.style.color = '#9CA3AF'
+                }
+                
+            }
       }
 //nMouseLeave={()=>removeStar()}
     return (
         <>
-            <div class="flex" onMouseLeave={()=>setStarCount(0)}>
-                <FontAwesomeIcon ref={star1} className='text-gray-400' onMouseEnter={()=>starRate(1)} onMouseLeave={()=>removeStar(starCount)} icon={faStar} style={uncolored} /> 
-                <FontAwesomeIcon ref={star2} className='text-gray-400' onMouseEnter={()=>starRate(2)} onMouseLeave={()=>removeStar(starCount)} icon={faStar} style={uncolored} />
-                <FontAwesomeIcon ref={star3} className='text-gray-400' onMouseEnter={()=>starRate(3)} onMouseLeave={()=>removeStar(starCount)} icon={faStar} style={uncolored} />
-                <FontAwesomeIcon ref={star4} className='text-gray-400' onMouseEnter={()=>starRate(4)} onMouseLeave={()=>removeStar(starCount)} icon={faStar} style={uncolored} />
-                <FontAwesomeIcon ref={star5} className='text-gray-400' onMouseEnter={()=>starRate(5)} onMouseLeave={()=>removeStar(starCount)} icon={faStar} style={uncolored} />
+            <div class="flex" >
+                <FontAwesomeIcon ref={star1} className='text-gray-400 hover:cursor-pointer' onMouseEnter={()=>starRate(1)} onMouseLeave={()=>removeStar(starCount)} icon={faStar} style={uncolored} /> 
+                <FontAwesomeIcon ref={star2} className='text-gray-400 hover:cursor-pointer' onMouseEnter={()=>starRate(2)} onMouseLeave={()=>removeStar(starCount)} icon={faStar} style={uncolored} />
+                <FontAwesomeIcon ref={star3} className='text-gray-400 hover:cursor-pointer' onMouseEnter={()=>starRate(3)} onMouseLeave={()=>removeStar(starCount)} icon={faStar} style={uncolored} />
+                <FontAwesomeIcon ref={star4} className='text-gray-400 hover:cursor-pointer' onMouseEnter={()=>starRate(4)} onMouseLeave={()=>removeStar(starCount)} icon={faStar} style={uncolored} />
+                <FontAwesomeIcon ref={star5} className='text-gray-400 hover:cursor-pointer' onMouseEnter={()=>starRate(5)} onMouseLeave={()=>removeStar(starCount)} icon={faStar} style={uncolored} />
             </div>
         </>
     )
