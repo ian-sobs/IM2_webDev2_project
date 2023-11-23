@@ -116,14 +116,7 @@ export default function purchase(props){
 
                         </Form.Root>
                         </>
-                            {/* <div className="flex flex-row justify-end mt-[8px]">
-                                <Dialog.Close className="bg-stone-300 p-[7px] rounded-md" onClick={()=>setIsOpen(false)}> 
-                                    Cancel
-                                </Dialog.Close>
-                                <Dialog.Close className="bg-green-500 p-[7px] text-white rounded-md ml-[15px]" onClick={handleSubmit}> 
-                                    Add to cart
-                                </Dialog.Close>
-                            </div> */}
+
                     </Dialog.Content>
                 </Dialog.Portal>    
             </Dialog.Root>
