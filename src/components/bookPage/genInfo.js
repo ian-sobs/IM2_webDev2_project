@@ -9,6 +9,7 @@ import FaveButton from './faveButton'
 import getUsrCookie from '../getUsrCookie'
 import BuyButton from './purchaseBut'
 import StarRating from './star'
+import RateBut from './rating'
 // import dynamic from 'next/dynamic'
 
 // const BuyButton = dynamic(() => import('./purchaseBut'))
@@ -95,11 +96,14 @@ export default async function genInfo({searchParams}){
                                 {/* className="flex flex-row" */}
                                     <StarRating rating={parseFloat(bookInfo.avgRating)}></StarRating>
                                     <span className="font-light text-lg text-justify ml-[6px]">{bookInfo.avgRating}</span> 
+                                    
                                 </div>
                                 
                             </div>
-
-                            <div className="flex flex-col md1:flex-row  md1:px-9 lg:px-10 xl:px-20 md1:justify-between">
+                            
+                            <div className="flex flex-col md1:flex-row  md1:justify-between">
+                                <RateBut ></RateBut>
+                                <div className="h-[10px] md1:h-0"></div>
                                 <FaveButton userInfo={userInfo} bookInfo={bookInfo}></FaveButton>
                                 <div className="h-[10px] md1:h-0"></div>
                                 <BuyButton userInfo={userInfo} bookInfo={bookInfo}></BuyButton>
