@@ -26,12 +26,12 @@ export default function StarRating({rating}){
         fontSize: '20px'        
     }
     let starArr = []
-
+    let y = 0
     for(let x = 0; x < count; ++x){
-        starArr.push(<FontAwesomeIcon icon={faStar} style={colored} />)
+        starArr.push(<FontAwesomeIcon key={y++} icon={faStar} style={colored} />)
     }
     for(let x = 0; x < 5 - count; ++x){
-        starArr.push(<FontAwesomeIcon icon={faStar} style={uncolored} />)
+        starArr.push(<FontAwesomeIcon key={y++} icon={faStar} style={uncolored} />)
     }
 
     return (

@@ -4,97 +4,78 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import { useRef } from 'react'
 
-export default function StarRating(){
-    // const [starRating, setStarRating] = useState(rating)
-    // const [count, setCount] = useState(0)
- 
-    // useEffect(()=>{
-    //     if((starRating - Math.floor(starRating)) >= 0.5){
-    //         setCount(Math.ceil(starRating))
-    //     }
-    //     else{
-    //         setCount(Math.floor(starRating))
-    //     }
-    // } , [starRating])
+export default function StarRating({bookID, userID, starRating}){
     const isInitialRender = useRef(true);
-    const [starCount, setStarCount] = useState(0)
+    const [starCount, setStarCount] = useState(starRating)
 
     let star1 = useRef(null)
     let star2 = useRef(null)
     let star3 = useRef(null)
     let star4 = useRef(null)
     let star5 = useRef(null)
-   
-    let starArr = [star1, star2, star3, star4, star5]
 
-    useEffect(()=>{
-        if (isInitialRender.current) {
-            // Update the ref to indicate that subsequent renders are not initial
-            isInitialRender.current = false;
-            // Skip the rest of the code for the initial render
-            return;
-        }
-        // removeStar()
-    }, [starCount])
+    console.log("Star rating", starRating)
 
-
-    
     const uncolored = {
         fontSize: '30px'
     }
 
+    let starArrJsx = [                
+        <FontAwesomeIcon key={0} ref={star1} className='text-gray-400 hover:cursor-pointer' onMouseEnter={()=>starNdx(0)} icon={faStar} style={uncolored} />, //onMouseLeave={()=>removeStar(starCount)}
+        <FontAwesomeIcon key={1} ref={star2} className='text-gray-400 hover:cursor-pointer' onMouseEnter={()=>starNdx(1)} icon={faStar} style={uncolored} />,
+        <FontAwesomeIcon key={2} ref={star3} className='text-gray-400 hover:cursor-pointer' onMouseEnter={()=>starNdx(2)} icon={faStar} style={uncolored} />,
+        <FontAwesomeIcon key={3} ref={star4} className='text-gray-400 hover:cursor-pointer' onMouseEnter={()=>starNdx(3)} icon={faStar} style={uncolored} />,
+        <FontAwesomeIcon key={4} ref={star5} className='text-gray-400 hover:cursor-pointer' onMouseEnter={()=>starNdx(4)} icon={faStar} style={uncolored} />
+    ]
+   
+    let starArr = [star1, star2, star3, star4, star5]
+
+
+    useEffect(()=>{
+        starRate(starRating)
+        // removeStar()
+    }, [])
+   
     const colored ={
         color: 'orange',
         fontSize: '30px'    
     }
 
-
-    // for(let x = 0; x < count; ++x){
-    //     starArr.push(<FontAwesomeIcon icon={faStar} style={colored} />)
-    // }
-    // for(let x = 0; x < 5 - count; ++x){
-    //     starArr.push(<FontAwesomeIcon icon={faStar} style={uncolored} />)
-    // }
     function starRate(star) {
-        for (let i = 0; i < star; i++) {
-        //   document.getElementsByClassName('star-' + (i + 1))[0].style = "color:orange"
-            if(starArr[i].current){ 
-                starArr[i].current.style.color = 'orange'
-            }
-            
-        }
         setStarCount(star)
+        for (let i = 0; i < star; i++) {
+            starArr[i].current.style.color = 'orange'
+        }
+        
+    }
+
+    function starNdx(ndx){
+        for (let i = 0; i <= 4; i++) {
+            if(i <= ndx) starArr[i].current.style.color = 'orange'
+            else starArr[i].current.style.color = '#9CA3AF'
+        }
     }
       
-      function removeStar(count) {
-        // if (stars[starIdx - 1].rated) {
-        //   return
-        // }
-        // for (let i = 5; i > count - 1; i--) {
-        // //   document.getElementsByClassName('star-' + (i + 1))[0].style = "color:gray"
-        //     if(starArr[i - 1].current){
-        //         starArr[i - 1].current.style.color = '#9CA3AF'
-        //     }
-        // }
-        // setStarCount(0)
+      function removeStar() {
 
-        for (let i = 0; i < count; i++) {
-            //   document.getElementsByClassName('star-' + (i + 1))[0].style = "color:orange"
-                if(starArr[i].current){ 
-                    starArr[i].current.style.color = '#9CA3AF'
-                }
-                
+        for (let i = 0; i < 5; i++) {
+            if(starArr[i].current){ 
+                starArr[i].current.style.color = '#9CA3AF'
             }
+        }
       }
-//nMouseLeave={()=>removeStar()}
+
+      function handleRate(){
+
+      } 
+      
     return (
         <>
-            <div class="flex" >
-                <FontAwesomeIcon ref={star1} className='text-gray-400 hover:cursor-pointer' onMouseEnter={()=>starRate(1)} onMouseLeave={()=>removeStar(starCount)} icon={faStar} style={uncolored} /> 
-                <FontAwesomeIcon ref={star2} className='text-gray-400 hover:cursor-pointer' onMouseEnter={()=>starRate(2)} onMouseLeave={()=>removeStar(starCount)} icon={faStar} style={uncolored} />
-                <FontAwesomeIcon ref={star3} className='text-gray-400 hover:cursor-pointer' onMouseEnter={()=>starRate(3)} onMouseLeave={()=>removeStar(starCount)} icon={faStar} style={uncolored} />
-                <FontAwesomeIcon ref={star4} className='text-gray-400 hover:cursor-pointer' onMouseEnter={()=>starRate(4)} onMouseLeave={()=>removeStar(starCount)} icon={faStar} style={uncolored} />
-                <FontAwesomeIcon ref={star5} className='text-gray-400 hover:cursor-pointer' onMouseEnter={()=>starRate(5)} onMouseLeave={()=>removeStar(starCount)} icon={faStar} style={uncolored} />
+            <div className="flex" onMouseLeave={()=>{
+                removeStar()
+                starRate(starRating)
+                }}>
+            {starArrJsx}
             </div>
         </>
     )

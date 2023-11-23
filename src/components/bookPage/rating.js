@@ -1,14 +1,27 @@
 'use client'
-import { useState } from 'react' 
+import { useState, useEffect } from 'react' 
 import * as Dialog from '@radix-ui/react-dialog'
 import * as Form from '@radix-ui/react-form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar } from '@fortawesome/free-solid-svg-icons'
 import GiveRating from './GiveRating'
 
-export default function RateBut(props){
+export default function RateBut({bookID, userID}){
     const [isOpen, setIsOpen] = useState(false)
-
+    const [starCount, setStarCount] = useState(3)
+    useEffect(()=>{
+        fetch(`/user/book/api/rateBook?bookID=${bookID}&userID=${userID}`)
+        .then((result)=>result.json())
+        .then((output)=>{
+            if(Object.keys(output).length > 0){
+                let rateVal = parseFloat(parseFloat(output.ratingVal).toFixed(2))
+                if((rateVal - Math.floor(rateVal)) < 0.5) rateVal = Math.floor(rateVal)
+                else rateVal = Math.ceil(rateVal)
+                setStarCount(rateVal)
+                console.log("rating", output)
+            }
+        })
+    }, [])
 
     let dialogContent = {
             backgroundColor: "white",
@@ -26,15 +39,15 @@ export default function RateBut(props){
             zIndex: "70"
     }
 
-    const uncolored = {
-        color: 'gray',
-        fontSize: '20px'
-    }
+    // const uncolored = {
+    //     color: 'gray',
+    //     fontSize: '20px'
+    // }
 
-    const colored ={
-        color: 'orange',
-        fontSize: '20px'        
-    }
+    // const colored ={
+    //     color: 'orange',
+    //     fontSize: '20px'        
+    // }
 
     // function handleSubmit(e){
     //     e.preventDefault()
@@ -77,7 +90,7 @@ export default function RateBut(props){
                         </Dialog.Title>
                        
                         <div className="mt-[10px]">
-                          <GiveRating></GiveRating>
+                          <GiveRating bookID={bookID} userID={userID} starRating={starCount}></GiveRating>
                         </div>
                         
                         <div className="flex flex-row justify-end mt-[28px]">
