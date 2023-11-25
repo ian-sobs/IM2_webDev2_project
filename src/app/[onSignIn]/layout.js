@@ -17,6 +17,10 @@ export default function BookiiLayout({children}){
             linkTo: `/${user["username"]}/shoppingCart`
         },
         {
+            name: "ORDERS",
+            linkTo: `/${user["username"]}/shoppingCart`
+        },
+        {
             name: `${user["username"].toUpperCase()}`,
             linkTo: `/${user["username"]}/userInfo`
         },
