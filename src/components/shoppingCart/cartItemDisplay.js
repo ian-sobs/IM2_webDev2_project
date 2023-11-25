@@ -4,6 +4,7 @@ import { useState , useEffect } from "react"
 
 
 export default function cartItemDisplay({userInfo}){
+    //backend dependent code starts here
     const [cartItems, setCartItems] = useState([])
     const [cartTotalDue, setCartTotalDue] = useState(0)
 
@@ -25,9 +26,12 @@ export default function cartItemDisplay({userInfo}){
         })
         setCartTotalDue(parseFloat(amountDue.toFixed(2)))
     }, [cartItems])
+    //backend dependent code end here
 
+
+    //The line below uses query data received from the backend dependent code in order to display a list of books added to cart
     const itemsToDisplay = cartItems.map((item)=><CartItem userInfo={userInfo} bookID={item.bookID} bookTitle={item.titile} bookImg={item.img} qty={item.qty} totalPriceUSD={item.totalPriceUSD} dateOrdered={item.dateOrdered} address={item.address}></CartItem>)
-
+    
     
     return(
         <>
