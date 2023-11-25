@@ -20,6 +20,10 @@ export default function BookiiLayout({children}){
             name: `${user["username"].toUpperCase()}`,
             linkTo: `/${user["username"]}/userInfo`
         },
+        {
+            name: `ABOUT`,
+            linkTo: `/${user["username"]}/userInfo`
+        }
     ]
     
     // 
