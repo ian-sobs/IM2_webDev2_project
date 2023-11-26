@@ -1,16 +1,20 @@
 import {HeadRow, BodyRow} from './tableRow'
-export default function TableFull(){
+
+
+export default function TableFull({colNames, rowsData}){
     return(
         <>
-        <table class="table-auto">
+        <div className='w-full overflow-x-auto shadow-lg'>
+        <table className="table-fixed text-black bg-white border-separate border-spacing-y-[50px] border-spacing-x-9 ">
             <thead>
-                
+                <HeadRow colNames={colNames}></HeadRow>
             </thead>
             <tbody>
-
-                
+                {rowsData.map((rowObj)=><BodyRow rowObj={rowObj} ndxToShorten={4}></BodyRow>)}
             </tbody>
         </table>        
+        </div>
+
         
         </>
 
