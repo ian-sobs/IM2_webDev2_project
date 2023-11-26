@@ -1,7 +1,8 @@
 import adminPageStyle from '../adminPageStyle'
 import TableFull from '../components/tableFull'
 import pool from '@/dbConn'
-import RowAction from '../components/rowAction'
+// import RowAction from '../components/rowAction'
+import BookForm from './bookForm'
 
 export default async function books(){
     // const adminPageStyle = {
@@ -22,12 +23,13 @@ export default async function books(){
     if(rows.length > 0){
         return(
             <>
+
+
                 <section name="sectionGrid" className={`${adminPageStyle.allWidth} ${adminPageStyle.mobile} ${adminPageStyle.sm} ${adminPageStyle.md} ${adminPageStyle.lg} ${adminPageStyle.xl}`}>
                     <TableFull caption='Table of all books in the database' colNames={colNames} rowsData={rows}></TableFull>
-                    <button className='text-slate-200 fixed bottom-7 right-14 bg-green-400 p-4 rounded-md font-semibold'>Add a new book</button>
-                    
+                    {/* <button onClick={BookForm}></button> */}
+                    <BookForm className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'> </BookForm>
                 </section>
-
             </>
         )
     }
