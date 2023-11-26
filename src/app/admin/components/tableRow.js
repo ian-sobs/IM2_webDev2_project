@@ -1,4 +1,5 @@
 // 'use client'
+import RowAction from "./rowAction"
 
 export function HeadRow({colNames, ndxToShorten}){
     return (
@@ -18,7 +19,7 @@ export function BodyRow({rowObj, ndxLink, ndxDesc}){
     let colData = Object.keys(rowObj)
     return (
         <>    
-            <tr>     
+            <tr className="z-0">     
                 {colData.map((objProp, index)=>{
                     if(index == ndxLink){ 
                         return <td key={index} className=' text-cyan-700 w-[10px]'><a target="_blank" className='hover:text-cyan-400 truncate' href={`${rowObj[objProp]}`}>Photo source</a></td>
@@ -28,7 +29,7 @@ export function BodyRow({rowObj, ndxLink, ndxDesc}){
                     }    
                     return <td key={index} >{rowObj[objProp]}</td>
                 })}
-                <td></td>
+                <td><RowAction></RowAction></td>
                         
             </tr>        
         </>
