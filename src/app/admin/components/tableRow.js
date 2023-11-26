@@ -15,7 +15,7 @@ export function BodyRow({rowObj, ndxToShorten}){
         <>    
             <tr>     
                 {colData.map((objProp, index)=>{
-                    if(index == ndxToShorten){ return <td className='w-[10px]'>{rowObj[objProp]}</td>}
+                    if(index == ndxToShorten){ return <td className='w-[10px] text-cyan-700 '><a target="_blank" className='hover:text-cyan-400' href={`${rowObj[objProp]}`}>{rowObj[objProp]}</a></td>}
                     else{
                         return <td >{rowObj[objProp]}</td>
                     }    
