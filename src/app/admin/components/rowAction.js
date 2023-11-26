@@ -1,35 +1,32 @@
 'use client'
-import { Menu } from '@headlessui/react'
+import { Menu, Transition, Dialog } from '@headlessui/react'
+import { useState } from 'react'
 
 export default function RowAction({actions}){
+    let [modalOpen, setModalOpen] = useState(false)
+
     return(
         <Menu >
-        <Menu.Button className='bg-slate-200 rounded-sm p-[5px] text-slate-500'>Action</Menu.Button>
-        <Menu.Items >
-            <Menu.Item>
-            {({ active }) => (
-                <a
-                className={`${active && 'bg-blue-500'}`}
-                href="/account-settings"
-                >
-                Account settings
-                </a>
-            )}
-            </Menu.Item>
-            <Menu.Item>
-            {({ active }) => (
-                <a
-                className={`${active && 'bg-blue-500'}`}
-                href="/account-settings"
-                >
-                Documentation
-                </a>
-            )}
-            </Menu.Item>
-            <Menu.Item disabled>
-            <span className="opacity-75">Invite a friend (coming soon!)</span>
-            </Menu.Item>
-        </Menu.Items>
+            <Menu.Button className='bg-slate-200 rounded-sm p-[5px] text-slate-500'>Action</Menu.Button>
+            <Transition
+                enter="transition duration-100 ease-out"
+                enterFrom="transform scale-95 opacity-0"
+                enterTo="transform scale-100 opacity-100"
+                leave="transition duration-75 ease-out"
+                leaveFrom="transform scale-100 opacity-100"
+                leaveTo="transform scale-95 opacity-0"
+            >
+                <Menu.Items as='div' className='bg-white border border-slate-200 shadow-xl p-[8px]'>
+                    {actions.map((action)=>{
+                        return (
+                            <Menu.Item key={action.name} as='button' className={`p-[8px] w-full rounded-sm ui-active:${action.activeBgColor} ui-active:${action.activeTextColor} ui-not-active:bg-white ui-not-active:text-black`}>
+                                {action.name}
+                            </Menu.Item>    
+                        )
+                    })}
+                    
+                </Menu.Items>
+            </Transition>
         </Menu>
 
     )

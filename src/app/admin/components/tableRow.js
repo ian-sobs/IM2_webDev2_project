@@ -17,6 +17,20 @@ export function HeadRow({colNames, ndxToShorten}){
 
 export function BodyRow({rowObj, ndxLink, ndxDesc}){
     let colData = Object.keys(rowObj)
+    const actions = [
+        {
+            name: 'Edit',
+            apiLink: 'Edit',
+            activeBgColor: 'bg-blue-500',
+            activeTextColor: 'text-white'
+        },
+        {
+            name: 'Delete',
+            apiLink: 'Delete',
+            activeBgColor: 'bg-rose-600',
+            activeTextColor: 'text-white'
+        }
+    ]
     return (
         <>    
             <tr className="z-0">     
@@ -29,7 +43,7 @@ export function BodyRow({rowObj, ndxLink, ndxDesc}){
                     }    
                     return <td key={index} >{rowObj[objProp]}</td>
                 })}
-                <td><RowAction></RowAction></td>
+                <td><RowAction actions={actions}></RowAction></td>
                         
             </tr>        
         </>
