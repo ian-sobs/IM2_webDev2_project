@@ -43,7 +43,12 @@ export default function BookForm({className}){
                             </div>
                             <div className='flex flex-col my-3'>
                                 <label htmlFor="bookImg">Image</label>
-                                 <input className="bg-slate-200" id='bookImg' name='bookImg' type='file'/> 
+                                <div className='flex flex-col mt-2'>
+                                    <input className="bg-slate-200 mb-1" id='bookImg' name='bookImg' type='file'/> 
+                                    <p className='text-justify'>Or</p>
+                                    <input className="bg-slate-200 mt-1" id='bookImg2' name='bookImg2' type='text' placeholder="Enter a URL to an image"/> 
+                                </div>
+                                 
                             </div>
                             <div className='flex flex-col my-3'>
                                 <label htmlFor="bookPrice">Price</label>
