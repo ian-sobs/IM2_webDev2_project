@@ -1,11 +1,12 @@
 'use client'
 import CartItem from "./cartItem"
 import { useState , useEffect } from "react"
-
+import OrderPage from "../orderPage/orderDisplay";  //Jiwooedit
 
 export default function cartItemDisplay({userInfo}){
     const [cartItems, setCartItems] = useState([])
     const [cartTotalDue, setCartTotalDue] = useState(0)
+    const [showOrderPage, setShowOrderPage] = useState(false); //jiwooedit
 
     useEffect(()=>{
         fetch('/user/shoppingCart/api')
@@ -26,15 +27,26 @@ export default function cartItemDisplay({userInfo}){
         setCartTotalDue(parseFloat(amountDue.toFixed(2)))
     }, [cartItems])
 
-    const itemsToDisplay = cartItems.map((item)=><CartItem userInfo={userInfo} bookID={item.bookID} bookTitle={item.titile} bookImg={item.img} qty={item.qty} totalPriceUSD={item.totalPriceUSD} dateOrdered={item.dateOrdered} address={item.address}></CartItem>)
-
+    const itemsToDisplay = cartItems.map((item)=><CartItem userInfo={userInfo} bookID={item.bookID} bookTitle={item.title} bookImg={item.img} qty={item.qty} totalPriceUSD={item.totalPriceUSD} dateOrdered={item.dateOrdered} address={item.address}></CartItem>)
+   
+    const handleOrderButtonClick = () => {
+        setShowOrderPage(true);
+      }; //Jiwooedit
     
-    return(
+      return (
         <>
-            {itemsToDisplay}
-            <p className="text-black"> {cartTotalDue}</p>
-            <button className="bg-green-400 p-4 rounded-md">Order</button>
+          {showOrderPage ? (
+            <OrderPage/>
+          ) : (
+            <>
+              {itemsToDisplay}
+              <p className="text-black">{cartTotalDue}</p>
+              <button className="bg-green-400 p-4 rounded-md" onClick={handleOrderButtonClick}>
+                Order
+              </button>
+            </>
+          )}
         </>
-    )
+      ); //Jiwooedit
 
 }
