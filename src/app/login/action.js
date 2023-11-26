@@ -20,7 +20,7 @@ export async function submitLogin(formData) {
     const [queryObj] = rows
 
     console.log("rows", rows)
-    console.log("queryObj", queryObj)
+    console.log("loginAction queryObj", queryObj)
 
     if(rows.length <= 0){
         await poolPromise.releaseConnection(db)
@@ -34,7 +34,7 @@ export async function submitLogin(formData) {
     const result = await bcrypt.compare(password, queryObj["password"])
 
     if(!result){
-        await poolPromise.releaseConnection(db)
+        poolPromise.releaseConnection(db)
         return
     } 
     console.log("Password was correct") 
@@ -48,6 +48,10 @@ export async function submitLogin(formData) {
     // userCredentials.set('userCredentials', JSON.stringify(queryObj))
 
     console.log("userCredentials", userCredentials)
+
+    if(queryObj["email"] === "admin@bookii.com"){
+        redirect(`/admin/books`)
+    }
 
     poolPromise.releaseConnection(db)
     redirect(`/${queryObj['username']}/market`)
