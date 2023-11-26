@@ -36,6 +36,7 @@ module.exports = {
     }
   },
   plugins: [
+    require('@headlessui/tailwindcss'),
     require("tailwindcss-radix")({
       // Default: `radix`
       variantPrefix: "rdx",
