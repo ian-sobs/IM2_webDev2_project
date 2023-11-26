@@ -33,7 +33,7 @@ export function BodyRow({rowObj, ndxLink, ndxDesc}){
     ]
     return (
         <>    
-            <tr className="z-0">     
+            <tr className="z-1">     
                 {colData.map((objProp, index)=>{
                     if(index == ndxLink){ 
                         return <td key={index} className=' text-cyan-700 w-[10px]'><a target="_blank" className='hover:text-cyan-400 truncate' href={`${rowObj[objProp]}`}>Photo source</a></td>
@@ -43,7 +43,7 @@ export function BodyRow({rowObj, ndxLink, ndxDesc}){
                     }    
                     return <td key={index} >{rowObj[objProp]}</td>
                 })}
-                <td><RowAction actions={actions}></RowAction></td>
+                <td className='z-1'><RowAction actions={actions}></RowAction></td>
                         
             </tr>        
         </>
