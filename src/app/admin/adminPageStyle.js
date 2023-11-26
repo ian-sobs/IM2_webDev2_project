@@ -1,4 +1,4 @@
-const sectionGridStyle = {
+const adminPageStyle = {
     allWidth: "min-h-screen pt-[25px] bg-slate-100 pb-[20px] w-full ",
     mobile:" px-9 ",
     sm:" sm:px-11 ",
@@ -7,4 +7,4 @@ const sectionGridStyle = {
     xl:" xl:px-22 "
 }
 
-module.exports = sectionGridStyle
+module.exports = adminPageStyle
