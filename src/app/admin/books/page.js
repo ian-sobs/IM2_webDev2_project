@@ -27,8 +27,10 @@ export default async function books(){
 
                 <section name="sectionGrid" className={`${adminPageStyle.allWidth} ${adminPageStyle.mobile} ${adminPageStyle.sm} ${adminPageStyle.md} ${adminPageStyle.lg} ${adminPageStyle.xl}`}>
                     <TableFull caption='Table of all books in the database' colNames={colNames} rowsData={rows}></TableFull>
+                    <div className='bg-inherit h-20'></div>
                     {/* <button onClick={BookForm}></button> */}
                     <BookForm className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'> </BookForm>
+                    
                 </section>
             </>
         )
