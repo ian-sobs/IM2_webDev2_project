@@ -4,6 +4,7 @@ import { useState , useEffect } from "react"
 import OrderPage from "../orderPage/orderDisplay";  //Jiwooedit
 
 export default function cartItemDisplay({userInfo}){
+    //backend dependent code starts here
     const [cartItems, setCartItems] = useState([])
     const [cartTotalDue, setCartTotalDue] = useState(0)
     const [showOrderPage, setShowOrderPage] = useState(false); //jiwooedit
@@ -26,13 +27,15 @@ export default function cartItemDisplay({userInfo}){
         })
         setCartTotalDue(parseFloat(amountDue.toFixed(2)))
     }, [cartItems])
+    //backend dependent code end here
+
 
     const itemsToDisplay = cartItems.map((item)=><CartItem userInfo={userInfo} bookID={item.bookID} bookTitle={item.title} bookImg={item.img} qty={item.qty} totalPriceUSD={item.totalPriceUSD} dateOrdered={item.dateOrdered} address={item.address}></CartItem>)
    
     const handleOrderButtonClick = () => {
         setShowOrderPage(true);
       }; //Jiwooedit
-    
+
       return (
         <>
           {showOrderPage ? (

@@ -22,7 +22,7 @@ export default function Navbar({fields, styles}){
                                             selected ? `${tabStyle} bg-[#e38a40] text-white` : `${tabStyle}`
                                         }
                                         >
-                                        {field.name}
+                                        {field.name} 
                                         </button>
                                     )}
                                 </Tab>
