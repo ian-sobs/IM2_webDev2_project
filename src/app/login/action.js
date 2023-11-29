@@ -23,7 +23,7 @@ export async function submitLogin(formData) {
     console.log("loginAction queryObj", queryObj)
 
     if(rows.length <= 0){
-        await poolPromise.releaseConnection(db)
+        poolPromise.releaseConnection(db)
         return
     }
     

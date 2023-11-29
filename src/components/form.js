@@ -77,7 +77,7 @@ function inputField(field, options){
             <>
                 <div className="py-[15px] bg-transparent"></div>
                     <h5 className="text-black p-[3px]">{field.fieldName}</h5>
-                <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="text"></input>
+                <input className={styles + " w-full focus:ring-2 ring-[#FFB169] text-white"} type="text"></input>
             </>)
     }
         
