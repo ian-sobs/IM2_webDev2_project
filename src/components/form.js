@@ -61,7 +61,7 @@ function inputField(field, options){
             <>
                 <div className="py-[15px] bg-transparent">
                     <div className="flex justify-center">
-                        <button className="text-xl w-32 font-medium p-[5px] rounded-full text-center bg-gradient-to-r from-[#DC8ECB] to-[#FFB169]" id={field.nameAttr} name={field.nameAttr} type="submit">{field.fieldName}</button>
+                        <button className="text-xl w-32 font-medium p-[5px] rounded-full text-center bg-gradient-to-r from-[#DC8ECB] to-[#FFB169] text-white" id={field.nameAttr} name={field.nameAttr} type="submit">{field.fieldName}</button>
                     </div>
                 </div>
             </> )
