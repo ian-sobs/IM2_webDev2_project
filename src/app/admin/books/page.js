@@ -20,13 +20,8 @@ export default async function books(){
     const colNames = Object.keys(rows[0])
 
     const actions = [
-       new actionDetails(),
-        {
-            name: 'Delete',
-            apiLink: 'Delete',
-            activeBgColor: 'bg-rose-600',
-            activeTextColor: 'text-white'
-        }
+       new actionDetails('All', '', 'bg-blue-500 ', 'text-white'),
+       new actionDetails('Literature', '', 'bg-blue-500 ', 'text-white')
     ]
     
     poolPromise.releaseConnection(conn)
@@ -37,7 +32,7 @@ export default async function books(){
 
 
                 <section name="sectionGrid" className={`${adminPageStyle.allWidth} ${adminPageStyle.mobile} ${adminPageStyle.sm} ${adminPageStyle.md} ${adminPageStyle.lg} ${adminPageStyle.xl}`}>
-                    <RowAction></RowAction>
+                    <RowAction actions={actions}></RowAction>
                     <TableFull caption='Table of all books in the database' colNames={colNames} rowsData={rows}></TableFull>
                     <div className='bg-inherit h-20'></div>
                     {/* <button onClick={BookForm}></button> */}
