@@ -26,7 +26,7 @@ export default function BookiiLayout({children}){
         },
         {
             name: `ABOUT`,
-            linkTo: `/${user["username"]}/userInfo`
+            linkTo: `/${user["username"]}/aboutpage`
         }
     ]
     
