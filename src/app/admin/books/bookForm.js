@@ -1,6 +1,6 @@
 'use client'
 import { useState , useEffect} from "react"
-import { Dialog } from '@headlessui/react'
+import { Dialog, Disclosure } from '@headlessui/react'
 import RowAction from "../components/rowAction"
 
 export default function BookForm({className, genres}){
@@ -40,15 +40,23 @@ export default function BookForm({className, genres}){
                                 <label htmlFor='bookDesc'>Description</label>
                                 <textarea id='bookDesc' name="bookDesc" className="bg-slate-200"></textarea>
                             </div>
-                            <div className='flex flex-col my-3'>
-                                <label>Genres</label>
+                            <div className='flex flex-col my-3'>                                
+                                <Disclosure>
+                                    <Disclosure.Button>
+                                        <div className='bg-slate-200 text-left'>
+                                            Select genres
+                                        </div>
+                                        
+                                    </Disclosure.Button>
+                                    <Disclosure.Panel>
+                                        <div className="flex flex-col max-h-32 overflow-x-auto">
+                                            {genres.map((genre)=>{
+                                                return <div> <input type="checkbox"></input> <label>{genre.name}</label></div>
+                                            })}
+                                        </div>
+                                    </Disclosure.Panel>
+                                </Disclosure>
 
-                                <div className="flex flex-col">
-                                    {genres.map((genre)=>{
-                                        return <div> <input type="checkbox"></input> <label>{genre.name}</label></div>
-                                    })}
-
-                                </div>
 
                             </div>
                             <div className='flex flex-col my-3'>
