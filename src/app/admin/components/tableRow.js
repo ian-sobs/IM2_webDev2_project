@@ -43,7 +43,7 @@ export function BodyRow({rowObj, ndxLink, ndxDesc}){
                     }    
                     return <td key={index} >{rowObj[objProp]}</td>
                 })}
-                <td className='z-1'><RowAction actions={actions}></RowAction></td>
+                <td className='z-1'><RowAction actions={actions}>Action</RowAction></td>
                         
             </tr>        
         </>

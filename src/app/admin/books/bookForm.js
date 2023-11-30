@@ -1,13 +1,15 @@
 'use client'
 import { useState , useEffect} from "react"
 import { Dialog } from '@headlessui/react'
+import RowAction from "../components/rowAction"
 
-export default function BookForm({className}){
+export default function BookForm({className, genres}){
     let [isOpen, setIsOpen] = useState(false)
 
     // function OpenModal(){
     //     setIsOpen(true)
     // }
+
 
    
         return(
@@ -40,6 +42,14 @@ export default function BookForm({className}){
                             </div>
                             <div className='flex flex-col my-3'>
                                 <label>Genres</label>
+
+                                <div className="flex flex-col">
+                                    {genres.map((genre)=>{
+                                        return <div> <input type="checkbox"></input> <label>{genre.name}</label></div>
+                                    })}
+
+                                </div>
+
                             </div>
                             <div className='flex flex-col my-3'>
                                 <label htmlFor="bookImg">Image</label>
