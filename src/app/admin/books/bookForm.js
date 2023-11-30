@@ -51,7 +51,7 @@ export default function BookForm({className, genres}){
                                     <Disclosure.Panel>
                                         <div className="flex flex-col max-h-32 overflow-x-auto">
                                             {genres.map((genre)=>{
-                                                return <div> <input type="checkbox"></input> <label>{genre.name}</label></div>
+                                                return <div> <input name={genre.name} id={genre.name} type="checkbox"></input> <label>{genre.name}</label></div>
                                             })}
                                         </div>
                                     </Disclosure.Panel>
