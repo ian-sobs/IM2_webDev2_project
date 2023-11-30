@@ -3,6 +3,7 @@
 import { useState , useEffect, useRef} from "react"
 import { Dialog, Disclosure } from '@headlessui/react'
 import RowAction from "../components/rowAction"
+import {recurseSearchTagname} from '../components/recurseTagname'
 
 export default function BookForm({className, genres}){
     let [isOpen, setIsOpen] = useState(false)
@@ -15,13 +16,20 @@ export default function BookForm({className, genres}){
 
     function handleSubmit(e){
         e.preventDefault()
-        console.log("checkBoxVal", checkBoxVal.current)
-        console.log(formBook.current)
+        // console.log("checkBoxVal", checkBoxVal.current)
+        let arr = recurseSearchTagname('input', checkBoxVal.current)
+        let genreIDs = []
+        arr.forEach(element => {
+            if(element.checked){
+                genreIDs.push(parseInt(element.value))
+            }
+        });
+        console.log(genreIDs)
         const data =  new FormData(formBook.current)
-        for (var [key, value] of data.entries()) { 
-            console.log(key, value);
-        }
-        console.log("formBookSubmission",data.get('bookTitle'))
+        // for (var [key, value] of data.entries()) { 
+        //     console.log(key, value);
+        // }
+        // console.log("formBookSubmission",data.get('bookTitle'))
         setIsOpen(false)
     }
 
