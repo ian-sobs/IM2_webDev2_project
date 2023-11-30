@@ -1,14 +1,30 @@
 'use client'
-import { useState , useEffect} from "react"
+
+import { useState , useEffect, useRef} from "react"
 import { Dialog, Disclosure } from '@headlessui/react'
 import RowAction from "../components/rowAction"
 
 export default function BookForm({className, genres}){
     let [isOpen, setIsOpen] = useState(false)
-
+    const formBook = useRef()
     // function OpenModal(){
     //     setIsOpen(true)
     // }
+
+    function getFormDataAsync(form) {
+        return new Promise((resolve) => {
+          const formData = new FormData(form);
+          resolve(formData);
+        });
+    }
+
+    async function handleSubmit(e){
+        e.preventDefault()
+        console.log(formBook.current)
+        const data = await getFormDataAsync(formBook.current)
+        console.log("formBookSubmission",data)
+        // setIsOpen(false)
+    }
 
 
    
@@ -31,7 +47,7 @@ export default function BookForm({className, genres}){
                             Input the required information for the new book
                         </Dialog.Description>
 
-                        <form className='flex flex-col'>
+                        <form ref={formBook} className='flex flex-col' onSubmit={handleSubmit}>
                             <div className='flex flex-col my-3'>
                                 <label htmlFor="bookTitle">Title</label>
                                 <input type='text' id='bookTitle' name='bookTitle' className="bg-slate-200"></input>
@@ -50,8 +66,8 @@ export default function BookForm({className, genres}){
                                     </Disclosure.Button>
                                     <Disclosure.Panel>
                                         <div className="flex flex-col max-h-32 overflow-x-auto">
-                                            {genres.map((genre)=>{
-                                                return <div> <input name={genre.name} id={genre.name} type="checkbox"></input> <label>{genre.name}</label></div>
+                                            {genres.map((genre, index)=>{
+                                                return <div key={index}> <input name={genre.name} id={genre.name} type="checkbox"></input> <label>{genre.name}</label></div>
                                             })}
                                         </div>
                                     </Disclosure.Panel>
@@ -78,8 +94,8 @@ export default function BookForm({className, genres}){
                             </div>
        
                             <div className='flex flex-row justify-end'>
-                                <button className="mr-3 bg-slate-300 p-1 rounded-md font-semibold text-slate-500" onClick={() => setIsOpen(false)}>Cancel</button>
-                                <button type='submit' className="mr-1 bg-green-500 p-1 rounded-md text-white font-semibold"  onClick={() => setIsOpen(false)}>Submit</button>
+                                <button className="mr-3 bg-slate-300 p-1 rounded-md font-semibold text-slate-500" name='cancel' id='cancel' onClick={() => setIsOpen(false)}>Cancel</button>
+                                <button type='submit' className="mr-1 bg-green-500 p-1 rounded-md text-white font-semibold" name='submitButton' id='submitButton'>Submit</button>
                             </div>
                         </form>
                     </Dialog.Panel>
