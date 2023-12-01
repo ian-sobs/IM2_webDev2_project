@@ -44,11 +44,11 @@ export default async function books(){
 
                 <section name="sectionGrid" className={`${adminPageStyle.allWidth} ${adminPageStyle.mobile} ${adminPageStyle.sm} ${adminPageStyle.md} ${adminPageStyle.lg} ${adminPageStyle.xl}`}>
                     
-                    <TableFull genreList={genreList} caption='Table of all books in the database' colNames={colNames} rowsData={rows}></TableFull>
-                    <div className='bg-inherit h-20'></div>
+                    <TableFull genres={genres} genreList={genreList} caption='Table of all books in the database' colNames={colNames} rowsData={rows}></TableFull>
+                    {/* <div className='bg-inherit h-20'></div>
                     {/* <button onClick={BookForm}></button> */}
-                    <BookForm genres={genres} className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'> </BookForm>
-                    
+                    {/*<BookForm genres={genres} className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'> </BookForm>
+                     */}
                 </section>
             </>
         )

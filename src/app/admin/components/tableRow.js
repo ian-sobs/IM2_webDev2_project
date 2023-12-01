@@ -19,27 +19,18 @@ export function BodyRow({rowObj, ndxLink, ndxDesc, deleteBook, editBook}){
     let colData = Object.keys(rowObj)
     let bookID = rowObj.ID
     console.log("rowObj", rowObj)
+
+    
     const actions = [
         {
             name: 'Edit',
-            apiLink: 'Edit',
-            fetchOptions: {
-                method: "POST",
-                headers: new Headers({'content-type': 'application/json'}),
-                body: JSON.stringify({bookID: bookID})
-            },
+
             activeBgColor: 'bg-blue-500',
             activeTextColor: 'text-white',
             behavior: editBook
         },
         {
             name: 'Delete',
-            apiLink: '/admin/books/api/deleteBook',
-            fetchOptions: {
-                method: "POST",
-                headers: new Headers({'content-type': 'application/json'}),
-                body: JSON.stringify({bookID: bookID})
-            },
             activeBgColor: 'bg-rose-600',
             activeTextColor: 'text-white',
             behavior: deleteBook

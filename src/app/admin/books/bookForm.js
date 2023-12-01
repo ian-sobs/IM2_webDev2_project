@@ -5,8 +5,8 @@ import { Dialog, Disclosure } from '@headlessui/react'
 import RowAction from "../components/rowAction"
 import {recurseSearchTagname} from '../components/recurseTagname'
 
-export default function BookForm({className, genres}){
-    let [isOpen, setIsOpen] = useState(false)
+export default function BookForm({className, genres, isOpen, setIsOpen}){
+    // let [isOpen, setIsOpen] = useState(false)
     const formBook = useRef()
     const checkBoxVal = useRef()
     const imageFile = useRef()
