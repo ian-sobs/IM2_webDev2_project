@@ -5,7 +5,7 @@ import { Dialog, Disclosure } from '@headlessui/react'
 import RowAction from "../components/rowAction"
 import {recurseSearchTagname} from '../components/recurseTagname'
 
-export default function BookForm({className, genres, isOpen, setIsOpen}){
+export default function BookForm({updateBook, forEditing, setForEditing, addBook, className, genres, isOpen, setIsOpen}){
     // let [isOpen, setIsOpen] = useState(false)
     const formBook = useRef()
     const checkBoxVal = useRef()
@@ -43,19 +43,25 @@ export default function BookForm({className, genres, isOpen, setIsOpen}){
         // }
         // objPost['genreIDs'] = genreIDs
         // console.log('Fetch post object', objPost)
-
-        fetch('/admin/books/api/newBook', {
-            method: "POST",
-            // headers: {
-            //     'Content-Type': 'application/json'
-            // },
-            body: data
-        })
-        .then((response)=>response.json())
-        .then((parsed)=>{
-            console.log("parsedResponse", parsed)
-            setIsOpen(false)
-        })    
+        if(forEditing){
+            updateBook(data)
+        }
+        else{
+            addBook(data)
+        }
+        
+        // fetch('/admin/books/api/newBook', {
+        //     method: "POST",
+        //     // headers: {
+        //     //     'Content-Type': 'application/json'
+        //     // },
+        //     body: data
+        // })
+        // .then((response)=>response.json())
+        // .then((parsed)=>{
+        //     console.log("parsedResponse", parsed)
+        //     setIsOpen(false)
+        // })    
     }
 
 
@@ -73,10 +79,10 @@ export default function BookForm({className, genres, isOpen, setIsOpen}){
 
                     <Dialog.Panel as='div' style={{top:' 50%', left: '50%', transform: 'translate(-50%, -50%)'}} className='p-[20px] bg-white rounded-md w-4/5 sm:w-3/5 lg:w-1/4 fixed z-50'>
                    
-                        <Dialog.Title className='text-center mb-3 font-semibold'>Add new book</Dialog.Title>
+                        <Dialog.Title className='text-center mb-3 font-semibold'>{(!forEditing) ? "Add new book" : "Edit this book"}</Dialog.Title>
 
                         <Dialog.Description className='text-justify font-light'>
-                            Input the required information for the new book
+                            {(!forEditing) ? "Input the required information for the new book" : "Edit this book's information"}
                         </Dialog.Description>
 
                         <form ref={formBook} className='flex flex-col'>
@@ -116,7 +122,10 @@ export default function BookForm({className, genres, isOpen, setIsOpen}){
                             </div>
        
                             <div className='flex flex-row justify-end'>
-                                <button className="mr-3 bg-slate-300 p-1 rounded-md font-semibold text-slate-500" name='cancel' id='cancel' onClick={() => setIsOpen(false)}>Cancel</button>
+                                <button className="mr-3 bg-slate-300 p-1 rounded-md font-semibold text-slate-500" name='cancel' id='cancel' onClick={() => {
+                                    setIsOpen(false)
+                                    setForEditing(false)
+                                    }}>Cancel</button>
                                 <button type='submit' className="mr-1 bg-green-500 p-1 rounded-md text-white font-semibold" name='submitButton' id='submitButton' onClick={handleSubmit}>Submit</button>
                             </div>
                         </form>
