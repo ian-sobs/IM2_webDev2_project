@@ -126,6 +126,7 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
                                 <button className="mr-3 bg-slate-300 p-1 rounded-md font-semibold text-slate-500" name='cancel' id='cancel' onClick={() => {
                                     setIsOpen(false)
                                     setForEditing(false)
+                                    setBookID_in_form(0)
                                     }}>Cancel</button>
                                 <button type='submit' className="mr-1 bg-green-500 p-1 rounded-md text-white font-semibold" name='submitButton' id='submitButton' onClick={handleSubmit}>Submit</button>
                             </div>

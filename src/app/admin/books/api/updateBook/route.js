@@ -13,7 +13,7 @@ export async function POST(request) {
     let insertStatement = ''
     let insertGenreID = []
 
-    const bookID = data.get('bookID')
+    const bookID = parseInt(data.get('bookID'))
     
     bookData['bookImgFile'] = data.get('bookImgFile')
     returnData['bookImgFile'] = new VldtMssg(-1, ['Enter a URL to the image or upload an image', 'Invalid filetype', 'Image must have an aspect ratio of...'])

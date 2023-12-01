@@ -93,6 +93,9 @@ export async function POST(request) {
         insertGenreID.push(genreID)
     }
 
+    const [justInserted, fieldsNewlyInserted] = await conn.execute("SELECT bk.bookID AS 'ID', bk.title AS 'Title', GROUP_CONCAT(gnr.name ORDER BY bk.bookID SEPARATOR ', ') AS 'Genre(s)', bk.description AS 'Description', bk.img AS 'Image', bk.priceUSD AS 'Price (USD)', bk.avgRating AS 'Avrg. Rating', bk.author AS 'Author/s' FROM ((book bk LEFT JOIN book_genre_relation bgr ON bk.bookID = bgr.bookID) LEFT JOIN genre gnr ON gnr.genreID = bgr.genreID) GROUP BY bk.bookID", [bookInsertedID])
+    const [newlyInserted] = justInserted
+    temp.bookDisplay = newlyInserted
     // console.log("insertStatement", insertStatement)
     // const [inserted, insertedFields] = await conn.execute(insertStatement)
     // console.log('inserted', inserted)
