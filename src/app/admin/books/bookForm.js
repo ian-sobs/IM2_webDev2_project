@@ -17,6 +17,7 @@ export default function BookForm({className, genres}){
     function handleSubmit(e){
         e.preventDefault()
         // console.log("checkBoxVal", checkBoxVal.current)
+        let objPost = {}
         let arr = recurseSearchTagname('input', checkBoxVal.current)
         let genreIDs = []
         arr.forEach(element => {
@@ -26,10 +27,26 @@ export default function BookForm({className, genres}){
         });
         console.log(genreIDs)
         const data =  new FormData(formBook.current)
-        // for (var [key, value] of data.entries()) { 
-        //     console.log(key, value);
-        // }
-        // console.log("formBookSubmission",data.get('bookTitle'))
+
+        genres.forEach((genre)=>{
+            data.delete(genre.name)
+        })
+        
+        for (var [key, value] of data.entries()) { 
+            objPost[key] = value
+            console.log(key, value)
+        }
+        objPost['genreIDs'] = genreIDs
+        console.log('Fetch post object', objPost)
+
+        fetch('/admin/books/api/newBook', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(objPost)
+        })
+        
         setIsOpen(false)
     }
 
@@ -73,11 +90,11 @@ export default function BookForm({className, genres}){
 
                             </div>
                             <div className='flex flex-col my-3'>
-                                <label htmlFor="bookImg">Image</label>
+                                <label >Image</label>
                                 <div className='flex flex-col mt-2'>
-                                    <input className="bg-slate-200 mb-1" id='bookImg' name='bookImg' type='file'/> 
+                                    <input className="bg-slate-200 mb-1" id='bookImgFile' name='bookImgFile' type='file'/> 
                                     <p className='text-justify'>Or</p>
-                                    <input className="bg-slate-200 mt-1" id='bookImg2' name='bookImg2' type='text' placeholder="Enter a URL to an image"/> 
+                                    <input className="bg-slate-200 mt-1" id='bookImgLink' name='bookImgLink' type='text' placeholder="Enter a URL to an image"/> 
                                 </div>
                                  
                             </div>
