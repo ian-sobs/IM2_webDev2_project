@@ -1,4 +1,4 @@
-// 'use client'
+'use client'
 import RowAction from "./rowAction"
 
 export function HeadRow({colNames, ndxToShorten, rowsCopy}){
@@ -15,20 +15,34 @@ export function HeadRow({colNames, ndxToShorten, rowsCopy}){
     )
 }
 
-export function BodyRow({rowObj, ndxLink, ndxDesc, tbodyHandler, rowsCopy}){
+export function BodyRow({rowObj, ndxLink, ndxDesc, deleteBook, editBook}){
     let colData = Object.keys(rowObj)
+    let bookID = rowObj.ID
+    console.log("rowObj", rowObj)
     const actions = [
         {
             name: 'Edit',
             apiLink: 'Edit',
+            fetchOptions: {
+                method: "POST",
+                headers: new Headers({'content-type': 'application/json'}),
+                body: JSON.stringify({bookID: bookID})
+            },
             activeBgColor: 'bg-blue-500',
-            activeTextColor: 'text-white'
+            activeTextColor: 'text-white',
+            behavior: editBook
         },
         {
             name: 'Delete',
-            apiLink: 'Delete',
+            apiLink: '/admin/books/api/deleteBook',
+            fetchOptions: {
+                method: "POST",
+                headers: new Headers({'content-type': 'application/json'}),
+                body: JSON.stringify({bookID: bookID})
+            },
             activeBgColor: 'bg-rose-600',
-            activeTextColor: 'text-white'
+            activeTextColor: 'text-white',
+            behavior: deleteBook
         }
     ]
     return (
@@ -43,7 +57,7 @@ export function BodyRow({rowObj, ndxLink, ndxDesc, tbodyHandler, rowsCopy}){
                     }    
                     return <td key={index} >{rowObj[objProp]}</td>
                 })}
-                <td className='z-1'><RowAction actions={actions} rowsCopy={rowsCopy} tbodyHandler={tbodyHandler}>Action</RowAction></td>
+                <td className='z-1'><RowAction bookID={bookID} positioning='absolute' actions={actions}>Action</RowAction></td>
                         
             </tr>        
         </>

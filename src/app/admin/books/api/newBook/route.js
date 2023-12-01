@@ -43,7 +43,8 @@ export async function POST(request) {
         imgSrc = `${baseImgPath}${bookData['bookImgFile'].name}`
     }
     console.log("imgSrc", imgSrc)
-
+    
+    console.log("bookData['genreIDs'].length", bookData['genreIDs'].length)
     if(bookData['genreIDs'].length == 0){
         returnData['genreIDs'].invalidField(0)
     }
@@ -68,7 +69,7 @@ export async function POST(request) {
 
     console.log("temp in admin books", temp)
 
-    for (const fieldName of fieldNames){
+    for (const fieldName of Object.keys(returnData)){
         if(!returnData[fieldName].isValid()){
             console.log("CANT INSERT A NEW BOOK")
             return Response.json(temp)

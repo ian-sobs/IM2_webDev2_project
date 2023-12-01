@@ -2,7 +2,7 @@
 import { Menu, Transition, Dialog } from '@headlessui/react'
 import { useState } from 'react'
 
-export default function RowAction({actions, children, rowsCopy, tbodyHandler}){
+export default function RowAction({actions, children, rowsCopy, tbodyHandler, positioning, bookID}){
     let [modalOpen, setModalOpen] = useState(false)
 
     return(
@@ -16,10 +16,12 @@ export default function RowAction({actions, children, rowsCopy, tbodyHandler}){
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
             >
-                <Menu.Items as='div' className='bg-white border border-slate-200 shadow-xl p-[8px] relative inline-block z-50'>
+                <Menu.Items as='div' className={`bg-white border border-slate-200 shadow-xl p-[8px] ${positioning} inline-block z-50`}>
                     {actions.map((action)=>{
                         return (
-                            <Menu.Item key={action.name} as='button' className={`p-[8px] w-full rounded-sm ui-active:${action.activeBgColor} ui-active:${action.activeTextColor} ui-not-active:bg-white ui-not-active:text-black`}>
+                            <Menu.Item key={action.name} as='button' className={`p-[8px] w-full rounded-sm ui-active:${action.activeBgColor} ui-active:${action.activeTextColor} ui-not-active:bg-white ui-not-active:text-black`} onClick={()=>{
+                                
+                            }}>
                                 {action.name}
                             </Menu.Item>    
                         )
