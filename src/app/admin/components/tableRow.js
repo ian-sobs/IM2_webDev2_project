@@ -1,7 +1,7 @@
 // 'use client'
 import RowAction from "./rowAction"
 
-export function HeadRow({colNames, ndxToShorten}){
+export function HeadRow({colNames, ndxToShorten, rowsCopy}){
     return (
         <>
             <tr >
@@ -15,7 +15,7 @@ export function HeadRow({colNames, ndxToShorten}){
     )
 }
 
-export function BodyRow({rowObj, ndxLink, ndxDesc}){
+export function BodyRow({rowObj, ndxLink, ndxDesc, tbodyHandler, rowsCopy}){
     let colData = Object.keys(rowObj)
     const actions = [
         {
@@ -43,7 +43,7 @@ export function BodyRow({rowObj, ndxLink, ndxDesc}){
                     }    
                     return <td key={index} >{rowObj[objProp]}</td>
                 })}
-                <td className='z-1'><RowAction actions={actions}>Action</RowAction></td>
+                <td className='z-1'><RowAction actions={actions} rowsCopy={rowsCopy} tbodyHandler={tbodyHandler}>Action</RowAction></td>
                         
             </tr>        
         </>

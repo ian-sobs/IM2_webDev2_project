@@ -2,7 +2,7 @@
 import { Menu, Transition, Dialog } from '@headlessui/react'
 import { useState } from 'react'
 
-export default function RowAction({actions, children}){
+export default function RowAction({actions, children, rowsCopy, tbodyHandler}){
     let [modalOpen, setModalOpen] = useState(false)
 
     return(

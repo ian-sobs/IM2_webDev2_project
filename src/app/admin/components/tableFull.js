@@ -1,7 +1,15 @@
+'use client'
 import {HeadRow, BodyRow} from './tableRow'
-
+import { useState } from 'react'
 
 export default function TableFull({colNames, rowsData, caption}){
+    const [rows, setRows] = useState(rowsData)
+    let rowsCopy = [...rows]
+    console.log('rowsCopy', rowsCopy)
+
+    function tbodyHandler(newRows){
+        setRows(newRows)
+    }
 
     return(
         <>
@@ -14,7 +22,7 @@ export default function TableFull({colNames, rowsData, caption}){
                 <HeadRow colNames={colNames} ndxToShorten={4}></HeadRow>
             </thead>
             <tbody>
-                {rowsData.map((rowObj, index)=><BodyRow key={index} rowObj={rowObj} ndxLink={4}></BodyRow>)}
+                {rows.map((rowObj, index)=><BodyRow rowsCopy={rowsCopy} tbodyHandler={tbodyHandler} key={index} rowObj={rowObj} ndxLink={4}></BodyRow>)}
             </tbody>
         </table>        
         </div>
