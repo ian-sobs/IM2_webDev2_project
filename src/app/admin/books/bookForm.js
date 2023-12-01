@@ -5,7 +5,7 @@ import { Dialog, Disclosure } from '@headlessui/react'
 import RowAction from "../components/rowAction"
 import {recurseSearchTagname} from '../components/recurseTagname'
 
-export default function BookForm({updateBook, forEditing, setForEditing, addBook, className, genres, isOpen, setIsOpen}){
+export default function BookForm({bookID_in_form, setBookID_in_form, updateBook, forEditing, setForEditing, addBook, className, genres, isOpen, setIsOpen}){
     // let [isOpen, setIsOpen] = useState(false)
     const formBook = useRef()
     const checkBoxVal = useRef()
@@ -44,6 +44,7 @@ export default function BookForm({updateBook, forEditing, setForEditing, addBook
         // objPost['genreIDs'] = genreIDs
         // console.log('Fetch post object', objPost)
         if(forEditing){
+            data.append('bookID', bookID_in_form.toString())
             updateBook(data)
         }
         else{

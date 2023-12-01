@@ -15,7 +15,7 @@ export function HeadRow({colNames, ndxToShorten, rowsCopy}){
     )
 }
 
-export function BodyRow({rowObj, ndxLink, ndxDesc, deleteBook, editBook}){
+export function BodyRow({rowObj, bookID_in_form, setBookID_in_form, ndxLink, ndxDesc, deleteBook, editBook}){
     let colData = Object.keys(rowObj)
     let bookID = rowObj.ID
     console.log("rowObj", rowObj)
