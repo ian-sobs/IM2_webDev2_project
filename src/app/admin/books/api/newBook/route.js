@@ -78,18 +78,23 @@ export async function POST(request) {
     const poolPromise = pool.promise()
     const conn = await poolPromise.getConnection({multipleStatements: true})
 
+    let bookInsertedID
+
     const [result, fields] = await conn.execute('INSERT INTO book (title, description, img, priceUSD, avgRating, author) VALUES (?, ?, ?, ?, ?, ?)', [bookData["bookTitle"], bookData["bookDesc"], imgSrc, parseFloat(parseFloat(bookData["bookPrice"]).toFixed(2)), 0, bookData["bookAuthors"]])
     console.log(result)
-    //result.insertId
+    
+    bookInsertedID = result.insertId
 
     for(const genreID of bookData["genreIDs"]){
-        insertStatement = insertStatement + 'INSERT INTO book_genre_relation (bookID, genreID) VALUES (?, ?);'
+        await conn.execute('INSERT INTO book_genre_relation (bookID, genreID) VALUES (?, ?)', [bookInsertedID, genreID])
+        // insertStatement = insertStatement + 'INSERT INTO book_genre_relation (bookID, genreID) VALUES (' + bookInsertedID + ', ' + genreID + ' ); '
         insertGenreID.push(result.insertId)
         insertGenreID.push(genreID)
     }
 
-    const [inserted, insertedFields] = await conn.execute(insertStatement, insertGenreID)
-    console.log('inserted', inserted)
+    // console.log("insertStatement", insertStatement)
+    // const [inserted, insertedFields] = await conn.execute(insertStatement)
+    // console.log('inserted', inserted)
 
     poolPromise.releaseConnection(conn)
 

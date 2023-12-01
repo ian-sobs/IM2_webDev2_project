@@ -51,8 +51,11 @@ export default function BookForm({className, genres}){
             // },
             body: data
         })
-        
-        setIsOpen(false)
+        .then((response)=>response.json())
+        .then((parsed)=>{
+            console.log("parsedResponse", parsed)
+            setIsOpen(false)
+        })    
     }
 
 
