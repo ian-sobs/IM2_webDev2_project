@@ -1,7 +1,7 @@
-// 'use client'
+'use client'
 import RowAction from "./rowAction"
 
-export function HeadRow({colNames, ndxToShorten}){
+export function HeadRow({colNames, ndxToShorten, rowsCopy}){
     return (
         <>
             <tr >
@@ -15,20 +15,25 @@ export function HeadRow({colNames, ndxToShorten}){
     )
 }
 
-export function BodyRow({rowObj, ndxLink, ndxDesc}){
+export function BodyRow({rowObj, bookID_in_form, setBookID_in_form, ndxLink, ndxDesc, deleteBook, editBook}){
     let colData = Object.keys(rowObj)
+    let bookID = rowObj.ID
+    console.log("rowObj", rowObj)
+
+    
     const actions = [
         {
             name: 'Edit',
-            apiLink: 'Edit',
+
             activeBgColor: 'bg-blue-500',
-            activeTextColor: 'text-white'
+            activeTextColor: 'text-white',
+            behavior: editBook
         },
         {
             name: 'Delete',
-            apiLink: 'Delete',
             activeBgColor: 'bg-rose-600',
-            activeTextColor: 'text-white'
+            activeTextColor: 'text-white',
+            behavior: deleteBook
         }
     ]
     return (
@@ -43,7 +48,7 @@ export function BodyRow({rowObj, ndxLink, ndxDesc}){
                     }    
                     return <td key={index} >{rowObj[objProp]}</td>
                 })}
-                <td className='z-1'><RowAction actions={actions}></RowAction></td>
+                <td className='z-1'><RowAction bookID={bookID} positioning='absolute' actions={actions}>Action</RowAction></td>
                         
             </tr>        
         </>
