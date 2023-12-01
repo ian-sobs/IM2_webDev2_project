@@ -1,6 +1,67 @@
+import pool from '@/dbConn'
+import VldtMssg from '@/components/validMssg'
+
 export async function POST(request) {
     const data = await request.formData()
-    console.log('postObj', data)
-   
-    return Response.json(data)
+    const fieldNames = data.keys()
+    let baseImgPath = '/bookPhotos/'
+    let bookData = {}
+    let returnData = {}
+    // if(imgFile)
+
+    
+    bookData['bookImgFile'] = data.get('bookImgFile')
+    returnData['bookImgFile'] = new VldtMssg(-1, ['Enter a URL to the image or upload an image', 'Invalid filetype', 'Image must have an aspect ratio of...'])
+    data.delete('bookImgFile')
+
+    bookData['bookImgLink'] = data.get('bookImgLink')
+    returnData['bookImgLink'] = new VldtMssg(-1, ['Enter a URL to the image or upload an image', 'URL is invalid'])
+    data.delete('bookImgLink')
+
+    bookData['genreIDs'] = JSON.parse(data.get('genreIDs'))
+    returnData['genreIDs'] = new VldtMssg(-1, ['Choose at least 1 genre'])
+    data.delete('genreIDs')
+
+    for(const fieldName of data.keys()){
+        bookData[fieldName] = data.get(fieldName)
+    }
+    console.log('bookData', bookData)
+
+    const poolPromise = pool.promise()
+    const conn = await poolPromise.getConnection()
+
+    const [results, fields] = await conn.execute()
+
+    
+
+    if(bookData['bookImgFile'] == 'undefined' && !bookData['bookImgLink']){
+        returnData['bookImgFile'].invalidField(0)
+        returnData['bookImgLink'].invalidField(0)
+    }
+
+    if(bookData['genreIDs'].length == 0){
+        returnData['genreIDs'].invalidField(0)
+    }
+
+    for(const fieldName of data.keys()){
+        returnData[fieldName] = new VldtMssg(-1, ['This field must not be empty'])  
+    }
+
+    for(const fieldName of data.keys()){
+        if(bookData[fieldName] == ""){
+            returnData[fieldName].invalidField(0)
+        }
+    }
+
+    console.log('returnData', returnData)
+
+    // for(const fieldName of fieldNames){
+    //     console.log(fieldName, data.get(fieldName))
+    // }
+
+
+    
+    // console.log('postObj', `${baseImgPath}${data.get('bookImgFile').name}`)
+    // console.log('postObj', imgFile)
+    return Response.json(returnData)
 }
