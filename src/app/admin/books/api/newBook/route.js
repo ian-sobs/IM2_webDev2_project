@@ -8,6 +8,7 @@ export async function POST(request) {
     let imgSrc
     let bookData = {}
     let returnData = {}
+    let temp = {}
 
     let insertStatement = ''
     let insertGenreID = []
@@ -62,10 +63,15 @@ export async function POST(request) {
     // for(const fieldName of fieldNames){
     //     console.log(fieldName, data.get(fieldName))
     // }
+    temp.vldtInfo = returnData
+    temp.bookData = bookData
+
+    console.log("temp in admin books", temp)
+
     for (const fieldName of fieldNames){
         if(!returnData[fieldName].isValid()){
             console.log("CANT INSERT A NEW BOOK")
-            return Response.json(returnData)
+            return Response.json(temp)
         }
     }
 
@@ -77,7 +83,7 @@ export async function POST(request) {
     //result.insertId
 
     for(const genreID of bookData["genreIDs"]){
-        insertStatement = insertStatement + 'INSERT INTO book_genre_relation bgr (bookID, genreID) VALUES (?, ?);'
+        insertStatement = insertStatement + 'INSERT INTO book_genre_relation (bookID, genreID) VALUES (?, ?);'
         insertGenreID.push(result.insertId)
         insertGenreID.push(genreID)
     }
@@ -86,6 +92,6 @@ export async function POST(request) {
     console.log('inserted', inserted)
 
     poolPromise.releaseConnection(conn)
-    
-    return Response.json(returnData)
+
+    return Response.json(temp)
 }
