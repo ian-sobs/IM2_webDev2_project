@@ -9,6 +9,7 @@ export default function BookForm({className, genres}){
     let [isOpen, setIsOpen] = useState(false)
     const formBook = useRef()
     const checkBoxVal = useRef()
+    const imageFile = useRef()
     // function OpenModal(){
     //     setIsOpen(true)
     // }
@@ -17,7 +18,7 @@ export default function BookForm({className, genres}){
     function handleSubmit(e){
         e.preventDefault()
         // console.log("checkBoxVal", checkBoxVal.current)
-        let objPost = {}
+        // let objPost = {}
         let arr = recurseSearchTagname('input', checkBoxVal.current)
         let genreIDs = []
         arr.forEach(element => {
@@ -25,26 +26,30 @@ export default function BookForm({className, genres}){
                 genreIDs.push(parseInt(element.value))
             }
         });
+
         console.log(genreIDs)
         const data =  new FormData(formBook.current)
+        data.set('bookImgFile', imageFile.current.files[0])
 
         genres.forEach((genre)=>{
             data.delete(genre.name)
         })
+
+        data.append('genreIDs', JSON.stringify(genreIDs));
         
-        for (var [key, value] of data.entries()) { 
-            objPost[key] = value
-            console.log(key, value)
-        }
-        objPost['genreIDs'] = genreIDs
-        console.log('Fetch post object', objPost)
+        // for (var [key, value] of data.entries()) { 
+        //     objPost[key] = value
+        //     console.log(key, value)
+        // }
+        // objPost['genreIDs'] = genreIDs
+        // console.log('Fetch post object', objPost)
 
         fetch('/admin/books/api/newBook', {
             method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(objPost)
+            // headers: {
+            //     'Content-Type': 'application/json'
+            // },
+            body: data
         })
         
         setIsOpen(false)
@@ -92,7 +97,7 @@ export default function BookForm({className, genres}){
                             <div className='flex flex-col my-3'>
                                 <label >Image</label>
                                 <div className='flex flex-col mt-2'>
-                                    <input className="bg-slate-200 mb-1" id='bookImgFile' name='bookImgFile' type='file'/> 
+                                    <input ref={imageFile} className="bg-slate-200 mb-1" id='bookImgFile' name='bookImgFile' type='file' accept='.png, .jpeg, .jpg, .svg'/> 
                                     <p className='text-justify'>Or</p>
                                     <input className="bg-slate-200 mt-1" id='bookImgLink' name='bookImgLink' type='text' placeholder="Enter a URL to an image"/> 
                                 </div>
