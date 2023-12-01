@@ -5,8 +5,12 @@ export async function POST(request) {
     const data = await request.formData()
     const fieldNames = data.keys()
     let baseImgPath = '/bookPhotos/'
+    let imgSrc
     let bookData = {}
     let returnData = {}
+
+    let insertStatement = ''
+    let insertGenreID = []
     // if(imgFile)
 
     
@@ -25,19 +29,19 @@ export async function POST(request) {
     for(const fieldName of data.keys()){
         bookData[fieldName] = data.get(fieldName)
     }
-    console.log('bookData', bookData)
-
-    const poolPromise = pool.promise()
-    const conn = await poolPromise.getConnection()
-
-    const [results, fields] = await conn.execute()
-
-    
+    console.log('bookData', bookData)    
 
     if(bookData['bookImgFile'] == 'undefined' && !bookData['bookImgLink']){
         returnData['bookImgFile'].invalidField(0)
         returnData['bookImgLink'].invalidField(0)
     }
+    else if(bookData['bookImgLink']){
+        imgSrc = `${bookData['bookImgLink']}`
+    }
+    else{
+        imgSrc = `${baseImgPath}${bookData['bookImgFile'].name}`
+    }
+    console.log("imgSrc", imgSrc)
 
     if(bookData['genreIDs'].length == 0){
         returnData['genreIDs'].invalidField(0)
@@ -58,10 +62,30 @@ export async function POST(request) {
     // for(const fieldName of fieldNames){
     //     console.log(fieldName, data.get(fieldName))
     // }
+    for (const fieldName of fieldNames){
+        if(!returnData[fieldName].isValid()){
+            console.log("CANT INSERT A NEW BOOK")
+            return Response.json(returnData)
+        }
+    }
 
+    const poolPromise = pool.promise()
+    const conn = await poolPromise.getConnection({multipleStatements: true})
 
+    const [result, fields] = await conn.execute('INSERT INTO book (title, description, img, priceUSD, avgRating, author) VALUES (?, ?, ?, ?, ?, ?)', [bookData["bookTitle"], bookData["bookDesc"], imgSrc, parseFloat(parseFloat(bookData["bookPrice"]).toFixed(2)), 0, bookData["bookAuthors"]])
+    console.log(result)
+    //result.insertId
+
+    for(const genreID of bookData["genreIDs"]){
+        insertStatement = insertStatement + 'INSERT INTO book_genre_relation bgr (bookID, genreID) VALUES (?, ?);'
+        insertGenreID.push(result.insertId)
+        insertGenreID.push(genreID)
+    }
+
+    const [inserted, insertedFields] = await conn.execute(insertStatement, insertGenreID)
+    console.log('inserted', inserted)
+
+    poolPromise.releaseConnection(conn)
     
-    // console.log('postObj', `${baseImgPath}${data.get('bookImgFile').name}`)
-    // console.log('postObj', imgFile)
     return Response.json(returnData)
 }
