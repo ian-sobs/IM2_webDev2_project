@@ -11,7 +11,6 @@ const pool = mysql.createPool({
 
   module.exports = pool;
 
-
 // export async function queryToDb(qeury, queryValues){
 //     pool.getConnection(function(err, connection) {
 //         if (err) throw err; // not connected!
