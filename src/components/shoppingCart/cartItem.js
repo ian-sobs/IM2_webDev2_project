@@ -1,6 +1,7 @@
 'use client'
 import Image from "next/image"
 
+//This is the component that displays information about the book that was added to the cart
 export default function cartItem({userInfo, bookID, bookTitle, bookImg, qty, totalPriceUSD, dateOrdered, address}){
     let d = new Date(dateOrdered);
     console.log(typeof(d))
