@@ -1,15 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
+      dangerouslyAllowSVG: true,
+      contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+
       remotePatterns: [
           {
               protocol: 'https',
               hostname: '**',
               port: '',
               pathname: '**',
-              dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    domains: ["www.svgrepo.com"]
           },
       ],
     },
@@ -18,9 +18,7 @@ const nextConfig = {
     },
     reactStrictMode: true,
     swcMinify: true,
-    images: {
-      domains: ["placehold.co"],
-    },
+
 }
 
 module.exports = nextConfig
