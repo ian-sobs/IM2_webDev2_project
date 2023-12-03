@@ -2,13 +2,12 @@ const mysql = require('mysql2');
 const pool = mysql.createPool({
     connectionLimit : 10,
     host            : '127.0.0.1',
-    user            : 'bookii',
-    password        : 'iikooB258#',
+    user            : 'root',
+    password        : '',
     database        : 'bookii'
   });
 
   module.exports = pool;
-
 
 // export async function queryToDb(qeury, queryValues){
 //     pool.getConnection(function(err, connection) {

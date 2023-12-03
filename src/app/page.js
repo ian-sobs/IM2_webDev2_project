@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image'
 import Link from 'next/link'
+import Carousel from "src/components/carousel.tsx";
 
 export default async function home(){
     // const poolPromise = pool.promise()
@@ -8,49 +11,67 @@ export default async function home(){
     // const results = await db.execute('select * from country where countryID = ?', [1])
     // console.log(results)
 
+    const images = [
+        "https://svgshare.com/i/U7z.svg",
+        "https://www.svgrepo.com/show/423204/coffee.svg",
+        "https://www.svgrepo.com/show/423204/coffee.svg",
+        "https://www.svgrepo.com/show/423204/coffee.svg",
+      ];
+    
+
     return(
         <>
-            {/* <div className="min-h-screen bg-white px-10 flex flex-wrap content-center justify-center md:flex-row lg:flex-row xl:flex-row text-3xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl  text-black">
-                        <div className="flex flex-col"> 
-                            <div className="flex flex-wrap flex-col content-center">
-                                <p className="font-medium mb-[6px]">
-                                    Welcome to
-                                </p>
-                                <div className="text-center bg-black bg-clip-content">
-                                    <span className="font-bold bg-clip-text text-transparent bg-gradient-to-tr from-[#DC8ECB] from-30% via-[#FFB169] via-60% to-[#FFF8BD] to-90%">Bookii</span>
-                                </div>
+            <div className="min-h-screen bg-white ">
+                    <nav className="bg-white border-gray-200 dark:bg-gray-900">
+                        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                            <a href="http://localhost:3000/" className="flex items-center space-x-3 rtl:space-x-reverse">
+                                <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
+                                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Bookii</span>
+                            </a>
+                            <div className='flex flex-wrap flex-col space-y-8 md:space-x-20 md:space-y-0 justify-center content-center md:flex-row'>
+                                <Link href="/signUp">
+                                    <button className="text-md w-24 font-medium p-[5px] rounded-full text-center bg-gradient-to-r from-[#DC8ECB] to-[#FFB169] text-white">
+                                        Sign Up
+                                    </button>
+                                </Link>
+                                <Link href="/login">
+                                    <button className="text-md w-24 font-medium p-[5px] rounded-full text-center bg-gradient-to-r from-[#DC8ECB] to-[#FFB169] text-white">
+                                        Log in
+                                    </button>
+                                </Link>                      
                             </div>
-                            <p className="my-[8px] text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl ">
-                                Read more, learn more, and buy more with the convenience of having the book arrive at your doorstep with just a tap of your finger.
-                            </p>
                         </div>
-                        <div> i am a test div</div>
-            </div> */}
-            <div className="min-h-screen bg-white px-4 sm:px-6 md:px-8 lg:px-32 xl:px-36 ">
-                <div className="min-h-screen flex flex-col space-y-10 justify-center text-black">
-                    <div className="flex flex-col flex-wrap content-center text-3xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl  text-black">
-                        <div className='text-center'>Welcome to</div>
-                        <div className=' bg-black text-center'><span className="font-medium	 bg-gradient-to-tr text-transparent bg-clip-text from-[#DC8ECB] from-30% via-[#FFB169] via-60% to-[#FFF8BD] to-90%">Bookii</span></div>
-                    </div >
-                    <p className="indent-[5%] text-justify my-[8px] text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl px-8"> 
-                        Read more, learn more, and buy more with the convenience of having the book arrive at your doorstep with just a tap of your finger.
-                    </p>
-                    <div className='flex flex-wrap flex-col space-y-8 md:space-x-20 md:space-y-0 justify-center content-center md:flex-row'>
-                        <Link href="/signUp">
-                            <button className="text-xl w-32 font-medium p-[5px] rounded-full text-center bg-gradient-to-r from-[#DC8ECB] to-[#FFB169] text-white">
-                                Sign Up
-                            </button>
-                        </Link>
-                        <Link href="/login">
-                            <button className="text-xl w-32 font-medium p-[5px] rounded-full text-center bg-gradient-to-r from-[#DC8ECB] to-[#FFB169] text-white">
-                                Log in
-                            </button>
-                        </Link>                      
-                    </div>
-                </div>
+                    </nav>
+                    <nav className="bg-white dark:bg-gray-900">
+                        <div className="bg-[#FFB169]  flex flex-wrap items-center justify-between mx-auto p-4">
+                        </div>
+                    </nav>
 
-            </div>
-            
+                    <div className="bg-rose-200 lg:w-4/4 mx-auto my-2">
+                        <Carousel loop>
+                            {images.map((src, i) => {
+                            return (
+                                // 👇 style each individual slide.
+                                // relative - needed since we use the fill prop from next/image component
+                                // h-64 - arbitrary height
+                                // flex[0_0_100%]
+                                //   - shorthand for flex-grow:0; flex-shrink:0; flex-basis:100%
+                                //   - we want this slide to not be able to grow or shrink and take up 100% width of the viewport.
+                                <div className="relative h-96 flex-[0_0_100%]" key={i}>
+                                {/* use object-cover + fill since we don't know the height and width of the parent */}
+                                <Image src={src} fill className="object-cover" alt="imgimg" />
+                                </div>
+                            );
+                            })}
+                        </Carousel>
+                    </div>
+
+                    <nav className="bg-white dark:bg-gray-900">
+                        <div className="bg-[#DC8ECB]  flex flex-wrap items-center justify-between mx-auto p-4">
+                        </div>
+                    </nav>
+            </div> 
+             
         </>
     )
 
