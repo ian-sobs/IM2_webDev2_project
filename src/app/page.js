@@ -12,8 +12,8 @@ export default async function home(){
     // console.log(results)
 
     const images = [
-        "https://svgshare.com/i/U7z.svg",
-        "https://www.svgrepo.com/show/423204/coffee.svg",
+        "https://images.unsplash.com/photo-1463320726281-696a485928c7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1618365908648-e71bd5716cba?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "https://www.svgrepo.com/show/423204/coffee.svg",
         "https://www.svgrepo.com/show/423204/coffee.svg",
       ];
