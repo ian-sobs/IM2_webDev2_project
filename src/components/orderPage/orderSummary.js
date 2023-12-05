@@ -62,6 +62,7 @@ class OrderSummary extends React.Component {
 
     return (
       <div style={{ margin: 0, padding: 0 }}>
+        <div style={{ width: "100%", borderBottom: "1px solid black", marginTop: "60px",marginBottom: "40px"}}></div> 
         {orderSummary}
         <div style={{ width: "100%", borderBottom: "1px solid black", marginTop: "40px",marginBottom: "40px"}}></div>
         <p style={{ textAlign: "right", fontSize: "18px", color: "black", paddingRight: "20px" }}>
