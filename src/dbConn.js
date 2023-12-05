@@ -1,3 +1,5 @@
+
+// code below creates a database pool connection to the mysql server
 const mysql = require('mysql2');
 const pool = mysql.createPool({
     connectionLimit : 10,
@@ -8,7 +10,6 @@ const pool = mysql.createPool({
   });
 
   module.exports = pool;
-
 
 // export async function queryToDb(qeury, queryValues){
 //     pool.getConnection(function(err, connection) {

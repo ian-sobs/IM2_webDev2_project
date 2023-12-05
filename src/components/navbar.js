@@ -10,7 +10,7 @@ export default function Navbar({fields, styles}){
     return (
         <>
             
-                <div className={styles + " flex flex-wrap flex-row"}>
+                <div className={styles + " flex flex-wrap flex-row text-white"}>
                     <Tab.Group manual>
                         <Tab.List className=" flex flex-wrap flex-row"> 
                             {fields.map((field, index)=>{return <Link key={index} href={field.linkTo} className="flex flex-row">
@@ -22,7 +22,7 @@ export default function Navbar({fields, styles}){
                                             selected ? `${tabStyle} bg-[#e38a40] text-white` : `${tabStyle}`
                                         }
                                         >
-                                        {field.name}
+                                        {field.name} 
                                         </button>
                                     )}
                                 </Tab>
