@@ -47,7 +47,7 @@ export default async function books(){
 
                     <h1 >No genres to show</h1>
                     </div>
-                    <GenreFormEmpty className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'>Add new genre </GenreFormEmpty>
+                    <GenreFormEmpty className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'>Add a new genre </GenreFormEmpty>
             </section>
         </>
     )

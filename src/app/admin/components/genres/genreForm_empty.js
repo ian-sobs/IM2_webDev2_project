@@ -48,7 +48,7 @@ export default function genreForm({className, children}){
         .then((response)=>response.json())
         .then((parsed)=>{
             console.log("parsedResponse", parsed)
-            if(parsed.insertId > 0){
+            if(parsed.sqlHeader.insertId > 0){
                 setIsOpen(false)
                 location.reload()
             }
@@ -80,37 +80,7 @@ export default function genreForm({className, children}){
                             <label htmlFor="genreName">Name</label>
                             <input ref={genreName} type='text' id='genreName' name='genreName' className="bg-slate-200"></input>
                         </div> 
-                        {/* <div className='flex flex-col my-3'>
-                            <label htmlFor='bookDesc'>Description</label>
-                            <textarea id='bookDesc' name="bookDesc" className="bg-slate-200"></textarea>
-                        </div> */}
-                        {/* <div className='flex flex-col my-3'>                                
-                                    <label>Select a genre</label>
-                                    <div ref={checkBoxVal} className="flex flex-col max-h-32 overflow-x-auto border">
-                                        {genres.map((genre, index)=>{
-                                            return <div key={index}> <input name={genre.name} id={genre.name} value={genre.genreID} type="checkbox"></input> <label>{genre.name}</label></div>
-                                        })}
-                                    </div>
-
-                        </div> */}
-                        {/* <div className='flex flex-col my-3'>
-                            <label >Image</label>
-                            <div className='flex flex-col mt-2'>
-                                <input ref={imageFile} className="bg-slate-200 mb-1" id='bookImgFile' name='bookImgFile' type='file' accept='.png, .jpeg, .jpg, .svg'/> 
-                                <p className='text-justify'>Or</p>
-                                <input className="bg-slate-200 mt-1" id='bookImgLink' name='bookImgLink' type='text' placeholder="Enter a URL to an image"/> 
-                            </div>
-                            
-                        </div> */}
-                        {/* <div className='flex flex-col my-3'>
-                            <label htmlFor="bookPrice">Price</label>
-                            <input id='bookPrice' name='bookPrice' type='number' className="bg-slate-200 w-1/3" ></input>
-                        </div>
-                        <div className='flex flex-col my-3'>
-                            <label htmlFor="bookAuthors">Author/s</label>
-                            <input id='bookAuthors' name='bookAuthors' type='text' className="bg-slate-200"></input>
-                        </div> */}
-
+                  
                         <div className='flex flex-row justify-end'>
                             <button className="mr-3 bg-slate-300 p-1 rounded-md font-semibold text-slate-500" name='cancel' id='cancel' onClick={() => {
                                 setIsOpen(false)
