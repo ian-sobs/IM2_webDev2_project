@@ -9,7 +9,7 @@ export default function TableFull({colNames, rowsData, caption}){
     const [isOpen, setIsOpen] = useState(false)
 
     const [forEditing, setForEditing] = useState(false)
-    const [bookID_in_form, setBookID_in_form] = useState(0)
+    const [rowID_in_form, setRowID_in_form] = useState(0)
 
     let rowsCopy = [...rows]
     console.log('rowsCopy', rowsCopy)
@@ -60,7 +60,7 @@ export default function TableFull({colNames, rowsData, caption}){
         //     body: JSON.stringify({bookID: bookID})
         // },
         setForEditing(true)
-        setBookID_in_form(bookID)
+        setRowID_in_form(bookID)
         setIsOpen(true)
     }
 
@@ -90,7 +90,7 @@ export default function TableFull({colNames, rowsData, caption}){
                 console.log('updatedRows', updatedRows)
                 setRows(updatedRows)
                 setForEditing(false)
-                setBookID_in_form(0)
+                setRowID_in_form(0)
                 setIsOpen(false)
             
         }) 
@@ -108,14 +108,14 @@ export default function TableFull({colNames, rowsData, caption}){
                 <HeadRow colNames={colNames} ndxToShorten={4}></HeadRow>
             </thead>
             <tbody>
-                {rows.map((rowObj, index)=><BodyRow bookID_in_form={bookID_in_form} setBookID_in_form={setBookID_in_form} isOpen={isOpen} setIsOpen={setIsOpen} rowsCopy={rowsCopy} deleteBook={deleteBook} editBook={editBook} key={index} rowObj={rowObj} ndxLink={4}></BodyRow>)}
+                {rows.map((rowObj, index)=><BodyRow rowID_in_form={rowID_in_form} setRowID_in_form={setRowID_in_form} isOpen={isOpen} setIsOpen={setIsOpen} rowsCopy={rowsCopy} deleteBook={deleteBook} editBook={editBook} key={index} rowObj={rowObj} ndxLink={4}></BodyRow>)}
             </tbody>
         </table>        
         </div>
 
         <div className='bg-inherit h-20'></div>
                     {/* <button onClick={GenreForm}></button> */}
-        <GenreForm rowID_in_form={bookID_in_form} setRowID_in_form={setBookID_in_form} forEditing={forEditing} setForEditing={setForEditing} addBook={addBook} updateBook={updateBook} isOpen={isOpen} setIsOpen={setIsOpen} genres={genres} className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'> </GenreForm>
+        <GenreForm rowID_in_form={rowID_in_form} setRowID_in_form={setRowID_in_form} forEditing={forEditing} setForEditing={setForEditing} addBook={addBook} updateBook={updateBook} isOpen={isOpen} setIsOpen={setIsOpen} genres={genres} className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'> </GenreForm>
 
         
         </>
