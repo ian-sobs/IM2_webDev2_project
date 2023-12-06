@@ -4,7 +4,7 @@ import { useState } from 'react'
 import RowAction from './rowAction'
 import BookForm from '../books/bookForm'
 
-export default function TableFull({genres, colNames, rowsData, caption, editRowAPI, deleteRowAPI, addRowAPI}){
+export default function TableFull({genres, colNames, rowsData, caption, genreList}){
     const [rows, setRows] = useState(rowsData)
     const [isOpen, setIsOpen] = useState(false)
 
@@ -18,7 +18,7 @@ export default function TableFull({genres, colNames, rowsData, caption, editRowA
     //     setRows(newRows)
     // }
 
-    function deleteRow(bookID){
+    function deleteBook(bookID){
         fetch('/admin/books/api/deleteBook', {
             method: "POST",
             headers: new Headers({'content-type': 'application/json'}),
@@ -33,7 +33,7 @@ export default function TableFull({genres, colNames, rowsData, caption, editRowA
         })
     }
 
-    function addRow(newBook){
+    function addBook(newBook){
         fetch('/admin/books/api/newBook', {
             method: "POST",
             // headers: {
@@ -64,7 +64,7 @@ export default function TableFull({genres, colNames, rowsData, caption, editRowA
         setIsOpen(true)
     }
 
-    function editRow(newBookDetails){
+    function updateBook(newBookDetails){
         fetch('/admin/books/api/updateBook', {
             method: "POST",
             // headers: {
