@@ -121,7 +121,7 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
 
         <div className='bg-inherit h-20'></div>
                     {/* <button onClick={BookForm}></button> */}
-        <BookForm bookID_in_form={bookID_in_form} setBookID_in_form={setBookID_in_form} forEditing={forEditing} setForEditing={setForEditing} addBook={addBook} updateBook={updateBook} isOpen={isOpen} setIsOpen={setIsOpen} genres={genres} className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'> </BookForm>
+        <BookForm bookID_in_form={bookID_in_form} setBookID_in_form={setBookID_in_form} forEditing={forEditing} setForEditing={setForEditing} addBook={addBook} updateBook={updateBook} isOpen={isOpen} setIsOpen={setIsOpen} genres={genres} className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'>Add a new book</BookForm>
 
         
         </>

@@ -5,7 +5,7 @@ import { Dialog} from '@headlessui/react'
 import {recurseSearchTagname} from '../recurseTagname'
 
 
-export default function genreForm({rowID_in_form, setRowID_in_form, forEditing,setForEditing,addRow,updateRow, isOpen, setIsOpen, className}){
+export default function genreForm({children, rowID_in_form, setRowID_in_form, forEditing,setForEditing,addRow,updateRow, isOpen, setIsOpen, className}){
     // let [isOpen, setIsOpen] = useState(false)
     const genreName = useRef()
     const imageFile = useRef()
@@ -27,16 +27,9 @@ export default function genreForm({rowID_in_form, setRowID_in_form, forEditing,s
         // });
 
         
-        let data
-            
-        // for (var [key, value] of data.entries()) { 
-        //     objPost[key] = value
-        //     console.log(key, value)
-        // }
-        // objPost['genreIDs'] = genreIDs
-        // console.log('Fetch post object', objPost)
-        data.genreName = genreName.current.value
-        data.genreID = rowID_in_form
+        let data = {
+            genreName : genreName.current.value
+        }
 
         if(forEditing){
             updateRow(data)
@@ -48,7 +41,7 @@ export default function genreForm({rowID_in_form, setRowID_in_form, forEditing,s
     return(
         <>
             <div>
-            <button className={className} onClick={()=>setIsOpen(true)}>Add a new book</button>
+            <button className={className} onClick={()=>setIsOpen(true)}>{children}</button>
 
 
             <Dialog open={isOpen} onClose={() => {}} as='div' className='text-black'>

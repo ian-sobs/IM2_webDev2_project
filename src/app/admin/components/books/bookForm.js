@@ -5,7 +5,7 @@ import { Dialog, Disclosure } from '@headlessui/react'
 import RowAction from "../rowAction"
 import {recurseSearchTagname} from '../recurseTagname'
 
-export default function BookForm({bookID_in_form, setBookID_in_form, updateBook, forEditing, setForEditing, addBook, className, genres, isOpen, setIsOpen}){
+export default function BookForm({bookID_in_form, setBookID_in_form, updateBook, forEditing, setForEditing, addBook, className, genres, isOpen, setIsOpen, children}){
     // let [isOpen, setIsOpen] = useState(false)
     const formBook = useRef()
     const checkBoxVal = useRef()
@@ -69,7 +69,7 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
    
         return(
             <>
-                <button className={className} onClick={()=>setIsOpen(true)}>Add a new book</button>
+                <button className={className} onClick={()=>setIsOpen(true)}>{children}</button>
 
 
                 <Dialog open={isOpen} onClose={() => {}} as='div' className='text-black'>
