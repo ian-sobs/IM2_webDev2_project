@@ -2,11 +2,11 @@
 
 import { useState , useEffect, useRef} from "react"
 import { Dialog, Disclosure } from '@headlessui/react'
-import RowAction from "../components/rowAction"
-import {recurseSearchTagname} from '../components/recurseTagname'
+import RowAction from "../rowAction"
+import {recurseSearchTagname} from '../recurseTagname'
 
-export default function BookForm({bookID_in_form, setBookID_in_form, updateBook, forEditing, setForEditing, addBook, className, genres, isOpen, setIsOpen}){
-    // let [isOpen, setIsOpen] = useState(false)
+export default function BookForm({ className, genres}){
+    let [isOpen, setIsOpen] = useState(false)
     const formBook = useRef()
     const checkBoxVal = useRef()
     const imageFile = useRef()
@@ -37,32 +37,23 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
 
         data.append('genreIDs', JSON.stringify(genreIDs));
         
-        // for (var [key, value] of data.entries()) { 
-        //     objPost[key] = value
-        //     console.log(key, value)
-        // }
-        // objPost['genreIDs'] = genreIDs
-        // console.log('Fetch post object', objPost)
-        if(forEditing){
-            data.append('bookID', bookID_in_form.toString())
-            updateBook(data)
-        }
-        else{
-            addBook(data)
-        }
+
         
-        // fetch('/admin/books/api/newBook', {
-        //     method: "POST",
-        //     // headers: {
-        //     //     'Content-Type': 'application/json'
-        //     // },
-        //     body: data
-        // })
-        // .then((response)=>response.json())
-        // .then((parsed)=>{
-        //     console.log("parsedResponse", parsed)
-        //     setIsOpen(false)
-        // })    
+        fetch('/admin/books/api/newBook', {
+            method: "POST",
+            // headers: {
+            //     'Content-Type': 'application/json'
+            // },
+            body: data
+        })
+        .then((response)=>response.json())
+        .then((parsed)=>{
+            console.log("parsedResponse", parsed)
+            if('bookDisplay' in parsed){
+                setIsOpen(false)
+                location.reload()
+            }
+        }) 
     }
 
 
@@ -80,10 +71,10 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
 
                     <Dialog.Panel as='div' style={{top:' 50%', left: '50%', transform: 'translate(-50%, -50%)'}} className='p-[20px] bg-white rounded-md w-4/5 sm:w-3/5 lg:w-1/4 fixed z-50'>
                    
-                        <Dialog.Title className='text-center mb-3 font-semibold'>{(!forEditing) ? "Add new book" : "Edit this book"}</Dialog.Title>
+                        <Dialog.Title className='text-center mb-3 font-semibold'>Add new book</Dialog.Title>
 
                         <Dialog.Description className='text-justify font-light'>
-                            {(!forEditing) ? "Input the required information for the new book" : "Edit this book's information"}
+                           Input the required information for the new book
                         </Dialog.Description>
 
                         <form ref={formBook} className='flex flex-col'>
@@ -125,8 +116,6 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
                             <div className='flex flex-row justify-end'>
                                 <button className="mr-3 bg-slate-300 p-1 rounded-md font-semibold text-slate-500" name='cancel' id='cancel' onClick={() => {
                                     setIsOpen(false)
-                                    setForEditing(false)
-                                    setBookID_in_form(0)
                                     }}>Cancel</button>
                                 <button type='submit' className="mr-1 bg-green-500 p-1 rounded-md text-white font-semibold" name='submitButton' id='submitButton' onClick={handleSubmit}>Submit</button>
                             </div>
