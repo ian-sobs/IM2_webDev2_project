@@ -25,7 +25,7 @@ export default async function books(){
                 <section name="sectionGrid" className={`${adminPageStyle.allWidth} ${adminPageStyle.mobile} ${adminPageStyle.sm} ${adminPageStyle.md} ${adminPageStyle.lg} ${adminPageStyle.xl}`}>
                 
                     
-                    <TableFull genres={genres} genreList={genreList} caption='Table of all books in the database' colNames={colNames} rowsData={rows}></TableFull>        
+                    <TableFull caption='Table of all books in the database' colNames={colNames} rowsData={rows}></TableFull>        
                     {/* {(cookies().has("userCredentials")) ? <CardsDisplay currency={userInfo["crrncyCode"]} localCurrPerUSD={userInfo["localCurrPerUSD"]} CtabStyles="col-span-2 md:col-span-3 lg:col-span-4 " requestURL="/user/market/api" username={userInfo["username"]}></CardsDisplay> : <h1>error</h1>} */}
     
                 </section>

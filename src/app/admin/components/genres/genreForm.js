@@ -80,7 +80,7 @@ export default function genreForm({bookID_in_form, setBookID_in_form, updateBook
                             <label htmlFor='bookDesc'>Description</label>
                             <textarea id='bookDesc' name="bookDesc" className="bg-slate-200"></textarea>
                         </div>
-                        <div className='flex flex-col my-3'>                                
+                        {/* <div className='flex flex-col my-3'>                                
                                     <label>Select a genre</label>
                                     <div ref={checkBoxVal} className="flex flex-col max-h-32 overflow-x-auto border">
                                         {genres.map((genre, index)=>{
@@ -88,7 +88,7 @@ export default function genreForm({bookID_in_form, setBookID_in_form, updateBook
                                         })}
                                     </div>
 
-                        </div>
+                        </div> */}
                         <div className='flex flex-col my-3'>
                             <label >Image</label>
                             <div className='flex flex-col mt-2'>
