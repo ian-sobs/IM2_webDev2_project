@@ -17,9 +17,9 @@ export function HeadRow({colNames, ndxToShorten, rowsCopy}){
     )
 }
 
-export function BodyRow({rowObj, bookID_in_form, setBookID_in_form, ndxLink, ndxDesc, deleteBook, editBook}){
+export function BodyRow({rowObj, deleteRow, openUpdateModal}){
     let colData = Object.keys(rowObj)
-    let bookID = rowObj.ID
+    let rowID = rowObj.ID
     console.log("rowObj", rowObj)
 
     
@@ -40,22 +40,14 @@ export function BodyRow({rowObj, bookID_in_form, setBookID_in_form, ndxLink, ndx
     // ]
 
     const actions = [
-        new actionDetails('Edit', editBook, 'bg-blue-500', 'text-white'),
-        new actionDetails('Delete', deleteBook, 'bg-rose-500', 'text-white')
+        new actionDetails('Edit', openUpdateModal, 'bg-blue-500', 'text-white'),
+        new actionDetails('Delete', deleteRow, 'bg-rose-500', 'text-white')
     ]
     return (
         <>    
             <tr className="z-1">     
-                {colData.map((objProp, index)=>{
-                    if(index == ndxLink){ 
-                        return <td key={index} className=' text-cyan-700 w-[10px]'><a target="_blank" className='hover:text-cyan-400 truncate' href={`${rowObj[objProp]}`}>Photo source</a></td>
-                    }
-                    else if(index == ndxDesc){
-                        return <td key={index} ><div >{rowObj[objProp]}</div></td>
-                    }    
-                    return <td key={index} >{rowObj[objProp]}</td>
-                })}
-                <td className='z-1'><RowAction bookID={bookID} positioning='absolute' actions={actions}>Action</RowAction></td>
+                {colData.map((objProp, index)=><td key={index} >{rowObj[objProp]}</td>)}
+                <td className='z-1'><RowAction rowID={rowID} positioning='absolute' actions={actions}>Action</RowAction></td>
                         
             </tr>        
         </>

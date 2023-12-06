@@ -22,7 +22,7 @@ export default function TableFull({colNames, rowsData, caption}){
         fetch('/admin/genres/api/deleteGenre', {
             method: "POST",
             headers: new Headers({'content-type': 'application/json'}),
-            body: JSON.stringify({bookID: rowID})
+            body: JSON.stringify({rowID: rowID})
         })
         .then((result)=>result.json())
         .then((parsedRes)=>{
@@ -52,15 +52,15 @@ export default function TableFull({colNames, rowsData, caption}){
         }) 
     }
 
-    function openUpdateModal(bookID){
+    function openUpdateModal(rowID){
         // apiLink: 'Edit',
         // fetchOptions: {
         //     method: "POST",
         //     headers: new Headers({'content-type': 'application/json'}),
-        //     body: JSON.stringify({bookID: bookID})
+        //     body: JSON.stringify({rowID: rowID})
         // },
         setForEditing(true)
-        setRowID_in_form(bookID)
+        setRowID_in_form(rowID)
         setIsOpen(true)
     }
 
@@ -108,14 +108,14 @@ export default function TableFull({colNames, rowsData, caption}){
                 <HeadRow colNames={colNames} ndxToShorten={4}></HeadRow>
             </thead>
             <tbody>
-                {rows.map((rowObj, index)=><BodyRow rowID_in_form={rowID_in_form} setRowID_in_form={setRowID_in_form} isOpen={isOpen} setIsOpen={setIsOpen} rowsCopy={rowsCopy} deleteBook={deleteBook} editBook={editBook} key={index} rowObj={rowObj} ndxLink={4}></BodyRow>)}
+                {rows.map((rowObj, index)=><BodyRow isOpen={isOpen} setIsOpen={setIsOpen} rowsCopy={rowsCopy} deleteRow={deleteRow} openUpdateModal={openUpdateModal} key={index} rowObj={rowObj}></BodyRow>)}
             </tbody>
         </table>        
         </div>
 
         <div className='bg-inherit h-20'></div>
                     {/* <button onClick={GenreForm}></button> */}
-        <GenreForm rowID_in_form={rowID_in_form} setRowID_in_form={setRowID_in_form} forEditing={forEditing} setForEditing={setForEditing} addBook={addBook} updateBook={updateBook} isOpen={isOpen} setIsOpen={setIsOpen} genres={genres} className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'> </GenreForm>
+        <GenreForm rowID_in_form={rowID_in_form} setRowID_in_form={setRowID_in_form} forEditing={forEditing} setForEditing={setForEditing} addRow={addRow} updateRow={updateRow} isOpen={isOpen} setIsOpen={setIsOpen} className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'> </GenreForm>
 
         
         </>
