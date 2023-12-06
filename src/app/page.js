@@ -12,10 +12,9 @@ export default async function home(){
     // console.log(results)
 
     const images = [
-        "https://svgshare.com/i/U7z.svg",
-        "https://www.svgrepo.com/show/423204/coffee.svg",
-        "https://www.svgrepo.com/show/423204/coffee.svg",
-        "https://www.svgrepo.com/show/423204/coffee.svg",
+        "https://images.unsplash.com/photo-1618414952052-289dab88b409?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1550399105-c4db5fb85c18?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1463320726281-696a485928c7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       ];
     
 
@@ -25,10 +24,10 @@ export default async function home(){
                     <nav className="bg-white border-gray-200 dark:bg-gray-900">
                         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                             <a href="http://localhost:3000/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                                <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
-                                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Bookii</span>
+                                <img src="https://cdn2.iconfinder.com/data/icons/flat-line-valentine-1/1010/love-book-512.png" className="h-8"/>
+                                <span className="whitespace-pre self-center text-lg font-semibold whitespace-nowrap dark:text-white">  Bookii</span>
                             </a>
-                            <div className='flex flex-wrap flex-col space-y-8 md:space-x-20 md:space-y-0 justify-center content-center md:flex-row'>
+                            <div className='flex space-x-5px flex flex-wrap flex-col space-y-8 md:space-x-20 md:space-y-0 justify-center content-center md:flex-row'>
                                 <Link href="/signUp">
                                     <button className="text-md w-24 font-medium p-[5px] rounded-full text-center bg-gradient-to-r from-[#DC8ECB] to-[#FFB169] text-white">
                                         Sign Up
@@ -43,8 +42,8 @@ export default async function home(){
                         </div>
                     </nav>
                     <nav className="bg-white dark:bg-gray-900">
-                        <div className="bg-[#FFB169]  flex flex-wrap items-center justify-between mx-auto p-4">
-                        </div>
+                        <div className="bg-[#FFB169]  flex flex-wrap items-center justify-between mx-auto p-3"></div>
+                        <div className="bg-[#FFB169]  flex flex-wrap items-center justify-between mx-auto p-3"></div>
                     </nav>
 
                     <div className="bg-rose-200 lg:w-4/4 mx-auto my-2">
@@ -57,9 +56,10 @@ export default async function home(){
                                 // flex[0_0_100%]
                                 //   - shorthand for flex-grow:0; flex-shrink:0; flex-basis:100%
                                 //   - we want this slide to not be able to grow or shrink and take up 100% width of the viewport.
-                                <div className="relative h-96 flex-[0_0_100%]" key={i}>
+                                <div className="relative h-128 flex-[0_0_100%]" key={i}>
                                 {/* use object-cover + fill since we don't know the height and width of the parent */}
                                 <Image src={src} fill className="object-cover" alt="imgimg" />
+                               
                                 </div>
                             );
                             })}
@@ -67,9 +67,16 @@ export default async function home(){
                     </div>
 
                     <nav className="bg-white dark:bg-gray-900">
-                        <div className="bg-[#DC8ECB]  flex flex-wrap items-center justify-between mx-auto p-4">
+                        <div className="bg-[#DC8ECB]  flex flex-wrap items-center justify-between mx-auto p-3"></div>
+                        <div className="bg-[#DC8ECB]  flex flex-wrap items-center justify-between mx-auto p-3"></div>
+                    </nav>
+                    
+                    <nav className="bg-white dark:bg-gray-900">
+                        <div className="bg-white  flex flex-wrap items-center justify-between mx-auto p-4">
                         </div>
                     </nav>
+
+                    <h1 className="whitespace-pre text-center text-xl font-semibold text-fuchsia-400">Unlock Your Mind's Potential Through Bookii</h1>
             </div> 
              
         </>
