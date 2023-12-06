@@ -44,9 +44,11 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
         .then((response)=>response.json())
         .then((parsed)=>{
             console.log("parsedResponse", parsed)
-            setIsOpen(false)
-            rowsData.push(parsed.bookDisplay)
-            setRows(rowsData)
+            if('bookDisplay' in parsed){
+                setIsOpen(false)
+                rowsData.push(parsed.bookDisplay)
+                setRows(rowsData)
+            }
         }) 
     }
 
