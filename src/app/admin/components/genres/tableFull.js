@@ -33,13 +33,13 @@ export default function TableFull({colNames, rowsData, caption}){
         })
     }
 
-    function addRow(newBook){
+    function addRow(newRow){
         fetch('/admin/genres/api/newGenre', {
             method: "POST",
             // headers: {
             //     'Content-Type': 'application/json'
             // },
-            body: newBook
+            body: newRow
         })
         .then((response)=>response.json())
         .then((parsed)=>{
@@ -64,13 +64,13 @@ export default function TableFull({colNames, rowsData, caption}){
         setIsOpen(true)
     }
 
-    function updateRow(newBookDetails){
+    function updateRow(newRowDetails){
         fetch('/admin/genres/api/updateGenre', {
             method: "POST",
             // headers: {
             //     'Content-Type': 'application/json'
             // },
-            body: newBookDetails
+            body: newRowDetails
         })
         .then((response)=>response.json())
         .then((parsed)=>{
