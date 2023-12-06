@@ -7,7 +7,12 @@ export default async function books(){
     const poolPromise = pool.promise()
     const conn = await poolPromise.getConnection()
     const [rows, fields] = await conn.execute('SELECT genreID AS "ID", name AS "Name" FROM genre')
-    const colNames = Object.keys(rows[0])
+    
+
+    let colNames
+    if(rows.length > 0){ 
+         colNames = Object.keys(rows[0])
+    }
 
     poolPromise.releaseConnection(conn)
 
@@ -19,7 +24,7 @@ export default async function books(){
     //     lg:" lg:px-20 ",
     //     xl:" xl:px-22 "
     // }
-    if(rows.length >= 0){
+    if(rows.length > 0){
         return(
             <>
                 <section name="sectionGrid" className={`${adminPageStyle.allWidth} ${adminPageStyle.mobile} ${adminPageStyle.sm} ${adminPageStyle.md} ${adminPageStyle.lg} ${adminPageStyle.xl}`}>

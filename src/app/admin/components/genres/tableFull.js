@@ -98,9 +98,9 @@ export default function TableFull({colNames, rowsData, caption}){
 
     return(
         <>
-        <div className='w-fit overflow-x-auto shadow-lg z-1 relative'>
+        
         {/* <RowAction actions={genreList} positioning='absolute'>Select genre</RowAction> */}
-        <table className="table-fixed text-black bg-white border-separate border-spacing-y-[50px] border-spacing-x-9 z-1">
+        <table className="mx-auto shadow-lg table-fixed text-black bg-white border-separate border-spacing-y-[50px] border-spacing-x-9 z-1">
             <caption className="caption-top mb-5 text-slate-400">
                 {caption}
             </caption>
@@ -111,7 +111,7 @@ export default function TableFull({colNames, rowsData, caption}){
                 {rows.map((rowObj, index)=><BodyRow isOpen={isOpen} setIsOpen={setIsOpen} rowsCopy={rowsCopy} deleteRow={deleteRow} openUpdateModal={openUpdateModal} key={index} rowObj={rowObj}></BodyRow>)}
             </tbody>
         </table>        
-        </div>
+        
 
         <div className='bg-inherit h-20'></div>
                     {/* <button onClick={GenreForm}></button> */}

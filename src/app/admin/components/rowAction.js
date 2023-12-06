@@ -4,7 +4,7 @@ import { Menu, Transition} from '@headlessui/react'
 
 export default function RowAction({actions, children, positioning, rowID}){
     // let [modalOpen, setModalOpen] = useState(false)
-
+    console.log('rowID', rowID)
     return(
         <Menu >
             <Menu.Button className='bg-slate-200 rounded-sm p-[5px] text-slate-500'>{children}</Menu.Button>

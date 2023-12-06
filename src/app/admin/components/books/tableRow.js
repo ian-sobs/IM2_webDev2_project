@@ -54,7 +54,7 @@ export function BodyRow({rowObj, bookID_in_form, setBookID_in_form, ndxLink, ndx
                     }    
                     return <td key={index} >{rowObj[objProp]}</td>
                 })}
-                <td className='z-1'><RowAction bookID={bookID} positioning='absolute' actions={actions}>Action</RowAction></td>
+                <td className='z-1'><RowAction rowID={bookID} positioning='absolute' actions={actions}>Action</RowAction></td>
                         
             </tr>        
         </>
