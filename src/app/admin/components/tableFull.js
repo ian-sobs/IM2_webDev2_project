@@ -76,7 +76,7 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
         .then((parsed)=>{
             console.log("parsedResponse", parsed)
             
-                let updatedRows = rowsData.map((data)=>{
+                let updatedRows = rowsCopy.map((data)=>{
                     if(data.ID == parsed.bookDisplay.ID){
                         console.log("parsed.bookDisplay", parsed.bookDisplay)
                         return parsed.bookDisplay
