@@ -44,9 +44,11 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
         .then((response)=>response.json())
         .then((parsed)=>{
             console.log("parsedResponse", parsed)
-            setIsOpen(false)
-            rowsData.push(parsed.bookDisplay)
-            setRows(rowsData)
+            if('bookDisplay' in parsed){
+                setIsOpen(false)
+                rowsData.push(parsed.bookDisplay)
+                setRows(rowsData)
+            }
         }) 
     }
 
@@ -73,9 +75,24 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
         .then((response)=>response.json())
         .then((parsed)=>{
             console.log("parsedResponse", parsed)
-            setForEditing(false)
-            setBookID_in_form(0)
-            setIsOpen(false)
+            
+                let updatedRows = rowsData.map((data)=>{
+                    if(data.ID == parsed.bookDisplay.ID){
+                        console.log("parsed.bookDisplay", parsed.bookDisplay)
+                        return parsed.bookDisplay
+                    }
+                    else{
+                        console.log("data", data)
+                        return data
+                    }
+                    
+                })
+                console.log('updatedRows', updatedRows)
+                setRows(updatedRows)
+                setForEditing(false)
+                setBookID_in_form(0)
+                setIsOpen(false)
+            
         }) 
     }
 
