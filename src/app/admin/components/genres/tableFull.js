@@ -29,6 +29,9 @@ export default function TableFull({colNames, rowsData, caption}){
             if(parsedRes.affectedRows == 1){
                 let newBody = rowsCopy.filter((rowCopy)=>rowCopy.ID != rowID)
                 setRows(newBody)
+                if(newBody.length == 0){
+                    location.reload()
+                }
             }
         })
     }
@@ -36,15 +39,15 @@ export default function TableFull({colNames, rowsData, caption}){
     function addRow(newRow){
         fetch('/admin/genres/api/newGenre', {
             method: "POST",
-            // headers: {
-            //     'Content-Type': 'application/json'
-            // },
-            body: newRow
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newRow)
         })
         .then((response)=>response.json())
         .then((parsed)=>{
             console.log("parsedResponse", parsed)
-            if('bookDisplay' in parsed){
+            if(parsed.sqlHeader.insertId > 0){
                 setIsOpen(false)
                 rowsData.push(parsed.toDisplay)
                 setRows(rowsData)
@@ -115,7 +118,7 @@ export default function TableFull({colNames, rowsData, caption}){
 
         <div className='bg-inherit h-20'></div>
                     {/* <button onClick={GenreForm}></button> */}
-        <GenreForm rowID_in_form={rowID_in_form} setRowID_in_form={setRowID_in_form} forEditing={forEditing} setForEditing={setForEditing} addRow={addRow} updateRow={updateRow} isOpen={isOpen} setIsOpen={setIsOpen} className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'> </GenreForm>
+        <GenreForm rowID_in_form={rowID_in_form} setRowID_in_form={setRowID_in_form} forEditing={forEditing} setForEditing={setForEditing} addRow={addRow} updateRow={updateRow} isOpen={isOpen} setIsOpen={setIsOpen} className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'>Add new row </GenreForm>
 
         
         </>

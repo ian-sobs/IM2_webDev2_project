@@ -1,12 +1,11 @@
 'use client'
 
-import {useRef} from "react"
+import {useRef, useState} from "react"
 import { Dialog} from '@headlessui/react'
-import {recurseSearchTagname} from '../recurseTagname'
 
 
-export default function genreForm({children, rowID_in_form, setRowID_in_form, forEditing,setForEditing,addRow,updateRow, isOpen, setIsOpen, className}){
-    // let [isOpen, setIsOpen] = useState(false)
+export default function genreForm({className, children}){
+    let [isOpen, setIsOpen] = useState(false)
     const genreName = useRef()
     const imageFile = useRef()
     // function OpenModal(){
@@ -28,15 +27,33 @@ export default function genreForm({children, rowID_in_form, setRowID_in_form, fo
 
         
         let data = {
-            genreName : genreName.current.value
+            genreName: genreName.current.value
         }
+            
+        // for (var [key, value] of data.entries()) { 
+        //     objPost[key] = value
+        //     console.log(key, value)
+        // }
+        // objPost['genreIDs'] = genreIDs
+        // console.log('Fetch post object', objPost)
+        
 
-        if(forEditing){
-            updateRow(data)
-        }
-        else{
-            addRow(data)
-        }
+        fetch('/admin/genres/api/newGenre', {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then((response)=>response.json())
+        .then((parsed)=>{
+            console.log("parsedResponse", parsed)
+            if(parsed.insertId > 0){
+                setIsOpen(false)
+                location.reload()
+            }
+        }) 
+        
     }
     return(
         <>
@@ -52,10 +69,10 @@ export default function genreForm({children, rowID_in_form, setRowID_in_form, fo
 
                 <Dialog.Panel as='div' style={{top:' 50%', left: '50%', transform: 'translate(-50%, -50%)'}} className='p-[20px] bg-white rounded-md w-4/5 sm:w-3/5 lg:w-1/4 fixed z-50'>
             
-                    <Dialog.Title className='text-center mb-3 font-semibold'>{(!forEditing) ? "Add new genre" : "Edit this genre"}</Dialog.Title>
+                    <Dialog.Title className='text-center mb-3 font-semibold'>Add new genre</Dialog.Title>
 
                     <Dialog.Description className='text-justify font-light'>
-                        {(!forEditing) ? "Input the required information for the new genre" : "Edit this genre's information"}
+                        Input the required information for the new genre
                     </Dialog.Description>
 
                     <form className='flex flex-col'>
@@ -97,8 +114,6 @@ export default function genreForm({children, rowID_in_form, setRowID_in_form, fo
                         <div className='flex flex-row justify-end'>
                             <button className="mr-3 bg-slate-300 p-1 rounded-md font-semibold text-slate-500" name='cancel' id='cancel' onClick={() => {
                                 setIsOpen(false)
-                                setForEditing(false)
-                                setRowID_in_form(0)
                                 }}>Cancel</button>
                             <button type='submit' className="mr-1 bg-green-500 p-1 rounded-md text-white font-semibold" name='submitButton' id='submitButton' onClick={handleSubmit}>Submit</button>
                         </div>
