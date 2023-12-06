@@ -42,11 +42,16 @@ export default function cartItemDisplay({userInfo}){
             <OrderPage/>
           ) : (
             <>
-              {itemsToDisplay}
-              <p className="text-black">{cartTotalDue}</p>
-              <button className="bg-green-400 p-4 rounded-md" onClick={handleOrderButtonClick}>
+              <p className="text-black my-[20px]"><span className="text-black font-semibold">Total Amount: </span>{cartTotalDue}</p>
+              <button className="bg-green-400 w-48 p-2 rounded-md mb-4" onClick={handleOrderButtonClick}>
                 Order
               </button>
+
+              <div className="flex flex-wrap">
+                
+                {itemsToDisplay}
+              </div>
+
             </>
           )}
         </>
