@@ -1,5 +1,6 @@
 'use client'
 import RowAction from "./rowAction"
+import actionDetails from "./actionButDetails"
 
 export function HeadRow({colNames, ndxToShorten, rowsCopy}){
     return (
@@ -21,20 +22,25 @@ export function BodyRow({rowObj, bookID_in_form, setBookID_in_form, ndxLink, ndx
     console.log("rowObj", rowObj)
 
     
-    const actions = [
-        {
-            name: 'Edit',
+    // const actions = [
+    //     {
+    //         name: 'Edit',
 
-            activeBgColor: 'bg-blue-500',
-            activeTextColor: 'text-white',
-            behavior: editBook
-        },
-        {
-            name: 'Delete',
-            activeBgColor: 'bg-rose-600',
-            activeTextColor: 'text-white',
-            behavior: deleteBook
-        }
+    //         activeBgColor: 'bg-blue-500',
+    //         activeTextColor: 'text-white',
+    //         behavior: editBook
+    //     },
+    //     {
+    //         name: 'Delete',
+    //         activeBgColor: 'bg-rose-600',
+    //         activeTextColor: 'text-white',
+    //         behavior: deleteBook
+    //     }
+    // ]
+
+    const actions = [
+        new actionDetails('Edit', editBook, 'bg-blue-500', 'text-white'),
+        new actionDetails('Delete', deleteBook, 'bg-rose-500', 'text-white')
     ]
     return (
         <>    
