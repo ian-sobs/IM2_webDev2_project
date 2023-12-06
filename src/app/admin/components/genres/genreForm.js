@@ -7,7 +7,7 @@ import {recurseSearchTagname} from '../recurseTagname'
 
 export default function genreForm({rowID_in_form, setRowID_in_form, forEditing,setForEditing,addRow,updateRow, isOpen, setIsOpen, className}){
     // let [isOpen, setIsOpen] = useState(false)
-    const formGenre = useRef()
+    const genreName = useRef()
     const imageFile = useRef()
     // function OpenModal(){
     //     setIsOpen(true)
@@ -27,7 +27,7 @@ export default function genreForm({rowID_in_form, setRowID_in_form, forEditing,s
         // });
 
         
-        const data =  new FormData(formGenre.current)
+        let data
             
         // for (var [key, value] of data.entries()) { 
         //     objPost[key] = value
@@ -35,12 +35,14 @@ export default function genreForm({rowID_in_form, setRowID_in_form, forEditing,s
         // }
         // objPost['genreIDs'] = genreIDs
         // console.log('Fetch post object', objPost)
+        data.genreName = genreName.current.value
+        data.genreID = rowID_in_form
+
         if(forEditing){
-  
-            updateBook(data)
+            updateRow(data)
         }
         else{
-            addBook(data)
+            addRow(data)
         }
     }
     return(
@@ -63,10 +65,10 @@ export default function genreForm({rowID_in_form, setRowID_in_form, forEditing,s
                         {(!forEditing) ? "Input the required information for the new genre" : "Edit this genre's information"}
                     </Dialog.Description>
 
-                    <form ref={formGenre} className='flex flex-col'>
+                    <form className='flex flex-col'>
                         <div className='flex flex-col my-3'>
                             <label htmlFor="genreName">Name</label>
-                            <input type='text' id='genreName' name='genreName' className="bg-slate-200"></input>
+                            <input ref={genreName} type='text' id='genreName' name='genreName' className="bg-slate-200"></input>
                         </div> 
                         {/* <div className='flex flex-col my-3'>
                             <label htmlFor='bookDesc'>Description</label>
@@ -103,7 +105,7 @@ export default function genreForm({rowID_in_form, setRowID_in_form, forEditing,s
                             <button className="mr-3 bg-slate-300 p-1 rounded-md font-semibold text-slate-500" name='cancel' id='cancel' onClick={() => {
                                 setIsOpen(false)
                                 setForEditing(false)
-                                setBookID_in_form(0)
+                                setRowID_in_form(0)
                                 }}>Cancel</button>
                             <button type='submit' className="mr-1 bg-green-500 p-1 rounded-md text-white font-semibold" name='submitButton' id='submitButton' onClick={handleSubmit}>Submit</button>
                         </div>
