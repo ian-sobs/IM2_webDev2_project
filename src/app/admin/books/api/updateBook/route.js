@@ -63,37 +63,44 @@ export async function POST(request) {
 
 
     temp.vldtInfo = returnData
+    temp.vldtInfo.display = false
     temp.bookData = bookData
 
     console.log("temp in admin books", temp)
 
-    for (const fieldName of Object.keys(returnData)){
-        if(!returnData[fieldName].isValid()){
-            console.log("CANT INSERT A NEW BOOK")
-            return Response.json(temp)
-        }
-    }
+    // for (const fieldName of Object.keys(returnData)){
+    //     if(!returnData[fieldName].isValid()){
+    //         console.log("CANT INSERT A NEW BOOK")
+    //         return Response.json(temp)
+    //     }
+    // }
 
     const poolPromise = pool.promise()
     const conn = await poolPromise.getConnection({multipleStatements: true})
 
     let bookInsertedID
 
-    const [result, fields] = await conn.execute('UPDATE table_name SET column1 = value1, column2 = value2, ...WHERE condition', [bookData["bookTitle"], bookData["bookDesc"], imgSrc, parseFloat(parseFloat(bookData["bookPrice"]).toFixed(2)), 0, bookData["bookAuthors"]])
+    const [result, fields] = await conn.execute('UPDATE book SET title = ?, description = ?, img=?, priceUSD=?, author=? WHERE bookID=?', [bookData["bookTitle"], bookData["bookDesc"], imgSrc, parseFloat(parseFloat(bookData["bookPrice"]).toFixed(2)), bookData["bookAuthors"], bookID])
     console.log(result)
     
     bookInsertedID = result.insertId
 
     //Instead of updating the genres associated with the book to edit, delete the genres associated with the
     //book and then iteratively insert the new genres
-
+    await conn.execute('DELETE FROM book_genre_relation WHERE bookID=?', [bookID])
     //for loop below iteratively inserts the genres for the book
     for(const genreID of bookData["genreIDs"]){
-        await conn.execute('INSERT INTO book_genre_relation (bookID, genreID) VALUES (?, ?)', [bookInsertedID, genreID])
+        await conn.execute('INSERT INTO book_genre_relation (bookID, genreID) VALUES (?, ?)', [bookID, genreID])
 
         insertGenreID.push(result.insertId)
         insertGenreID.push(genreID)
     }
+
+    const [newInfo, newInfoFields] = await conn.execute("SELECT bk.bookID AS 'ID', bk.title AS 'Title', GROUP_CONCAT(gnr.name ORDER BY bk.bookID SEPARATOR ', ') AS 'Genre(s)', bk.description AS 'Description', bk.img AS 'Image', bk.priceUSD AS 'Price (USD)', bk.avgRating AS 'Avrg. Rating', bk.author AS 'Author/s' FROM ((book bk LEFT JOIN book_genre_relation bgr ON bk.bookID = bgr.bookID) LEFT JOIN genre gnr ON gnr.genreID = bgr.genreID) WHERE bk.bookID=? GROUP BY bk.bookID", [bookID])
+    const [bookDisplay] = newInfo
+
+    temp.bookDisplay = bookDisplay
+    temp.vldtInfo.display = true
 
     poolPromise.releaseConnection(conn)
 
