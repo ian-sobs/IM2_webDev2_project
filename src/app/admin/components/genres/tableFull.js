@@ -70,19 +70,19 @@ export default function TableFull({colNames, rowsData, caption}){
     function updateRow(newRowDetails){
         fetch('/admin/genres/api/updateGenre', {
             method: "POST",
-            // headers: {
-            //     'Content-Type': 'application/json'
-            // },
-            body: newRowDetails
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newRowDetails)
         })
         .then((response)=>response.json())
         .then((parsed)=>{
             console.log("parsedResponse", parsed)
             
                 let updatedRows = rowsCopy.map((data)=>{
-                    if(data.ID == parsed.bookDisplay.ID){
-                        console.log("parsed.bookDisplay", parsed.bookDisplay)
-                        return parsed.bookDisplay
+                    if(data.ID == parsed.toDisplay.ID){
+                        console.log("parsed.toDisplay", parsed.toDisplay)
+                        return parsed.toDisplay
                     }
                     else{
                         console.log("data", data)

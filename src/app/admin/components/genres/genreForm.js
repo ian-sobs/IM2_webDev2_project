@@ -28,7 +28,8 @@ export default function genreForm({children, rowID_in_form, setRowID_in_form, fo
 
         
         let data = {
-            genreName : genreName.current.value
+            genreName : genreName.current.value,
+            genreID: rowID_in_form
         }
 
         if(forEditing){
