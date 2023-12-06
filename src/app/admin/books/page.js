@@ -1,5 +1,5 @@
 import adminPageStyle from '../adminPageStyle'
-import TableFull from '../components/tableFull_book'
+import TableFull from '../components/tableFull'
 import pool from '@/dbConn'
 import BookForm from './bookForm'
 

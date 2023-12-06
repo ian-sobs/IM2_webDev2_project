@@ -1,5 +1,5 @@
 'use client'
-import {HeadRow, BodyRow} from './tableRow_book'
+import {HeadRow, BodyRow} from './tableRow'
 import { useState } from 'react'
 import RowAction from './rowAction'
 import BookForm from '../books/bookForm'
@@ -99,7 +99,7 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
     return(
         <>
         <div className='w-full overflow-x-auto shadow-lg z-1 relative'>
-        {/* <RowAction actions={genreList} positioning='absolute'>Select genre</RowAction> */}
+        <RowAction actions={genreList} positioning='absolute'>Select genre</RowAction>
         <table className="table-fixed text-black bg-white border-separate border-spacing-y-[50px] border-spacing-x-9 z-1">
             <caption className="caption-top mb-5 text-slate-400">
                 {caption}
