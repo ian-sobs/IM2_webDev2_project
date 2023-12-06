@@ -1,7 +1,7 @@
 'use client'
 import {HeadRow, BodyRow} from './tableRow'
 import { useState } from 'react'
-import RowAction from './rowAction'
+import RowAction from '../rowAction'
 import BookForm from '../books/bookForm'
 
 export default function TableFull({genres, colNames, rowsData, caption, genreList}){

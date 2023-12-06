@@ -1,9 +1,9 @@
 'use client'
-import { Menu, Transition, Dialog } from '@headlessui/react'
-import { useState } from 'react'
+import { Menu, Transition} from '@headlessui/react'
+// import { useState } from 'react'
 
 export default function RowAction({actions, children, positioning, bookID}){
-    let [modalOpen, setModalOpen] = useState(false)
+    // let [modalOpen, setModalOpen] = useState(false)
 
     return(
         <Menu >

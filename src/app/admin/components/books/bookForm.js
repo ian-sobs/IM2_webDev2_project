@@ -2,8 +2,8 @@
 
 import { useState , useEffect, useRef} from "react"
 import { Dialog, Disclosure } from '@headlessui/react'
-import RowAction from "../components/rowAction"
-import {recurseSearchTagname} from '../components/recurseTagname'
+import RowAction from "../rowAction"
+import {recurseSearchTagname} from '../recurseTagname'
 
 export default function BookForm({bookID_in_form, setBookID_in_form, updateBook, forEditing, setForEditing, addBook, className, genres, isOpen, setIsOpen}){
     // let [isOpen, setIsOpen] = useState(false)

@@ -1,6 +1,6 @@
 'use client'
-import RowAction from "./rowAction"
-import actionDetails from "./actionButDetails"
+import RowAction from "../rowAction"
+import actionDetails from "../actionButDetails"
 
 export function HeadRow({colNames, ndxToShorten, rowsCopy}){
     return (

@@ -1,7 +1,7 @@
 import adminPageStyle from '../adminPageStyle'
-import TableFull from '../components/tableFull'
+import TableFull from '../components/books/tableFull'
 import pool from '@/dbConn'
-import BookForm from './bookForm'
+import BookForm from '../components/books/bookForm'
 
 export default async function books(){
 
