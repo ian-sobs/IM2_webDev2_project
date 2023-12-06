@@ -2,9 +2,9 @@
 import {HeadRow, BodyRow} from './tableRow'
 import { useState } from 'react'
 import RowAction from '../rowAction'
-import BookForm from '../books/bookForm'
+import GenreForm from './genreForm'
 
-export default function TableFull({genres, colNames, rowsData, caption, genreList}){
+export default function TableFull({colNames, rowsData, caption}){
     const [rows, setRows] = useState(rowsData)
     const [isOpen, setIsOpen] = useState(false)
 
@@ -18,23 +18,23 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
     //     setRows(newRows)
     // }
 
-    function deleteBook(bookID){
-        fetch('/admin/books/api/deleteBook', {
+    function deleteRow(rowID){
+        fetch('/admin/genres/api/deleteGenre', {
             method: "POST",
             headers: new Headers({'content-type': 'application/json'}),
-            body: JSON.stringify({bookID: bookID})
+            body: JSON.stringify({bookID: rowID})
         })
         .then((result)=>result.json())
         .then((parsedRes)=>{
             if(parsedRes.affectedRows == 1){
-                let newBody = rowsCopy.filter((rowCopy)=>rowCopy.ID != bookID)
+                let newBody = rowsCopy.filter((rowCopy)=>rowCopy.ID != rowID)
                 setRows(newBody)
             }
         })
     }
 
-    function addBook(newBook){
-        fetch('/admin/books/api/newBook', {
+    function addRow(newBook){
+        fetch('/admin/genres/api/newGenre', {
             method: "POST",
             // headers: {
             //     'Content-Type': 'application/json'
@@ -46,13 +46,13 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
             console.log("parsedResponse", parsed)
             if('bookDisplay' in parsed){
                 setIsOpen(false)
-                rowsData.push(parsed.bookDisplay)
+                rowsData.push(parsed.toDisplay)
                 setRows(rowsData)
             }
         }) 
     }
 
-    function editBook(bookID){
+    function openUpdateModal(bookID){
         // apiLink: 'Edit',
         // fetchOptions: {
         //     method: "POST",
@@ -64,8 +64,8 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
         setIsOpen(true)
     }
 
-    function updateBook(newBookDetails){
-        fetch('/admin/books/api/updateBook', {
+    function updateRow(newBookDetails){
+        fetch('/admin/genres/api/updateGenre', {
             method: "POST",
             // headers: {
             //     'Content-Type': 'application/json'
@@ -114,8 +114,8 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
         </div>
 
         <div className='bg-inherit h-20'></div>
-                    {/* <button onClick={BookForm}></button> */}
-        <BookForm bookID_in_form={bookID_in_form} setBookID_in_form={setBookID_in_form} forEditing={forEditing} setForEditing={setForEditing} addBook={addBook} updateBook={updateBook} isOpen={isOpen} setIsOpen={setIsOpen} genres={genres} className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'> </BookForm>
+                    {/* <button onClick={GenreForm}></button> */}
+        <GenreForm rowID_in_form={bookID_in_form} setRowID_in_form={setBookID_in_form} forEditing={forEditing} setForEditing={setForEditing} addBook={addBook} updateBook={updateBook} isOpen={isOpen} setIsOpen={setIsOpen} genres={genres} className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'> </GenreForm>
 
         
         </>
