@@ -1,21 +1,16 @@
 import adminPageStyle from '../adminPageStyle'
+import TableFull from '../components/orders/tableFull'
+import pool from '@/dbConn'
 
-export default function books(){
-    // const adminPageStyle = {
-    //     allWidth: "min-h-screen pt-[25px] bg-slate-100 pb-[20px] w-full ",
-    //     mobile:" px-9 ",
-    //     sm:" sm:px-11 ",
-    //     md:" md:px-14 ",
-    //     lg:" lg:px-20 ",
-    //     xl:" xl:px-22 "
-    // }
+export default async function orders(){
+    const poolPromise = pool.promise()
+    const conn = await poolPromise.getConnection()
+    await conn.execute('SELECT ')
     return(
         <>
             <section name="sectionGrid" className={`${adminPageStyle.allWidth} ${adminPageStyle.mobile} ${adminPageStyle.sm} ${adminPageStyle.md} ${adminPageStyle.lg} ${adminPageStyle.xl}`}>
             
-                {/* {books.map((book, index)=><Card key={index} details={book}></Card>)} */}
-                    
-                {/* {(cookies().has("userCredentials")) ? <CardsDisplay currency={userInfo["crrncyCode"]} localCurrPerUSD={userInfo["localCurrPerUSD"]} CtabStyles="col-span-2 md:col-span-3 lg:col-span-4 " requestURL="/user/market/api" username={userInfo["username"]}></CardsDisplay> : <h1>error</h1>} */}
+               <TableFull colNames rowsData caption></TableFull>
 
             </section>
         </>
