@@ -1,7 +1,7 @@
 'use client'
 import RowAction from "../rowAction"
 import actionDetails from "../actionButDetails"
-import GenreForm from "./genreForm"
+// import GenreForm from "./genreForm"
 
 export function HeadRow({colNames, ndxToShorten, rowsCopy}){
     return (
