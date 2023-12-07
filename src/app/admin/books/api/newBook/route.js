@@ -45,9 +45,9 @@ export async function POST(request) {
     console.log("imgSrc", imgSrc)
     
     console.log("bookData['genreIDs'].length", bookData['genreIDs'].length)
-    if(bookData['genreIDs'].length == 0){
-        returnData['genreIDs'].invalidField(0)
-    }
+    // if(bookData['genreIDs'].length == 0){
+    //     returnData['genreIDs'].invalidField(0)
+    // }
 
     for(const fieldName of data.keys()){
         returnData[fieldName] = new VldtMssg(-1, ['This field must not be empty'])  
@@ -93,7 +93,7 @@ export async function POST(request) {
         insertGenreID.push(genreID)
     }
 
-    const [justInserted, fieldsNewlyInserted] = await conn.execute("SELECT bk.bookID AS 'ID', bk.title AS 'Title', GROUP_CONCAT(gnr.name ORDER BY bk.bookID SEPARATOR ', ') AS 'Genre(s)', bk.description AS 'Description', bk.img AS 'Image', bk.priceUSD AS 'Price (USD)', bk.avgRating AS 'Avrg. Rating', bk.author AS 'Author/s' FROM ((book bk LEFT JOIN book_genre_relation bgr ON bk.bookID = bgr.bookID) LEFT JOIN genre gnr ON gnr.genreID = bgr.genreID) GROUP BY bk.bookID", [bookInsertedID])
+    const [justInserted, fieldsNewlyInserted] = await conn.execute("SELECT bk.bookID AS 'ID', bk.title AS 'Title', GROUP_CONCAT(gnr.name ORDER BY bk.bookID SEPARATOR ', ') AS 'Genre(s)', bk.description AS 'Description', bk.img AS 'Image', bk.priceUSD AS 'Price (USD)', bk.avgRating AS 'Avrg. Rating', bk.author AS 'Author/s' FROM ((book bk LEFT JOIN book_genre_relation bgr ON bk.bookID = bgr.bookID) LEFT JOIN genre gnr ON gnr.genreID = bgr.genreID) WHERE bk.bookID=? GROUP BY bk.bookID", [bookInsertedID])
     const [newlyInserted] = justInserted
     temp.bookDisplay = newlyInserted
     // console.log("insertStatement", insertStatement)

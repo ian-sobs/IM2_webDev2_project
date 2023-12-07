@@ -7,4 +7,4 @@ const adminPageStyle = {
     xl:" xl:px-17 "
 }
 
-module.exports = adminPageStyle
+module.exports = adminPageStyle 
