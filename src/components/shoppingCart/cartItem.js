@@ -20,12 +20,8 @@ export default function cartItem({userInfo, bookID, bookTitle, bookImg, qty, tot
                     <p className="mb-3">Address: {address}</p>
                     
                     <div className="flex flex-row justify-between">
-<<<<<<< HEAD
-                        <button className="bg-red-400 p-2" onClick={()=>console.log(userInfo.userID)}>Remove from cart</button>
-=======
                         <button className="bg-red-400 p-2" onClick={()=>console.log(userInfo.usr)}>Remove from cart</button>
                         <button className="bg-blue-400 p-2">View book page</button>
->>>>>>> 9c4be9679f9a9977f25f7bfe1efde6bc10122a70
                     </div>
                    
                 </div>

@@ -14,11 +14,11 @@ export default function Navbar({fields, styles}){
                 
                 
                 <div className={styles + "  flex-wrap flex-column "}>
-                    <nav className="bg-white border-gray-200 text-black">
-                            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                    <nav className="bg-white border-gray-200 ">
+                            <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 text-black">
                                 <a href="http://localhost:3000/" className="flex items-center space-x-3 rtl:space-x-reverse">
                                     <img src="https://cdn4.iconfinder.com/data/icons/essentials-74/24/046_-_House-512.png" className="h-8"/>
-                                    <span className="self-center text-lg font-semibold whitespace-nowrap dark:text-white">  Bookii @ USC-TC</span>
+                                    <span className="self-center text-lg font-semibold whitespace-nowrap ">  Bookii @ USC-TC</span>
                                 </a>
                                 <div className='flex space-x-5px flex-wrap flex-col space-y-8 md:space-x-20 md:space-y-0 justify-center content-center md:flex-row'>
                                     <Link href="">
