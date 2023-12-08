@@ -20,7 +20,7 @@ export async function submitLogin(formData) {
 
     const password = formData.get("password")
 
-    const [rows, fields] = await db.execute("SELECT `user`.`userID` AS usr, `user`.`email` AS email, `user`.`username` AS unm, `user`.`firstName` AS given_name, `user`.`midName` AS middle_name, `user`.`lastName` AS family_name, `user`.`password_bcrypt` AS `password`, `user`.`address` , `user`.`birthdate` , `country`.`name` AS `country`,    `country`.`abbreviation` AS `country_a2`,`country`.`crrncyCode` , `country`.`localCurrPerUSD`  FROM (`user` INNER JOIN `country` ON `country`.countryID = `user`.countryID) WHERE `email`= ?;", [formData.get("email")])
+    const [rows, fields] = await db.execute("SELECT `user`.`userID` AS usr, `user`.`email` AS email, `user`.`username` AS unm, `user`.`firstName` AS given_name, `user`.`midName` AS middle_name, `user`.`lastName` AS family_name, `user`.`password_bcrypt` AS `password`, `user`.`birthdate` FROM `user` WHERE `email`= ?", [formData.get("email")])
     const [queryObj] = rows
 
     let jwt_payload = {
@@ -30,7 +30,6 @@ export async function submitLogin(formData) {
         given_name: queryObj['given_name'],
         middle_name: queryObj['middle_name'],
         family_name: queryObj['family_name'],
-        address: queryObj['address'],
         birthdate: queryObj['birthdate']
     }
 
