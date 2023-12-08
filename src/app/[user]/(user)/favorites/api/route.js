@@ -16,7 +16,7 @@ export async function GET(request) {
 
     const [results, fields] = await conn.execute('SELECT book.bookID, book.title, book.author, book.description AS `desc`, book.img, book.priceUSD, book.avgRating FROM ((book INNER JOIN favorites ON book.bookID = favorites.bookID) INNER JOIN `user` ON `user`.userID = favorites.userID) WHERE `user`.userID = ?;', [usrInfo.usr])
     
-    await promisePool.releaseConnection(conn)
+    promisePool.releaseConnection(conn)
     console.log("Results of favorites api", Response.json(results))
     // console.log(`favorite books of user with ID ${userInfo.userID}`,results)
     return Response.json(results)
