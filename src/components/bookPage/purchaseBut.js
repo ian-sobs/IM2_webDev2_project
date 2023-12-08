@@ -9,6 +9,20 @@ export default function purchase(props){
     const [isOpen, setIsOpen] = useState(false)
     const [isRequest, setIsRequest] = useState(true)
     const [prodQuant, setProdQuant] = useState(1)
+
+    useEffect(()=>{
+        fetch(`/user/book/api/checkIfRequested?userID=${props.userInfo.usr}&bookID=${props.bookInfo.bookID}`)
+        .then((response)=>response.json())
+        .then((output)=>{
+            console.log("isRequest", output)
+            if(output.reqCount > 0){
+                setIsRequest(false)
+            }
+        })
+    }, [])
+
+    
+
     let style = {
         filter: "invert(92%) sepia(100%) saturate(0%) hue-rotate(202deg) brightness(106%) contrast(106%)"
     }
@@ -29,9 +43,6 @@ export default function purchase(props){
             zIndex: "70"
     }
     
-    useEffect(()=>{
-
-    }, [])
 
     function handleSubmit(e){
         e.preventDefault()
@@ -39,7 +50,7 @@ export default function purchase(props){
 
         console.log(data)
 
-        fetch("book/api/addToCart", {    
+        fetch("/user/book/api/addToCart", {    
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -54,19 +65,19 @@ export default function purchase(props){
         })
     }
 
+
+
     function handleCancel(e){
-        fetch("book/api/cancelDormRequest?userID=", {    
+        fetch(`/user/book/api/cancelDormRequest?userID=${props.userInfo.usr}&bookID=${props.bookInfo.bookID}`,{
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)})
+        })
         .then((result)=>result.json())
         .then((output)=> {
-            console.log("purchaseButOutput", output)
-            setIsOpen(false)
-            setIsRequest(false)
+            console.log("cancelRequestOutput", output)
+            if(output.affectedRows > 0){
+                setIsOpen(false)
+                setIsRequest(true)
+            }
         })
     }
 

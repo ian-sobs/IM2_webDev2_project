@@ -3,10 +3,20 @@ import pool from "@/dbConn"
 
 export async function GET(request) {
 
-    const data = await res.json()
+    // const data = await request.json()
    
     const searchParams = request.nextUrl.searchParams
-    const query = searchParams.get('query')
-    // query is "hello" for /api/search?query=hello
-    return Response.json({ data })
+    const userID = searchParams.get('userID')
+    const bookID = searchParams.get('bookID')
+
+    const poolPromise = pool.promise()
+    const conn = await poolPromise.getConnection()
+    const [row, fields] = await conn.execute("SELECT COUNT(shoppingCartID) AS reqCount FROM shopping_cart WHERE userID=? AND bookID=?",[userID, bookID])
+    const [ret] = row
+
+    console.log("isRequest?",ret)
+
+    poolPromise.releaseConnection(conn)
+
+    return Response.json(ret)
   }
