@@ -19,7 +19,7 @@ export default function Navbar({fields, styles}){
                                         /* Use the `selected` state to conditionally style the selected tab. */
                                         <button
                                         className={
-                                            selected ? `${tabStyle} bg-[#e38a40] text-white` : `${tabStyle}`
+                                            selected ? `${tabStyle} bg-[#65a30d] text-white` : `${tabStyle}`
                                         }
                                         >
                                         {field.name} 
