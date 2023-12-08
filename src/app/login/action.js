@@ -35,12 +35,7 @@ export async function submitLogin(formData) {
     }
 
     
-    let token = jwt.sign(jwt_payload, process.env.JWT_SECRET, {expiresIn: 86400});
 
-    console.log("jwt_payload", jwt_payload)
-
-    console.log("rows", rows)
-    console.log("loginAction queryObj", queryObj)
 
     if(rows.length <= 0){
         poolPromise.releaseConnection(db)
@@ -59,9 +54,17 @@ export async function submitLogin(formData) {
     } 
     console.log("Password was correct") 
 
+    //creates the JWT token and stores it as an HTTP cookie
+    console.log("process.env.NEXT_PUBLIC_JWT_SECRET", process.env.NEXT_PUBLIC_JWT_SECRET)
+    let token = jwt.sign(jwt_payload, process.env.NEXT_PUBLIC_JWT_SECRET, {expiresIn: 86400})
     const userToken = cookies()
-    userToken.set("usrToken", JSON.stringif(queryObj), {httpOnly: true, }
-    )
+    userToken.set("usrToken", token, {httpOnly: true, secure: true, sameSite: 'None' })
+
+    console.log("jwt_payload", jwt_payload)
+    console.log("rows", rows)
+    console.log("loginAction queryObj", queryObj)
+
+
     // userToken.set('userToken', JSON.stringify(queryObj))
 
     console.log("userToken", userToken)
