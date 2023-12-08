@@ -100,7 +100,7 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
                                         <label>Select an accommodation</label>
                                         <div ref={checkBoxVal} className="flex flex-col max-h-32 overflow-x-auto border">
                                             {genres.map((genre, index)=>{
-                                                return <div key={index}> <input name={genre.name} id={genre.name} value={genre.genreID} type="radio"></input> <label>{genre.name}</label></div>
+                                                return <div key={index}> <input name="accomodation" id={genre.name} value={genre.genreID} type="radio"></input> <label>{genre.name}</label></div>
                                             })}
                                         </div>
 
