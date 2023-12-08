@@ -45,9 +45,9 @@ export async function POST(request) {
     console.log("imgSrc", imgSrc)
     
     console.log("bookData['genreIDs'].length", bookData['genreIDs'].length)
-    if(bookData['genreIDs'].length == 0){
-        returnData['genreIDs'].invalidField(0)
-    }
+    // if(bookData['genreIDs'].length == 0){
+    //     returnData['genreIDs'].invalidField(0)
+    // }
 
     for(const fieldName of data.keys()){
         returnData[fieldName] = new VldtMssg(-1, ['This field must not be empty'])  
