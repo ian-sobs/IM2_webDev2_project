@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 import Card from '@/components/listOfCards/card'
 import user  from '@/components/getUsrCookie'
 import CardsDisplay from '@/components/listOfCards/cardsDisplay';
@@ -8,8 +9,22 @@ export default function Page(){
     // const userInfo = cookies().get("userCredentials")
     // const user = JSON.parse(userInfo.value)
     // console.log("userInfo", user) 
+    const jwt = require('jsonwebtoken')
+
+    if(!cookies().has('usrToken')) redirect('/login')
+
+    const usrToken = cookies().get('usrToken')
+    console.log("usrTokenInMidware", usrToken)
+
+    try {
+        var decoded = jwt.verify(usrToken.value, process.env.JWT_SECRET);
+    } catch(err) {
+        console.log("jwtErr", err)
+        redirect('/login')
+    }
+
     
-    const userInfo = user()
+    // const userInfo = user()
 
     const sectionGridStyle = {
         allWidth: "min-h-screen pt-[25px] bg-slate-100 pb-[20px] grid place-items-center gap-6 w-full",

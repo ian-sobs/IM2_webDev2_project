@@ -1,17 +1,25 @@
 import { NextResponse } from 'next/server'
+import { redirect } from 'next/navigation'
+import { cookies } from 'next/headers'
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
-    
-    // if(!request.cookies.has('userCredentials')){ 
-    //     console.log("NO COOKIES")
-    //     return NextResponse.redirect(new URL('/', request.url))
+    // const jwt = require('jsonwebtoken')
+
+    // if(!cookies().has('usrToken')) redirect('/login')
+
+    // const usrToken = cookies().get('usrToken')
+    // console.log("usrTokenInMidware", usrToken)
+
+    // try {
+    //     var decoded = jwt.verify(usrToken.value, process.env.JWT_SECRET);
+    // } catch(err) {
+    //     console.log("jwtErr", err)
+    //     redirect('/login')
     // }
-    console.log("Middleware triggered")
-    // let cookie = request.cookies.get('userCredentials')
-    // let parsedCookieVal = JSON.parse(cookie.value)
-    // console.log("parsedCookieVal_middleware", parsedCookieVal)
-    // return NextResponse.redirect(new URL(`/${parsedCookieVal.username}/`, request.url))
+
+    // console.log("AUTHENTICATED", decoded)
+
 }
  
 // See "Matching Paths" below to learn more

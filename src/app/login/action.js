@@ -74,5 +74,5 @@ export async function submitLogin(formData) {
     }
 
     poolPromise.releaseConnection(db)
-    redirect(`/${queryObj['username']}/market`)
+    redirect(`/${queryObj['unm']}/market`)
   }

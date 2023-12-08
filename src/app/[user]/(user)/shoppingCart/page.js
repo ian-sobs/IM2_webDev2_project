@@ -2,7 +2,21 @@ import getUsrCookie from "@/components/getUsrCookie"
 import CartItemDisplay from "@/components/shoppingCart/cartItemDisplay"
 
 export default function cart(){
-    const userInfo = getUsrCookie()
+    const jwt = require('jsonwebtoken')
+
+    if(!cookies().has('usrToken')) redirect('/login')
+
+    const usrToken = cookies().get('usrToken')
+    console.log("usrTokenInMidware", usrToken)
+
+    try {
+        var decoded = jwt.verify(usrToken.value, process.env.JWT_SECRET);
+    } catch(err) {
+        console.log("jwtErr", err)
+        redirect('/login')
+    }
+
+    // const userInfo = getUsrCookie()
 
     const sectionGridStyle = {
         allWidth: "min-h-screen bg-slate-100 pt-[25px] pb-[20px] flex flex-col w-full items-center",
