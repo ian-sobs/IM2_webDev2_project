@@ -41,12 +41,13 @@ export default function TableFull({colNames, rowsData, caption}){
         })
         .then((result)=>result.json())
         .then((parsedRes)=>{
+            location.reload()
             if(parsedRes.approve){
                 let newBody = rowsCopy.filter((rowCopy)=>rowCopy.ID != rowID)
                 setRows(newBody)
-                if(newBody.length == 0){
+                
                     location.reload()
-                }
+                
             }
         })
     }
