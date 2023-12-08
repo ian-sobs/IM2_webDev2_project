@@ -27,7 +27,7 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
         .then((result)=>result.json())
         .then((parsedRes)=>{
             if(parsedRes.affectedRows == 1){
-                let newBody = rowsCopy.filter((rowCopy)=>rowCopy.ID != bookID)
+                let newBody = rowsCopy.filter((rowCopy)=>rowCopy['DB Index'] != bookID)
                 console.log("newBody.length", newBody.length)
                 setRows(newBody)
                 if(newBody.length == 0){
@@ -81,9 +81,11 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
         .then((response)=>response.json())
         .then((parsed)=>{
             console.log("parsedResponse", parsed)
-            
+                console.log("updateBookData", rowsCopy)
+                console.log("updateBookParsed", parsed)
                 let updatedRows = rowsCopy.map((data)=>{
-                    if(data.ID == parsed.bookDisplay.ID){
+                    console.log("data", data)
+                    if(data['DB Index'] == parsed.bookDisplay['DB Index']){
                         console.log("parsed.bookDisplay", parsed.bookDisplay)
                         return parsed.bookDisplay
                     }
@@ -93,11 +95,11 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
                     }
                     
                 })
-                console.log('updatedRows', updatedRows)
-                setRows(updatedRows)
-                setForEditing(false)
-                setBookID_in_form(0)
-                setIsOpen(false)
+                // console.log('updatedRows', updatedRows)
+                // setRows(updatedRows)
+                // setForEditing(false)
+                // setBookID_in_form(0)
+                // setIsOpen(false)
             
         }) 
     }
