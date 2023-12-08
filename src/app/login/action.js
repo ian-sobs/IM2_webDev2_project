@@ -26,7 +26,7 @@ export async function submitLogin(formData) {
     let jwt_payload = {
         usr: queryObj['usr'],
         email: queryObj['email'],
-        unm: queryObj['usr'],
+        unm: queryObj['unm'],
         given_name: queryObj['given_name'],
         middle_name: queryObj['middle_name'],
         family_name: queryObj['family_name'],
@@ -55,8 +55,8 @@ export async function submitLogin(formData) {
     console.log("Password was correct") 
 
     //creates the JWT token and stores it as an HTTP cookie
-    console.log("process.env.NEXT_PUBLIC_JWT_SECRET", process.env.NEXT_PUBLIC_JWT_SECRET)
-    let token = jwt.sign(jwt_payload, process.env.NEXT_PUBLIC_JWT_SECRET, {expiresIn: 86400})
+    console.log("process.env.NEXT_PUBLIC_JWT_SECRET", process.env.JWT_SECRET)
+    let token = jwt.sign(jwt_payload, process.env.JWT_SECRET, {expiresIn: 86400})
     const userToken = cookies()
     userToken.set("usrToken", token, {httpOnly: true, secure: true, sameSite: 'None' })
 
