@@ -13,7 +13,7 @@ export async function GET(request, {params}) {
     const conn = await poolPromise.getConnection()
     const [rows, fields] = await conn.execute("DELETE FROM favorites f WHERE f.userID=? AND f.bookID=?", [userID, bookID])
     const [result, resFields] = await conn.execute("SELECT f.favoriteID FROM favorites f WHERE f.userID=? AND f.bookID=?", [userID, bookID])
-    await poolPromise.releaseConnection(conn)
+    poolPromise.releaseConnection(conn)
 
     return Response.json(result)
 }

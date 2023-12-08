@@ -1,4 +1,4 @@
-import { cookies } from 'next/headers'
+import {auth} from '@/components/authentication/authUser'
 import Card from '@/components/listOfCards/card'
 import user  from '@/components/getUsrCookie'
 import CardsDisplay from '@/components/listOfCards/cardsDisplay';
@@ -8,7 +8,10 @@ export default function Page(){
     // const userInfo = cookies().get("userCredentials")
     // const user = JSON.parse(userInfo.value)
     // console.log("userInfo", user) 
-    const userInfo = user()
+    let usrInfo = auth()
+
+    
+    // const userInfo = user()
 
     const sectionGridStyle = {
         allWidth: "min-h-screen pt-[25px] bg-slate-100 pb-[20px] grid place-items-center gap-6 w-full",
@@ -49,7 +52,7 @@ export default function Page(){
             
                     {/* {books.map((book, index)=><Card key={index} details={book}></Card>)} */}
                 
-           {(cookies().has("userCredentials")) ? <CardsDisplay currency={userInfo["crrncyCode"]} localCurrPerUSD={userInfo["localCurrPerUSD"]} CtabStyles="col-span-2 md:col-span-3 lg:col-span-4 " requestURL="/user/market/api" username={userInfo["username"]}></CardsDisplay> : <h1>error</h1>}
+           <CardsDisplay currency="PHP" localCurrPerUSD="1" CtabStyles="col-span-2 md:col-span-3 lg:col-span-4 " requestURL="/user/market/api" username={usrInfo.unm}></CardsDisplay>
 
         </section>
     

@@ -14,7 +14,7 @@ import RateBut from './rating'
 
 // const BuyButton = dynamic(() => import('./purchaseBut'))
 
-export default async function genInfo({searchParams}){
+export default async function genInfo({searchParams, userInfo}){
     // let searchParams = useSearchParams()
     // let id = searchParams.get('bookID')
     // const [bookID, setBookID] = useState(0)
@@ -60,8 +60,8 @@ export default async function genInfo({searchParams}){
         sm: "sm:grow sm:pl-[35px] sm:pt-0"
     }
 
-    const userInfo = getUsrCookie()
-    console.log("genInfoUserInfo", userInfo)
+    // const userInfo = getUsrCookie()
+    // console.log("genInfoUserInfo", userInfo)
     return (
         <>
             {/* <p className="text-black">{JSON.stringify(bookInfo)}</p> */}
@@ -102,7 +102,7 @@ export default async function genInfo({searchParams}){
                             </div>
                             
                             <div className="flex flex-col md1:flex-row  md1:justify-between">
-                                <RateBut bookID={bookInfo.bookID} userID={parseInt(userInfo.userID)}></RateBut>
+                                <RateBut bookID={bookInfo.bookID} userID={parseInt(userInfo.usr)}></RateBut>
                                 <div className="h-[10px] md1:h-0"></div>
                                 <FaveButton userInfo={userInfo} bookInfo={bookInfo}></FaveButton>
                                 <div className="h-[10px] md1:h-0"></div>

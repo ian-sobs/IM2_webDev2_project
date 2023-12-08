@@ -56,7 +56,7 @@ export default function purchase(props){
                     <button className="bg-green-500 p-[4px] px-[9px] rounded-full text-white font-semibold flex flex-row justify-center items-center" onClick={()=>setIsOpen(true)}>
                         <Image src={cartAdd} className="mr-[4px]" style={style} alt="AddToCart"></Image>
                         <div className="flex flex-row">
-                            <span className="mr-[4px]">{`${props.userInfo.crrncyCode}`}</span>
+                            <span className="mr-[4px]">{"PHP "}</span>
                             {`${props.bookInfo.priceUSD}`}
                         </div>
                     </button>
@@ -79,7 +79,7 @@ export default function purchase(props){
                             </Form.Field>
 
                             <div className='flex flex-row items-center mb-[14px]'>
-                                <p className='mr-[7px]'>Total price: </p> <span className='text-green-500 font-semibold'>{`${props.userInfo.crrncyCode} ${(props.bookInfo.priceUSD * prodQuant * 56).toFixed(2)}`}</span>
+                                <p className='mr-[7px]'>Total price: </p> <span className='text-green-500 font-semibold'>{`PHP ${(props.bookInfo.priceUSD * prodQuant).toFixed(2)}`}</span>
                             </div>
 
                              <Form.Field className='flex flex-row items-center mb-[8px]' name="address">
@@ -95,7 +95,7 @@ export default function purchase(props){
                             </Form.Field>
 
                             <Form.Field name="userID" asChild>
-                                <Form.Control asChild><input type="number" value={parseInt(props.userInfo.userID)} hidden></input></Form.Control>
+                                <Form.Control asChild><input type="number" value={parseInt(props.userInfo.usr)} hidden></input></Form.Control>
                             </Form.Field>
 
                             <Form.Field name="bookID" asChild>

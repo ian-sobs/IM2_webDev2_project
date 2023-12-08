@@ -2,9 +2,10 @@
 import GenInfo from './genInfo'
 import Reviews from './reviewSection'
 import getUsrCookie from '../getUsrCookie'
+import {auth} from '@/components/authentication/authUser'
 
 export default function bookPage({genInfoRH, reviewsRH, searchParams}){
-    const userInfo = getUsrCookie()
+    const userInfo = auth()
     return(
         <>
             <div className="flex flex-wrap flex-col items-center w-full max-w-screen-lg">
