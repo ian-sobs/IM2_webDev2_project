@@ -17,4 +17,4 @@ export async function POST(request) {
     console.log("insert", insert)
     // if(insert.insertID <= 0) return Response.json({approved: false})
     return Response.json({approved: true})
-  }
+}
