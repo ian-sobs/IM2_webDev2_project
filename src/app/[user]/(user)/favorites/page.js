@@ -11,7 +11,7 @@ export default function Page(){
     let usrInfo = auth()
 
     const sectionGridStyle = {
-        allWidth: "min-h-screen  pt-[25px]  bg-slate-100 pb-[20px] grid place-items-center gap-6",
+        allWidth: "min-h-screen  pt-[25px]  bg-[#ffedd5] pb-[20px] grid place-items-center gap-6",
         mobile:"grid-cols-2 px-9",
         sm:"sm:px-11 sm:grid-cols-2",
         md:"md:px-14 md:grid-cols-3",

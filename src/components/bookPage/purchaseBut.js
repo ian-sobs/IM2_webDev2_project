@@ -55,7 +55,11 @@ export default function purchase(props){
     }
 
     function handleCancel(e){
+<<<<<<< HEAD
+        fetch("book/api/cancelDormRequest?userID=", {    
+=======
         fetch("book/api/cancelDormRequest", {    
+>>>>>>> 9c4be9679f9a9977f25f7bfe1efde6bc10122a70
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
