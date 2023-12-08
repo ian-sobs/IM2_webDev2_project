@@ -1,5 +1,7 @@
 import OrderPage from "@/components/orderPage/orderDisplay";
 import adminPageStyle from "@/app/admin/adminPageStyle";
+import { cookies } from "next/headers"
+import {redirect} from 'next/navigation'
 
 export default function page(){
     const jwt = require('jsonwebtoken')
@@ -15,7 +17,7 @@ export default function page(){
         console.log("jwtErr", err)
         redirect('/login')
     }
-    
+
     const styleArr = Object.keys(adminPageStyle)
     let classStyle = ''
     for (const classnameStyle of styleArr){

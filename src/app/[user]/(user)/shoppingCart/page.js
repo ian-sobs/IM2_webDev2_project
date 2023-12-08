@@ -1,5 +1,7 @@
 import getUsrCookie from "@/components/getUsrCookie"
 import CartItemDisplay from "@/components/shoppingCart/cartItemDisplay"
+import { cookies } from "next/headers"
+import {redirect} from 'next/navigation'
 
 export default function cart(){
     const jwt = require('jsonwebtoken')

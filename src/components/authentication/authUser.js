@@ -1,7 +1,7 @@
 import { cookies } from "next/headers"
 import {redirect} from 'next/navigation'
 
-export default function Page(){
+export function auth(){
     const jwt = require('jsonwebtoken')
 
     if(!cookies().has('usrToken')) redirect('/login')
@@ -16,5 +16,5 @@ export default function Page(){
         redirect('/login')
     }
 
-    return <h1>Hello</h1>
+    return decoded
 }

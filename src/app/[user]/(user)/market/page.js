@@ -1,5 +1,4 @@
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
+import {auth} from '@/components/authentication/authUser'
 import Card from '@/components/listOfCards/card'
 import user  from '@/components/getUsrCookie'
 import CardsDisplay from '@/components/listOfCards/cardsDisplay';
@@ -9,19 +8,7 @@ export default function Page(){
     // const userInfo = cookies().get("userCredentials")
     // const user = JSON.parse(userInfo.value)
     // console.log("userInfo", user) 
-    const jwt = require('jsonwebtoken')
-
-    if(!cookies().has('usrToken')) redirect('/login')
-
-    const usrToken = cookies().get('usrToken')
-    console.log("usrTokenInMidware", usrToken)
-
-    try {
-        var decoded = jwt.verify(usrToken.value, process.env.JWT_SECRET);
-    } catch(err) {
-        console.log("jwtErr", err)
-        redirect('/login')
-    }
+    let usrInfo = auth()
 
     
     // const userInfo = user()
@@ -65,7 +52,7 @@ export default function Page(){
             
                     {/* {books.map((book, index)=><Card key={index} details={book}></Card>)} */}
                 
-           <CardsDisplay currency="PHP" localCurrPerUSD="1" CtabStyles="col-span-2 md:col-span-3 lg:col-span-4 " requestURL="/user/market/api" username={decoded.unm}></CardsDisplay>
+           <CardsDisplay currency="PHP" localCurrPerUSD="1" CtabStyles="col-span-2 md:col-span-3 lg:col-span-4 " requestURL="/user/market/api" username={usrInfo.unm}></CardsDisplay>
 
         </section>
     
