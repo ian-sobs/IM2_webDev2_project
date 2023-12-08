@@ -4,6 +4,10 @@ import { cookies } from 'next/headers'
 import pool from '@/dbConn'
 
 export async function submitLogin(formData) {
+    const jwt = require('jsonwebtoken')
+    
+
+
     console.log("login pool config: action.js", pool.config.connectionConfig)   
     const bcrypt = require('bcrypt');
     const saltRounds = 10;
@@ -16,8 +20,24 @@ export async function submitLogin(formData) {
 
     const password = formData.get("password")
 
-    const [rows, fields] = await db.execute("SELECT `user`.`userID`, `user`.`email`, `user`.`username` , `user`.`firstName` , `user`.`midName`, `user`.`lastName`, `user`.`password_bcrypt` AS `password`, `user`.`address` , `user`.`birthdate` , `country`.`name` AS `country`,    `country`.`abbreviation` AS `country_a2`,`country`.`crrncyCode` , `country`.`localCurrPerUSD`  FROM (`user` INNER JOIN `country` ON `country`.countryID = `user`.countryID) WHERE `email`= ?;", [formData.get("email")])
+    const [rows, fields] = await db.execute("SELECT `user`.`userID` AS usr, `user`.`email` AS email, `user`.`username` AS unm, `user`.`firstName` AS given_name, `user`.`midName` AS middle_name, `user`.`lastName` AS family_name, `user`.`password_bcrypt` AS `password`, `user`.`address` , `user`.`birthdate` , `country`.`name` AS `country`,    `country`.`abbreviation` AS `country_a2`,`country`.`crrncyCode` , `country`.`localCurrPerUSD`  FROM (`user` INNER JOIN `country` ON `country`.countryID = `user`.countryID) WHERE `email`= ?;", [formData.get("email")])
     const [queryObj] = rows
+
+    let jwt_payload = {
+        usr: queryObj['usr'],
+        email: queryObj['email'],
+        unm: queryObj['usr'],
+        given_name: queryObj['given_name'],
+        middle_name: queryObj['middle_name'],
+        family_name: queryObj['family_name'],
+        address: queryObj['address'],
+        birthdate: queryObj['birthdate']
+    }
+
+    
+    let token = jwt.sign(jwt_payload, process.env.JWT_SECRET, {expiresIn: 86400});
+
+    console.log("jwt_payload", jwt_payload)
 
     console.log("rows", rows)
     console.log("loginAction queryObj", queryObj)
@@ -39,15 +59,12 @@ export async function submitLogin(formData) {
     } 
     console.log("Password was correct") 
 
-    const userCredentials = cookies()
-    userCredentials.set({
-        name: "userCredentials",
-        value: JSON.stringify(queryObj),
-        httpOnly: true
-    })
-    // userCredentials.set('userCredentials', JSON.stringify(queryObj))
+    const userToken = cookies()
+    userToken.set("usrToken", JSON.stringif(queryObj), {httpOnly: true, }
+    )
+    // userToken.set('userToken', JSON.stringify(queryObj))
 
-    console.log("userCredentials", userCredentials)
+    console.log("userToken", userToken)
 
     if(queryObj["email"] === "admin@bookii.com"){
         redirect(`/admin/books`)
