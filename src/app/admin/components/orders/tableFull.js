@@ -25,11 +25,10 @@ export default function TableFull({colNames, rowsData, caption}){
         })
         .then((result)=>result.json())
         .then((parsedRes)=>{
-            if(parsedRes.affectedRows == 1){
 
                 location.reload()
                 
-            }
+            
         })
     }
  
