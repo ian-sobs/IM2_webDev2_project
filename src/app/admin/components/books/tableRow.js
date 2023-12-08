@@ -6,10 +6,7 @@ export function HeadRow({colNames, ndxToShorten, rowsCopy}){
     return (
         <>
             <tr >
-                {colNames.map((col, index)=>{
-                    console.log(index)
-                    return (ndxToShorten == index) ? <th key={index} >{col}</th> : <th key={index} >{col}</th> 
-                })}
+                {colNames.map((col, index)=><th key={index} >{col}</th>)}
                 <th>Actions</th>
             </tr>
         </>

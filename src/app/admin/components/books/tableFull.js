@@ -95,11 +95,11 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
                     }
                     
                 })
-                // console.log('updatedRows', updatedRows)
-                // setRows(updatedRows)
-                // setForEditing(false)
-                // setBookID_in_form(0)
-                // setIsOpen(false)
+                console.log('updatedRows', updatedRows)
+                setRows(updatedRows)
+                setForEditing(false)
+                setBookID_in_form(0)
+                setIsOpen(false)
             
         }) 
     }
@@ -116,7 +116,7 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
                     <HeadRow colNames={colNames} ndxToShorten={4}></HeadRow>
                 </thead>
                 <tbody>
-                    {rows.map((rowObj, index)=><BodyRow bookID_in_form={bookID_in_form} setBookID_in_form={setBookID_in_form} isOpen={isOpen} setIsOpen={setIsOpen} rowsCopy={rowsCopy} deleteBook={deleteBook} editBook={editBook} key={index} rowObj={rowObj} ndxLink={4}></BodyRow>)}
+                    {rows.map((rowObj, index)=><BodyRow bookID_in_form={bookID_in_form} setBookID_in_form={setBookID_in_form} isOpen={isOpen} setIsOpen={setIsOpen} rowsCopy={rowsCopy} deleteBook={deleteBook} editBook={editBook} key={index} rowObj={rowObj} ndxLink={6}></BodyRow>)}
                 </tbody>
             </table>        
         {/* </div> */}
