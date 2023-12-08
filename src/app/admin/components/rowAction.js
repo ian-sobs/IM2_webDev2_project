@@ -1,10 +1,10 @@
 'use client'
-import { Menu, Transition, Dialog } from '@headlessui/react'
-import { useState } from 'react'
+import { Menu, Transition} from '@headlessui/react'
+// import { useState } from 'react'
 
-export default function RowAction({actions, children, positioning, bookID}){
-    let [modalOpen, setModalOpen] = useState(false)
-
+export default function RowAction({actions, children, positioning, rowID}){
+    // let [modalOpen, setModalOpen] = useState(false)
+    console.log('rowID', rowID)
     return(
         <Menu >
             <Menu.Button className='bg-slate-200 rounded-sm p-[5px] text-slate-500'>{children}</Menu.Button>
@@ -19,7 +19,7 @@ export default function RowAction({actions, children, positioning, bookID}){
                 <Menu.Items as='div' className={`bg-white border border-slate-200 shadow-xl p-[8px] ${positioning} inline-block z-50`}>
                     {actions.map((action)=>{
                         return (
-                            <Menu.Item key={action.name} as='button' className={`p-[8px] w-full rounded-sm ui-active:${action.activeBgColor} ui-active:${action.activeTextColor} ui-not-active:bg-white ui-not-active:text-black`} onClick={()=>action.behavior(bookID)}>
+                            <Menu.Item key={action.name} as='button' className={`p-[8px] w-full rounded-sm ui-active:${action.activeBgColor} ui-active:${action.activeTextColor} ui-not-active:bg-white ui-not-active:text-black`} onClick={()=>action.behavior(rowID)}>
                                 {action.name}
                             </Menu.Item>    
                         )

@@ -67,7 +67,7 @@ export default async function genInfo({searchParams}){
             {/* <p className="text-black">{JSON.stringify(bookInfo)}</p> */}
             <div className={`${containerStyle.allWidth} ${containerStyle.sm} ${containerStyle.mobile}`}>
 
-                    <Image className={`${imgStyle.allWidth} ${imgStyle.sm} ${imgStyle.lg}`} src={bookInfo.img} width={612} height={939} alt={`${bookInfo.title}`}></Image> 
+                    <Image className={`${imgStyle.allWidth} ${imgStyle.sm} ${imgStyle.lg}`} src={bookInfo.img} width={1920} height={1080} alt={`${bookInfo.title}`}></Image> 
 
                     <div className={`${contentStyle.allWidth} ${contentStyle.sm}`}>
                         <div>

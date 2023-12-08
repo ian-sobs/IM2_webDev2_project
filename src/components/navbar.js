@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { Tab } from '@headlessui/react'
 
 export default function Navbar({fields, styles}){
-    const tabStyle = "flex flex-wrap flex-row content-center  px-8 justify-center w-fit h-full text-2xl hover:bg-[#e38a40] font-medium focus:ring-[0px]"
+    const tabStyle = "flex flex-wrap flex-row content-center  px-8 justify-center w-fit h-full text-md hover:bg-[#e38a40] font-medium focus:ring-[0px]"
     console.log(fields)
     return (
         <>
