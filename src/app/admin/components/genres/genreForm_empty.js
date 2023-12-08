@@ -7,6 +7,7 @@ import { Dialog} from '@headlessui/react'
 export default function genreForm({className, children}){
     let [isOpen, setIsOpen] = useState(false)
     const genreName = useRef()
+    const slots = useRef()
     const imageFile = useRef()
     // function OpenModal(){
     //     setIsOpen(true)
@@ -27,7 +28,8 @@ export default function genreForm({className, children}){
 
         
         let data = {
-            genreName: genreName.current.value
+            genreName: genreName.current.value,
+            slots: slots.current.value
         }
             
         // for (var [key, value] of data.entries()) { 
@@ -79,6 +81,11 @@ export default function genreForm({className, children}){
                         <div className='flex flex-col my-3'>
                             <label htmlFor="genreName">Name</label>
                             <input ref={genreName} type='text' id='genreName' name='genreName' className="bg-slate-200"></input>
+                        </div> 
+
+                        <div className='flex flex-col my-3'>
+                            <label htmlFor="slots">Max occupancy</label>
+                            <input ref={slots} type='number' id='slots' name='slots' className="bg-slate-200"></input>
                         </div> 
                   
                         <div className='flex flex-row justify-end'>

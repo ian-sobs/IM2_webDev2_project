@@ -8,6 +8,7 @@ import {recurseSearchTagname} from '../recurseTagname'
 export default function genreForm({children, rowID_in_form, setRowID_in_form, forEditing,setForEditing,addRow,updateRow, isOpen, setIsOpen, className}){
     // let [isOpen, setIsOpen] = useState(false)
     const genreName = useRef()
+    const slots = useRef()
     const imageFile = useRef()
     // function OpenModal(){
     //     setIsOpen(true)
@@ -29,7 +30,8 @@ export default function genreForm({children, rowID_in_form, setRowID_in_form, fo
         
         let data = {
             genreName : genreName.current.value,
-            genreID: rowID_in_form
+            genreID: rowID_in_form,
+            slots: slots.current.value
         }
 
         if(forEditing){
@@ -61,8 +63,13 @@ export default function genreForm({children, rowID_in_form, setRowID_in_form, fo
 
                     <form className='flex flex-col'>
                         <div className='flex flex-col my-3'>
-                            <label htmlFor="genreName">Name</label>
+                            <label htmlFor="genreName">Accommodation name</label>
                             <input ref={genreName} type='text' id='genreName' name='genreName' className="bg-slate-200"></input>
+                        </div> 
+
+                        <div className='flex flex-col my-3'>
+                            <label htmlFor="slots">Max occupancy</label>
+                            <input ref={slots} type='number' id='slots' name='slots' className="bg-slate-200"></input>
                         </div> 
                         {/* <div className='flex flex-col my-3'>
                             <label htmlFor='bookDesc'>Description</label>
