@@ -38,10 +38,10 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
 
         // data.append('genreIDs', JSON.stringify(genreIDs));
         
-        // for (var [key, value] of data.entries()) { 
-        //     objPost[key] = value
-        //     console.log(key, value)
-        // }
+        for (var [key, value] of data.entries()) { 
+            
+            console.log(key, value)
+        }
         // objPost['genreIDs'] = genreIDs
         // console.log('Fetch post object', objPost)
         if(forEditing){
@@ -81,10 +81,10 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
 
                     <Dialog.Panel as='div' style={{top:' 50%', left: '50%', transform: 'translate(-50%, -50%)'}} className='p-[20px] bg-white rounded-md w-4/5 sm:w-3/5 lg:w-1/4 fixed z-50'>
                    
-                        <Dialog.Title className='text-center mb-3 font-semibold'>{(!forEditing) ? "Add new book" : "Edit this book"}</Dialog.Title>
+                        <Dialog.Title className='text-center mb-3 font-semibold'>{(!forEditing) ? "Add new dorm room" : "Edit this dorm room"}</Dialog.Title>
 
                         <Dialog.Description className='text-justify font-light'>
-                            {(!forEditing) ? "Input the required information for the new book" : "Edit this book's information"}
+                            {(!forEditing) ? "Input the required information for the new dorm" : "Edit this dorm room's information"}
                         </Dialog.Description>
 
                         <form ref={formBook} className='flex flex-col'>
@@ -100,7 +100,7 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
                                         <label>Select an accommodation</label>
                                         <div ref={checkBoxVal} className="flex flex-col max-h-32 overflow-x-auto border">
                                             {genres.map((genre, index)=>{
-                                                return <div key={index}> <input name="accomodation" id={genre.name} value={genre.genreID} type="radio"></input> <label>{genre.name}</label></div>
+                                                return <div key={index}> <input name="accommodation" id={genre.name} value={genre.genreID} type="radio"></input> <label>{genre.name}</label></div>
                                             })}
                                         </div>
 
@@ -119,7 +119,7 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
                                 <input id='bookPrice' name='bookPrice' type='number' className="bg-slate-200 w-1/3" ></input>
                             </div> */}
                             <div className='flex flex-col my-3'>
-                                <label htmlFor="bookAuthors">Author/s</label>
+                                <label htmlFor="bookAuthors">Location</label>
                                 <input id='bookAuthors' name='bookAuthors' type='text' className="bg-slate-200"></input>
                             </div>
        

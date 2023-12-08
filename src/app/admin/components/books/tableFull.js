@@ -27,7 +27,7 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
         .then((result)=>result.json())
         .then((parsedRes)=>{
             if(parsedRes.affectedRows == 1){
-                let newBody = rowsCopy.filter((rowCopy)=>rowCopy.ID != bookID)
+                let newBody = rowsCopy.filter((rowCopy)=>rowCopy['DB Index'] != bookID)
                 console.log("newBody.length", newBody.length)
                 setRows(newBody)
                 if(newBody.length == 0){
@@ -81,9 +81,11 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
         .then((response)=>response.json())
         .then((parsed)=>{
             console.log("parsedResponse", parsed)
-            
+                console.log("updateBookData", rowsCopy)
+                console.log("updateBookParsed", parsed)
                 let updatedRows = rowsCopy.map((data)=>{
-                    if(data.ID == parsed.bookDisplay.ID){
+                    console.log("data", data)
+                    if(data['DB Index'] == parsed.bookDisplay['DB Index']){
                         console.log("parsed.bookDisplay", parsed.bookDisplay)
                         return parsed.bookDisplay
                     }
@@ -114,7 +116,7 @@ export default function TableFull({genres, colNames, rowsData, caption, genreLis
                     <HeadRow colNames={colNames} ndxToShorten={4}></HeadRow>
                 </thead>
                 <tbody>
-                    {rows.map((rowObj, index)=><BodyRow bookID_in_form={bookID_in_form} setBookID_in_form={setBookID_in_form} isOpen={isOpen} setIsOpen={setIsOpen} rowsCopy={rowsCopy} deleteBook={deleteBook} editBook={editBook} key={index} rowObj={rowObj} ndxLink={4}></BodyRow>)}
+                    {rows.map((rowObj, index)=><BodyRow bookID_in_form={bookID_in_form} setBookID_in_form={setBookID_in_form} isOpen={isOpen} setIsOpen={setIsOpen} rowsCopy={rowsCopy} deleteBook={deleteBook} editBook={editBook} key={index} rowObj={rowObj} ndxLink={6}></BodyRow>)}
                 </tbody>
             </table>        
         {/* </div> */}
