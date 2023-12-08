@@ -3,11 +3,11 @@ import { NextResponse } from 'next/server'
 // This function can be marked `async` if using `await` inside
 export function middleware(request) {
     
-    if(!request.cookies.has('userCredentials')){ 
-        console.log("NO COOKIES")
-        return NextResponse.redirect(new URL('/', request.url))
-    }
-    
+    // if(!request.cookies.has('userCredentials')){ 
+    //     console.log("NO COOKIES")
+    //     return NextResponse.redirect(new URL('/', request.url))
+    // }
+    console.log("Middleware triggered")
     // let cookie = request.cookies.get('userCredentials')
     // let parsedCookieVal = JSON.parse(cookie.value)
     // console.log("parsedCookieVal_middleware", parsedCookieVal)
@@ -25,5 +25,6 @@ export const config = {
          * - favicon.ico (favicon file)
          */
         '/user/:path*',
+        '/admin/:path*'
       ],
 }
