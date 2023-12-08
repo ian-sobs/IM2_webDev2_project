@@ -6,7 +6,7 @@ import { Tab } from '@headlessui/react'
 
 
 export default function Navbar({fields, styles}){
-    const tabStyle = "flex flex-wrap flex-row content-center  px-8 justify-center w-fit h-8 text-md hover:bg-[#e38a40] font-medium focus:ring-[0px]"
+    const tabStyle = "flex flex-wrap flex-row content-center  px-8 justify-center w-fit h-8 text-md hover:bg-[#65a30d] font-medium focus:ring-[0px]"
 
     console.log(fields)
     return (
@@ -32,27 +32,27 @@ export default function Navbar({fields, styles}){
                     </nav>
 
                     
-
-                    <Tab.Group manual>
-                        <Tab.List className=" flex flex-wrap flex-row"> 
-                            {fields.map((field, index)=>{return <Link key={index} href={field.linkTo} className="flex flex-row">
-                                <Tab as={Fragment} className="text-white focus:ring-[0px]"> 
-                                    {({ selected }) => (
-                                        /* Use the `selected` state to conditionally style the selected tab. */
-                                        <button
-                                        className={
-                                            selected ? `${tabStyle} bg-[#65a30d] text-white` : `${tabStyle}`
-                                        }
-                                        >
-                                        {field.name} 
-                                        </button>
-                                    )}
-                                </Tab>
-                                </Link>})
-                            }
-                        </Tab.List>
-                    </Tab.Group>
-                    
+                    <div className='bg-[#eab308]'>
+                        <Tab.Group manual>
+                            <Tab.List className=" flex flex-wrap flex-row"> 
+                                {fields.map((field, index)=>{return <Link key={index} href={field.linkTo} className="flex flex-row">
+                                    <Tab as={Fragment} className="text-white focus:ring-[0px]"> 
+                                        {({ selected }) => (
+                                            /* Use the `selected` state to conditionally style the selected tab. */
+                                            <button
+                                            className={
+                                                selected ? `${tabStyle} bg-[#65a30d] text-white` : `${tabStyle}`
+                                            }
+                                            >
+                                            {field.name} 
+                                            </button>
+                                        )}
+                                    </Tab>
+                                    </Link>})
+                                }
+                            </Tab.List>
+                        </Tab.Group>
+                    </div>
                 </div>
             
             

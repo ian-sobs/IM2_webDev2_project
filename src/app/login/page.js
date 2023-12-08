@@ -45,7 +45,7 @@ export default async function Login(){
         <div className="p-4 min-h-screen flex flex-col justify-center items-center bg-gradient-to-tr from-[#eab308] from-30% via-[#a3e635] via-60% to-[#65a30d] to-90%">
             <Form fields={fields} action={submitLogin}></Form> 
             <div className="text-black text-center container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-b-lg">
-                Don't have an account? <span className="no-underline hover:underline text-[#fc1c6e]"><Link href="/signUp">Sign up</Link></span>
+                Don't have an account? <span className="no-underline hover:underline text-[#65a30d]"><Link href="/signUp">Sign up</Link></span>
             </div>
         </div>
         </>

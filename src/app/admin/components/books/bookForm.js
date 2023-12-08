@@ -19,23 +19,24 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
         e.preventDefault()
         // console.log("checkBoxVal", checkBoxVal.current)
         // let objPost = {}
-        let arr = recurseSearchTagname('input', checkBoxVal.current)
-        let genreIDs = []
-        arr.forEach(element => {
-            if(element.checked){
-                genreIDs.push(parseInt(element.value))
-            }
-        });
+        // let arr = recurseSearchTagname('input', checkBoxVal.current)
+        // let genreIDs = []
+        // arr.forEach(element => {
+        //     if(element.checked){
+        //         genreIDs.push(parseInt(element.value))
+        //     }
+        // });
 
-        console.log(genreIDs)
+        // console.log(genreIDs)
         const data =  new FormData(formBook.current)
+        console.log("formData_in_dorm_rooms", data)
         data.set('bookImgFile', imageFile.current.files[0])
 
-        genres.forEach((genre)=>{
-            data.delete(genre.name)
-        })
+        // genres.forEach((genre)=>{
+        //     data.delete(genre.name)
+        // })
 
-        data.append('genreIDs', JSON.stringify(genreIDs));
+        // data.append('genreIDs', JSON.stringify(genreIDs));
         
         // for (var [key, value] of data.entries()) { 
         //     objPost[key] = value
@@ -88,7 +89,7 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
 
                         <form ref={formBook} className='flex flex-col'>
                             <div className='flex flex-col my-3'>
-                                <label htmlFor="bookTitle">Title</label>
+                                <label htmlFor="bookTitle">Dorm room ID</label>
                                 <input type='text' id='bookTitle' name='bookTitle' className="bg-slate-200"></input>
                             </div> 
                             <div className='flex flex-col my-3'>
@@ -96,10 +97,10 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
                                 <textarea id='bookDesc' name="bookDesc" className="bg-slate-200"></textarea>
                             </div>
                             <div className='flex flex-col my-3'>                                
-                                        <label>Select a genre</label>
+                                        <label>Select an accommodation</label>
                                         <div ref={checkBoxVal} className="flex flex-col max-h-32 overflow-x-auto border">
                                             {genres.map((genre, index)=>{
-                                                return <div key={index}> <input name={genre.name} id={genre.name} value={genre.genreID} type="checkbox"></input> <label>{genre.name}</label></div>
+                                                return <div key={index}> <input name={genre.name} id={genre.name} value={genre.genreID} type="radio"></input> <label>{genre.name}</label></div>
                                             })}
                                         </div>
 
@@ -113,10 +114,10 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
                                 </div>
                                  
                             </div>
-                            <div className='flex flex-col my-3'>
+                            {/* <div className='flex flex-col my-3'>
                                 <label htmlFor="bookPrice">Price</label>
                                 <input id='bookPrice' name='bookPrice' type='number' className="bg-slate-200 w-1/3" ></input>
-                            </div>
+                            </div> */}
                             <div className='flex flex-col my-3'>
                                 <label htmlFor="bookAuthors">Author/s</label>
                                 <input id='bookAuthors' name='bookAuthors' type='text' className="bg-slate-200"></input>
