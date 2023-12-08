@@ -16,5 +16,7 @@ export async function GET(request) {
 
     console.log("isRequest?",ret)
 
+    poolPromise.releaseConnection(conn)
+
     return Response.json(ret)
   }

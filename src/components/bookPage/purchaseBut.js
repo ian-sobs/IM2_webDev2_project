@@ -68,12 +68,16 @@ export default function purchase(props){
 
 
     function handleCancel(e){
-        fetch(`/user/book/api/cancelDormRequest?userID=${props.userInfo.usr}&bookID=${props.bookInfo.bookID}`)
+        fetch(`/user/book/api/cancelDormRequest?userID=${props.userInfo.usr}&bookID=${props.bookInfo.bookID}`,{
+            method: 'POST',
+        })
         .then((result)=>result.json())
         .then((output)=> {
             console.log("cancelRequestOutput", output)
-            setIsOpen(false)
-            setIsRequest(true)
+            if(output.affectedRows > 0){
+                setIsOpen(false)
+                setIsRequest(true)
+            }
         })
     }
 
