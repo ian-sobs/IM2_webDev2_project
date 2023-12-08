@@ -17,8 +17,8 @@ export default function TableFull({colNames, rowsData, caption}){
     //     setRows(newRows)
     // }
 
-    function deleteRow(rowID){
-        fetch('/admin/genres/api/deleteGenre', {
+    function reject(rowID){
+        fetch('/admin/requests/api/reject', {
             method: "POST",
             headers: new Headers({'content-type': 'application/json'}),
             body: JSON.stringify({rowID: rowID})
@@ -26,6 +26,22 @@ export default function TableFull({colNames, rowsData, caption}){
         .then((result)=>result.json())
         .then((parsedRes)=>{
             if(parsedRes.affectedRows == 1){
+
+                location.reload()
+                
+            }
+        })
+    }
+ 
+    function approve(rowID){
+        fetch('/admin/requests/api/approve', {
+            method: "POST",
+            headers: new Headers({'content-type': 'application/json'}),
+            body: JSON.stringify({rowID: rowID})
+        })
+        .then((result)=>result.json())
+        .then((parsedRes)=>{
+            if(parsedRes.approve){
                 let newBody = rowsCopy.filter((rowCopy)=>rowCopy.ID != rowID)
                 setRows(newBody)
                 if(newBody.length == 0){
@@ -35,7 +51,7 @@ export default function TableFull({colNames, rowsData, caption}){
         })
     }
 
-    // function addRow(newRow){
+    // function approve(newRow){
     //     fetch('/admin/genres/api/newGenre', {
     //         method: "POST",
     //         headers: {
@@ -110,7 +126,7 @@ export default function TableFull({colNames, rowsData, caption}){
                 <HeadRow colNames={colNames} ndxToShorten={4}></HeadRow>
             </thead>
             <tbody>
-                {rows.map((rowObj, index)=><BodyRow rowsCopy={rowsCopy} deleteRow={deleteRow} key={index} rowObj={rowObj}></BodyRow>)}
+                {rows.map((rowObj, index)=><BodyRow rowsCopy={rowsCopy} reject={reject} approve={approve} key={index} rowObj={rowObj}></BodyRow>)}
             </tbody>
         </table>        
         

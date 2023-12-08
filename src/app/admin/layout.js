@@ -13,11 +13,11 @@ export default function AdminNav({children}){
         },
         {
             name: "REQUESTS",
-            linkTo: `/admin/orders`
+            linkTo: `/admin/requests`
         },
         {
             name: "ASSGINMENTS",
-            linkTo: `/admin/orders`
+            linkTo: `/admin/assginments`
         },
         {
             name: "USERS",
