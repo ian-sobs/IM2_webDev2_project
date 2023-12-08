@@ -36,10 +36,12 @@ export default async function genInfo({searchParams, userInfo}){
     const poolPromise = pool.promise()
     const conn = await poolPromise.getConnection()
     console.log(parseInt(searchParams.bookID))
-    const [data, fields] = await conn.execute(`SELECT bk.bookID, bk.title, bk.description, bk.img, bk.priceUSD, bk.avgRating, bk.author, GROUP_CONCAT(gnr.name ORDER BY bk.bookID SEPARATOR ', ') AS genreName FROM ((book bk LEFT JOIN book_genre_relation bgr ON bk.bookID = bgr.bookID) LEFT JOIN genre gnr ON gnr.genreID = bgr.genreID) WHERE bk.bookID=? GROUP BY bk.bookID;`, [parseInt(searchParams.bookID)])
-    console.log("dataBook", data)
+    const [data, fields] = await conn.execute(`SELECT bk.bookID, bk.title, bk.description, bk.img, bk.priceUSD, bk.avgRating, bk.author, gnr.name AS genreName FROM (book bk INNER JOIN genre gnr ON gnr.genreID = bk.genreID) WHERE bk.bookID=?`, [parseInt(searchParams.bookID)])
+    
     const [bookInfo] = data
-    await poolPromise.releaseConnection(conn)
+    console.log("dataBook", bookInfo)
+    console.log('bookInfo_geninfo', bookInfo)
+    poolPromise.releaseConnection(conn)
     console.log("Book information async", bookInfo)
 
     const imgStyle = {
