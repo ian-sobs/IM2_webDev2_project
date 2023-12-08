@@ -23,9 +23,9 @@ export async function POST(request) {
     returnData['bookImgLink'] = new VldtMssg(-1, ['Enter a URL to the image or upload an image', 'URL is invalid'])
     data.delete('bookImgLink')
 
-    bookData['genreIDs'] = JSON.parse(data.get('genreIDs'))
-    returnData['genreIDs'] = new VldtMssg(-1, ['Choose at least 1 genre'])
-    data.delete('genreIDs')
+    // bookData['genreIDs'] = JSON.parse(data.get('genreIDs'))
+    // returnData['genreIDs'] = new VldtMssg(-1, ['Choose at least 1 genre'])
+    // data.delete('genreIDs')
 
     for(const fieldName of data.keys()){
         bookData[fieldName] = data.get(fieldName)
@@ -44,7 +44,7 @@ export async function POST(request) {
     }
     console.log("imgSrc", imgSrc)
     
-    console.log("bookData['genreIDs'].length", bookData['genreIDs'].length)
+    // console.log("bookData['genreIDs'].length", bookData['genreIDs'].length)
     // if(bookData['genreIDs'].length == 0){
     //     returnData['genreIDs'].invalidField(0)
     // }
@@ -77,11 +77,12 @@ export async function POST(request) {
     }
 
     const poolPromise = pool.promise()
-    const conn = await poolPromise.getConnection({multipleStatements: true})
+    const conn = await poolPromise.getConnection()
 
-    let bookInsertedID
+    const [accArr, accArrFields] = await conn.execute("SELECT * FROM genre")
+    const [accomodations] = accArr
 
-    const [result, fields] = await conn.execute('INSERT INTO book (title, description, img, priceUSD, avgRating, author) VALUES (?, ?, ?, ?, ?, ?)', [bookData["bookTitle"], bookData["bookDesc"], imgSrc, parseFloat(parseFloat(bookData["bookPrice"]).toFixed(2)), 0, bookData["bookAuthors"]])
+    const [result, fields] = await conn.execute('INSERT INTO book (title, description, img, avgRating, author, slots, genreID) VALUES (?, ?, ?, ?, ?, (SELECT slots FROM genre WHERE genreID=?), ?)', [bookData["bookTitle"], bookData["bookDesc"], imgSrc, 0, bookData["bookAuthors"], bookData["accommodation"],bookData["accomodation"]])
     console.log(result)
     
     bookInsertedID = result.insertId

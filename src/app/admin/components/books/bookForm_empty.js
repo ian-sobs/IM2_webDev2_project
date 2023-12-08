@@ -19,26 +19,26 @@ export default function BookForm({ className, genres, children}){
         e.preventDefault()
         // console.log("checkBoxVal", checkBoxVal.current)
         // let objPost = {}
-        let arr = recurseSearchTagname('input', checkBoxVal.current)
-        let genreIDs = []
-        arr.forEach(element => {
-            if(element.checked){
-                genreIDs.push(parseInt(element.value))
-            }
-        });
+        // let arr = recurseSearchTagname('input', checkBoxVal.current)
+        // let genreIDs = []
+        // arr.forEach(element => {
+        //     if(element.checked){
+        //         genreIDs.push(parseInt(element.value))
+        //     }
+        // });
 
-        console.log(genreIDs)
+        // console.log(genreIDs)
         const data =  new FormData(formBook.current)
         data.set('bookImgFile', imageFile.current.files[0])
 
-        genres.forEach((genre)=>{
-            data.delete(genre.name)
-        })
+        // genres.forEach((genre)=>{
+        //     data.delete(genre.name)
+        // })
 
-        data.append('genreIDs', JSON.stringify(genreIDs));
+        // data.append('genreIDs', JSON.stringify(genreIDs));
         
 
-        
+        console.log("formData_in_books", data)
         fetch('/admin/books/api/newBook', {
             method: "POST",
             // headers: {
@@ -71,15 +71,15 @@ export default function BookForm({ className, genres, children}){
 
                     <Dialog.Panel as='div' style={{top:' 50%', left: '50%', transform: 'translate(-50%, -50%)'}} className='p-[20px] bg-white rounded-md w-4/5 sm:w-3/5 lg:w-1/4 fixed z-50'>
                    
-                        <Dialog.Title className='text-center mb-3 font-semibold'>Add new book</Dialog.Title>
+                        <Dialog.Title className='text-center mb-3 font-semibold'>Add a new dorm room</Dialog.Title>
 
                         <Dialog.Description className='text-justify font-light'>
-                           Input the required information for the new book
+                           Input the required information for the new dorm room
                         </Dialog.Description>
 
                         <form ref={formBook} className='flex flex-col'>
                             <div className='flex flex-col my-3'>
-                                <label htmlFor="bookTitle">Title</label>
+                                <label htmlFor="bookTitle">Dorm Room ID</label>
                                 <input type='text' id='bookTitle' name='bookTitle' className="bg-slate-200"></input>
                             </div> 
                             <div className='flex flex-col my-3'>
@@ -87,10 +87,10 @@ export default function BookForm({ className, genres, children}){
                                 <textarea id='bookDesc' name="bookDesc" className="bg-slate-200"></textarea>
                             </div>
                             <div className='flex flex-col my-3'>                                
-                                        <label>Select a genre</label>
+                                        <label>Select the accommodation</label>
                                         <div ref={checkBoxVal} className="flex flex-col max-h-32 overflow-x-auto border">
                                             {genres.map((genre, index)=>{
-                                                return <div key={index}> <input name={genre.name} id={genre.name} value={genre.genreID} type="checkbox"></input> <label>{genre.name}</label></div>
+                                                return <div key={index}> <input name="accommodation" id={genre.name} value={genre.genreID} type="radio"></input> <label for={genre.name}>{genre.name}</label></div>
                                             })}
                                         </div>
 
@@ -104,12 +104,12 @@ export default function BookForm({ className, genres, children}){
                                 </div>
                                  
                             </div>
-                            <div className='flex flex-col my-3'>
+                            {/* <div className='flex flex-col my-3'>
                                 <label htmlFor="bookPrice">Price</label>
                                 <input id='bookPrice' name='bookPrice' type='number' className="bg-slate-200 w-1/3" ></input>
-                            </div>
+                            </div> */}
                             <div className='flex flex-col my-3'>
-                                <label htmlFor="bookAuthors">Author/s</label>
+                                <label htmlFor="bookAuthors">Location</label>
                                 <input id='bookAuthors' name='bookAuthors' type='text' className="bg-slate-200"></input>
                             </div>
        
