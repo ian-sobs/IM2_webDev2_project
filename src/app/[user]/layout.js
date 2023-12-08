@@ -7,23 +7,23 @@ export default function BookiiLayout({children}){
 
     const navFields = [
         {
-            name: "MARKET",
+            name: "DORMS",
             linkTo: `/${usrInfo.unm}/market`
         },
         {
             name: "WISH LIST",
             linkTo: `/${usrInfo.unm}/favorites`
         },
+        // {
+        //     name: "SHOPPING CART",
+        //     linkTo: `/${usrInfo.unm}/shoppingCart`
+        // },
         {
-            name: "SHOPPING CART",
-            linkTo: `/${usrInfo.unm}/shoppingCart`
-        },
-        {
-            name: "ORDERS",
+            name: "REQUEST",
             linkTo: `/${usrInfo.unm}/orders`
         },
         {
-            name: `${usrInfo.unm.toUpperCase()}`,
+            name: `PROFILE`,
             linkTo: `/${usrInfo.unm}/userInfo`
         },
         {
