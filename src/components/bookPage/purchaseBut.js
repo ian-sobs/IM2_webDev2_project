@@ -83,7 +83,7 @@ export default function purchase(props){
                                 <p className='mr-[7px]'>Total price: </p> <span className='text-green-500 font-semibold'>{`PHP ${(props.bookInfo.priceUSD * prodQuant).toFixed(2)}`}</span>
                             </div> */}
 
-                             <Form.Field className='flex flex-col items-center mb-[8px]' name="address">
+                             <Form.Field className='flex flex-col items-center mb-[8px]' name="message">
                                 <div className="flex flex-row justify-between items-center">    
                                     <Form.Label asChild className='mr-[10px] self-start text-left'>
                                         <div className='w-full text-left'>
