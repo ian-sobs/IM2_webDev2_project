@@ -14,10 +14,10 @@ export default function BookiiLayout({children}){
             name: "WISH LIST",
             linkTo: `/${usrInfo.unm}/favorites`
         },
-        {
-            name: "REQUEST",
-            linkTo: `/${usrInfo.unm}/shoppingCart`
-        },
+        // {
+        //     name: "REQUEST",
+        //     linkTo: `/${usrInfo.unm}/shoppingCart`
+        // },
         // {
         //     name: "REQUEST",
         //     linkTo: `/${usrInfo.unm}/orders`
