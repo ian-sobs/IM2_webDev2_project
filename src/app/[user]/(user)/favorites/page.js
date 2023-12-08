@@ -7,7 +7,19 @@ export default function Page(){
     // const userInfo = cookies().get("userCredentials")
     // const user = JSON.parse(userInfo.value)
     // console.log("userInfo", user) 
-    const userInfo = user()
+    const jwt = require('jsonwebtoken')
+
+    if(!cookies().has('usrToken')) redirect('/login')
+
+    const usrToken = cookies().get('usrToken')
+    console.log("usrTokenInMidware", usrToken)
+
+    try {
+        var decoded = jwt.verify(usrToken.value, process.env.JWT_SECRET);
+    } catch(err) {
+        console.log("jwtErr", err)
+        redirect('/login')
+    }
 
     const sectionGridStyle = {
         allWidth: "min-h-screen  pt-[25px]  bg-slate-100 pb-[20px] grid place-items-center gap-6",
@@ -25,7 +37,7 @@ export default function Page(){
             
                     {/* {books.map((book, index)=><Card key={index} details={book}></Card>)} */}
                 
-            <CardsDisplay currency={userInfo["crrncyCode"]} tabStyles="col-span-2 md:col-span-3 lg:col-span-4" requestURL="/user/favorites/api" username={userInfo["username"]}></CardsDisplay>
+            <CardsDisplay currency="PHP" localCurrPerUSD="1" tabStyles="col-span-2 md:col-span-3 lg:col-span-4" requestURL="/user/favorites/api" username={decoded.unm}></CardsDisplay>
 
         </section>
     

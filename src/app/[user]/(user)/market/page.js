@@ -65,7 +65,7 @@ export default function Page(){
             
                     {/* {books.map((book, index)=><Card key={index} details={book}></Card>)} */}
                 
-           <CardsDisplay currency={userInfo["crrncyCode"]} localCurrPerUSD={userInfo["localCurrPerUSD"]} CtabStyles="col-span-2 md:col-span-3 lg:col-span-4 " requestURL="/user/market/api" username={userInfo["username"]}></CardsDisplay>
+           <CardsDisplay currency="PHP" localCurrPerUSD="1" CtabStyles="col-span-2 md:col-span-3 lg:col-span-4 " requestURL="/user/market/api" username={decoded.unm}></CardsDisplay>
 
         </section>
     
