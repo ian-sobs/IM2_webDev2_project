@@ -1,11 +1,14 @@
-import userCookie  from '@/components/getUsrCookie'
-import emailCookie  from '@/components/getEmail'
-import firstN  from '@/components/getFirstName'
-import lastN  from '@/components/getLastName'
-import birth  from '@/components/getBirth'
-import add  from '@/components/getAddress'
+import {auth} from '@/components/authentication/authUser'
+// import userCookie  from '@/components/getUsrCookie'
+// import emailCookie  from '@/components/getEmail'
+// import firstN  from '@/components/getFirstName'
+// import lastN  from '@/components/getLastName'
+// import birth  from '@/components/getBirth'
+// import add  from '@/components/getAddress'
 
-export default function Page(){ 
+
+export default function Page(){
+    const userInfo = auth()
 
     const sectionGridStyle = {
         allWidth: "min-h-screen min-w-screen pt-[25px] bg-[#ffedd5] pb-[20px] w-full",
@@ -16,12 +19,12 @@ export default function Page(){
         xl:"xl:px-22 xl:grid-cols-4"
     }
 
-    const user = userCookie()
-    const email = emailCookie()
-    const first = firstN()
-    const last = lastN()
-    const bday = birth()
-    const addr = add()
+    // const user = userCookie()
+    // const email = emailCookie()
+    // const first = firstN()
+    // const last = lastN()
+    // const bday = birth()
+    // const addr = add()
     
     return (
     <>
@@ -35,33 +38,36 @@ export default function Page(){
                         <div className="pt-[12px] text-black">
                             <div className="flex flex-col font-semibold	whitespace-pre text-3xl py-8 items-center md:flex-row justify-right">                My Profile:  </div>
                             <div className="flex flex-col px-40 place-items-center">
-                                <span className='w-4/6 h-12 font-medium rounded-full bg-gradient-to-r from-[#d9f99d] to-[#d9f99d] text-[#365314] px-24 py-2 text-center font-normal text-lg	'>
-                                    Username: {user["username"]}
+                                <span className='w-4/6 h-12 rounded-full bg-gradient-to-r from-[#d9f99d] to-[#d9f99d] text-[#365314] px-24 py-2 text-center font-normal text-lg	'>
+                                    Username: {userInfo["unm"]}
                                 </span>
                                 <span className='px-60 py-4 text-left font-normal	text-xl	'>
                                     
                                 </span>
-                                <span className='w-4/6 h-12 font-medium rounded-full bg-gradient-to-r from-[#d9f99d] to-[#d9f99d] text-[#365314] px-16 py-2 text-center font-normal text-lg	'>
-                                    Name: {first["firstName"]} {last["lastName"]}
+                                <span className='w-4/6 h-12 rounded-full bg-gradient-to-r from-[#d9f99d] to-[#d9f99d] text-[#365314] px-16 py-2 text-center font-normal text-lg	'>
+                                    First name: {userInfo["given_name"]} 
                                 </span>
                                 <span className='px-60 py-4 text-left font-normal	text-xl	'>
                                     
                                 </span>
-                                <span className='w-4/6 h-12 font-medium rounded-full bg-gradient-to-r from-[#d9f99d] to-[#d9f99d] text-[#365314] px-16 py-2 text-center font-normal text-lg'>
-                                    Email: {email["email"]}
+                                <span className='w-4/6 h-12 rounded-full bg-gradient-to-r from-[#d9f99d] to-[#d9f99d] text-[#365314] px-16 py-2 text-center font-normal text-lg	'>
+                                    Last name: {userInfo["last_name"]} 
+                                </span>
+                                <span className='w-4/6 h-12 rounded-full bg-gradient-to-r from-[#d9f99d] to-[#d9f99d] text-[#365314] px-16 py-2 text-center font-normal text-lg'>
+                                    Email: {userInfo["email"]}
                                 </span>
                                 <span className='px-60 py-4 text-left font-normal	text-xl	'>
                                     
                                 </span>
-                                <span className='w-4/6 h-12 font-medium rounded-full bg-gradient-to-r from-[#d9f99d] to-[#d9f99d] text-[#365314]  py-2 text-center font-normal text-lg'>
-                                    Birthdate: {bday["birthdate"]}
+                                <span className='w-4/6 h-12 rounded-full bg-gradient-to-r from-[#d9f99d] to-[#d9f99d] text-[#365314]  py-2 text-center font-normal text-lg'>
+                                    Birthdate: {userInfo["birthdate"]}
                                 </span>
-                                <span className='px-60 py-4 text-left font-normal	text-xl	'>
+                                {/* <span className='px-60 py-4 text-left font-normal	text-xl	'>
                                     
                                 </span>
-                                <span className='w-4/6 h-12 font-medium rounded-full bg-gradient-to-r from-[#d9f99d] to-[#d9f99d] text-[#365314] px-16 py-2 text-center font-normal text-lg'>
+                                <span className='w-4/6 h-12 rounded-full bg-gradient-to-r from-[#d9f99d] to-[#d9f99d] text-[#365314] px-16 py-2 text-center font-normal text-lg'>
                                     Address: {addr["address"]}
-                                </span>
+                                </span> */}
                                 <span className='px-60 py-4 text-left font-normal	text-xl	'>
                                     
                                 </span>

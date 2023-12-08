@@ -51,16 +51,6 @@ export default async function SignUp() {
       fieldType: "TEXT"
     },
     {
-      fieldName: "Country",
-      nameAttr: "country",
-      fieldType: "SELECT"
-    },
-    {
-      fieldName: "Address",
-      nameAttr: "address",
-      fieldType: "TEXT"
-    },
-    {
       fieldName: "Sign up",
       nameAttr: "signUp",
       fieldType: "SUBMIT"
@@ -73,11 +63,11 @@ export default async function SignUp() {
   
   const db =  await poolPromise.getConnection()
   
-  const [cntryResults, cntryFields] = await db.execute("SELECT countryID, name FROM country ORDER BY name ASC")
+  // const [cntryResults, cntryFields] = await db.execute("SELECT countryID, name FROM country ORDER BY name ASC")
     
-  await poolPromise.releaseConnection(db)
+  // await poolPromise.releaseConnection(db)
     
-  options = cntryResults.map((cntry, index)=><option key={index} value={cntry.countryID}>{cntry.name}</option>)
+  // options = cntryResults.map((cntry, index)=><option key={index} value={cntry.countryID}>{cntry.name}</option>)
 
 
   // console.log(cntryResults)
@@ -100,27 +90,28 @@ export default async function SignUp() {
     const firstName = formData.get("firstName")
     const middleName = formData.get("middleName")
     const lastName = formData.get("lastName")
-    const address = formData.get("address")
-    const country = formData.get("country")
+    // const address = formData.get("address")
+    // const country = formData.get("country")
     
     const [rows, fields] = await db.execute('SELECT COUNT(email), COUNT(username) FROM user WHERE email = ? AND username = ?', [email, username])
-    await poolPromise.releaseConnection(db)
+    
     const [queriedForObj] = rows
     // console.log("formdata", formData)
 
     //modify the code to allow redirects and check if the input fields are empty
     if(queriedForObj["COUNT(email)"] >= 1 || queriedForObj["COUNT(username)"] >= 1 || password != formData.get("confirmPassword")){
-      await poolPromise.releaseConnection(db)
+      poolPromise.releaseConnection(db)
       return
     }
     // if(queriedForObj["COUNT(email)"] < 1 && queriedForObj["COUNT(username)"] < 1 && password == formData.get("confirmPassword")){
+    poolPromise.releaseConnection(db)
 
     bcrypt.hash(password, saltRounds, function(err, hash) {
           // Store hash in your password DB.
       pool.getConnection(function(err, conn){
           conn.execute(
-            'INSERT INTO user (email, username, password_bcrypt,  birthdate, firstName, midName, lastName, address, countryID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-              [email, username, hash, birthDate, firstName, middleName, lastName, address, country],
+            'INSERT INTO user (email, username, password_bcrypt,  birthdate, firstName, midName, lastName) VALUES (?, ?, ?, ?, ?, ?, ?)',
+              [email, username, hash, birthDate, firstName, middleName, lastName],
                 function(err, results, fields) {
                   console.log(results); // results contains rows returned by server
                   console.log(fields); // fields contains extra meta data about results, if available
@@ -133,15 +124,20 @@ export default async function SignUp() {
     })
     // }
 
-    await poolPromise.releaseConnection(db)
+    poolPromise.releaseConnection(db)
   }
 
   return ( 
 
     <>
 
+<<<<<<< HEAD
       <div className="p-4 min-h-screen flex flex-col justify-center items-center bg-gradient-to-tr from-[#eab308] from-30% via-[#a3e635] via-60% to-[#65a30d] to-90%">
         <Form  options={options} action={create} fields={fields} ></Form> 
+=======
+      <div className="p-4 min-h-screen flex flex-col justify-center items-center bg-gradient-to-tr from-[#DC8ECB] from-30% via-[#FFB169] via-60% to-[#FFF8BD] to-90%">
+        <Form action={create} fields={fields}></Form> 
+>>>>>>> 9c4be9679f9a9977f25f7bfe1efde6bc10122a70
         <div className="text-black text-center container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-b-lg">
           Already have an account? <span className="no-underline hover:underline text-[#fc1c6e]"><Link href="/login">Log in</Link></span>
         </div>

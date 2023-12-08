@@ -1,13 +1,14 @@
 
 import user  from '@/components/getUsrCookie'
 import CardsDisplay from '@/components/listOfCards/cardsDisplay';
+import {auth} from '@/components/authentication/authUser'
 // import cardsDisplay from '@/components/listOfCards/cardsDisplay';
 
 export default function Page(){
     // const userInfo = cookies().get("userCredentials")
     // const user = JSON.parse(userInfo.value)
     // console.log("userInfo", user) 
-    const userInfo = user()
+    let usrInfo = auth()
 
     const sectionGridStyle = {
         allWidth: "min-h-screen  pt-[25px]  bg-[#ffedd5] pb-[20px] grid place-items-center gap-6",
@@ -25,7 +26,7 @@ export default function Page(){
             
                     {/* {books.map((book, index)=><Card key={index} details={book}></Card>)} */}
                 
-            <CardsDisplay currency={userInfo["crrncyCode"]} tabStyles="col-span-2 md:col-span-3 lg:col-span-4" requestURL="/user/favorites/api" username={userInfo["username"]}></CardsDisplay>
+            <CardsDisplay currency="PHP" localCurrPerUSD="1" tabStyles="col-span-2 md:col-span-3 lg:col-span-4" requestURL="/user/favorites/api" username={usrInfo.unm}></CardsDisplay>
 
         </section>
     

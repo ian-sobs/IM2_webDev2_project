@@ -1,32 +1,34 @@
 import Navbar from "@/components/navbar"
 import userCookie  from '@/components/getUsrCookie'
+import {auth} from '@/components/authentication/authUser'
 
 export default function BookiiLayout({children}){
-    const user = userCookie()
+    let usrInfo = auth()
+
     const navFields = [
         {
-            name: "MARKET",
-            linkTo: `/${user["username"]}/market`
+            name: "DORMS",
+            linkTo: `/${usrInfo.unm}/market`
         },
         {
             name: "WISH LIST",
-            linkTo: `/${user["username"]}/favorites`
+            linkTo: `/${usrInfo.unm}/favorites`
         },
         {
-            name: "SHOPPING CART",
-            linkTo: `/${user["username"]}/shoppingCart`
+            name: "REQUEST",
+            linkTo: `/${usrInfo.unm}/shoppingCart`
         },
+        // {
+        //     name: "REQUEST",
+        //     linkTo: `/${usrInfo.unm}/orders`
+        // },
         {
-            name: "ORDERS",
-            linkTo: `/${user["username"]}/orders`
-        },
-        {
-            name: `${user["username"].toUpperCase()}`,
-            linkTo: `/${user["username"]}/userInfo`
+            name: `PROFILE`,
+            linkTo: `/${usrInfo.unm}/userInfo`
         },
         {
             name: `ABOUT`,
-            linkTo: `/${user["username"]}/aboutpage`
+            linkTo: `/${usrInfo.unm}/aboutpage`
         }
     ]
     
