@@ -54,10 +54,11 @@ export default function purchase(props){
 
                 <Dialog.Trigger asChild>
                     <button className="bg-green-500 p-[4px] px-[9px] rounded-full text-white font-semibold flex flex-row justify-center items-center" onClick={()=>setIsOpen(true)}>
-                        <Image src={cartAdd} className="mr-[4px]" style={style} alt="AddToCart"></Image>
+                        {/* <Image src={cartAdd} className="mr-[4px]" style={style} alt="AddToCart"></Image> */}
                         <div className="flex flex-row">
-                            <span className="mr-[4px]">{"PHP "}</span>
-                            {`${props.bookInfo.priceUSD}`}
+                            {/* <span className="mr-[4px]">{"PHP "}</span>
+                            {`${props.bookInfo.priceUSD}`} */}
+                            Request
                         </div>
                     </button>
                 </Dialog.Trigger>  
@@ -73,26 +74,30 @@ export default function purchase(props){
 
                             
                         <Form.Root className='flex flex-col justify-center mb-[8px]' onSubmit={handleSubmit}>
-                            <Form.Field className='flex flex-row items-center mb-[8px]' name="prodQuant">
+                            {/* <Form.Field className='flex flex-row items-center mb-[8px]' name="prodQuant">
                                     <Form.Label className='mr-[10px]'>Quantity</Form.Label>
                                     <Form.Control className='w-[60px] bg-slate-200 p-[4px] rounded-sm' asChild><input type="number" min="1" value={prodQuant} onChange={(e)=>setProdQuant(e.target.value)}></input></Form.Control>
-                            </Form.Field>
-
+                            </Form.Field> */}
+{/* 
                             <div className='flex flex-row items-center mb-[14px]'>
                                 <p className='mr-[7px]'>Total price: </p> <span className='text-green-500 font-semibold'>{`PHP ${(props.bookInfo.priceUSD * prodQuant).toFixed(2)}`}</span>
-                            </div>
+                            </div> */}
 
-                             <Form.Field className='flex flex-row items-center mb-[8px]' name="address">
+                             <Form.Field className='flex flex-col items-center mb-[8px]' name="address">
                                 <div className="flex flex-row justify-between items-center">    
-                                    <Form.Label className='mr-[10px]'>Address</Form.Label>
+                                    <Form.Label asChild className='mr-[10px] self-start text-left'>
+                                        <div className='w-full text-left'>
+                                            Message
+                                        </div>
+                                    </Form.Label>
                                     <Form.Message className="text-sm font-light" match="valueMissing"> Address should not be empty </Form.Message>
                                 </div>
-                                <Form.Control className='w-full bg-slate-200 p-[4px] rounded-sm' asChild><input type="text"></input></Form.Control>
+                                <Form.Control className='w-full bg-slate-200 p-[4px] rounded-sm h-36' asChild><textarea type="text"></textarea></Form.Control>
                             </Form.Field>
-
+{/* 
                             <Form.Field name="totalPrice" asChild>
                                 <Form.Control asChild><input type="number" value={(props.bookInfo.priceUSD * prodQuant).toFixed(2)} hidden></input></Form.Control>
-                            </Form.Field>
+                            </Form.Field> */}
 
                             <Form.Field name="userID" asChild>
                                 <Form.Control asChild><input type="number" value={parseInt(props.userInfo.usr)} hidden></input></Form.Control>

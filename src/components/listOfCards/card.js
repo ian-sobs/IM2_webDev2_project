@@ -44,9 +44,9 @@ export default function Card({details, localCurrPerUSD, currency, username}){
                             <div name="bookRatings" className="flex flex-row items-center">
                                 <Image className="w-[20px] md:w-[24px]" src={starIcon} style={startStyle} alt="star"></Image> <span className='w-fit align-middle font-light h-fit'>{details.ratings}</span>
                             </div>
-                            <div name="bookPrice" className="font-light flex flex-row truncate">
-                                <span className=' mr-[4px]'>{`${currency}`}</span> {`${(56 * parseFloat(details.price)).toFixed(2)}`}
-                            </div>
+                            {/* <div name="bookPrice" className="font-light flex flex-row truncate">
+                                {`${(56 * parseFloat(details.price)).toFixed(2)}`}
+                            </div> */}
                         </div>
                     </div>
                 </div>
