@@ -5,7 +5,7 @@ export async function GET(request) {
     const promisePool = pool.promise()
     const conn = await promisePool.getConnection()
     const [results, fields] = await conn.execute('SELECT * FROM `user`')
-    await promisePool.releaseConnection(conn)
+     promisePool.releaseConnection(conn)
     // console.log("jdalfja", Response.json(results))
     return Response.json(results)
 }

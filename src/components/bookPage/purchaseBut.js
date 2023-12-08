@@ -74,10 +74,9 @@ export default function purchase(props){
         .then((result)=>result.json())
         .then((output)=> {
             console.log("cancelRequestOutput", output)
-            if(output.affectedRows > 0){
                 setIsOpen(false)
                 setIsRequest(true)
-            }
+            
         })
     }
 
