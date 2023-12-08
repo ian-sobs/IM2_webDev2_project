@@ -1,22 +1,9 @@
 import getUsrCookie from "@/components/getUsrCookie"
 import CartItemDisplay from "@/components/shoppingCart/cartItemDisplay"
-import { cookies } from "next/headers"
-import {redirect} from 'next/navigation'
+import {auth} from '@/components/authentication/authUser'
 
 export default function cart(){
-    const jwt = require('jsonwebtoken')
-
-    if(!cookies().has('usrToken')) redirect('/login')
-
-    const usrToken = cookies().get('usrToken')
-    console.log("usrTokenInMidware", usrToken)
-
-    try {
-        var decoded = jwt.verify(usrToken.value, process.env.JWT_SECRET);
-    } catch(err) {
-        console.log("jwtErr", err)
-        redirect('/login')
-    }
+    const userInfo = auth()
 
     // const userInfo = getUsrCookie()
 
