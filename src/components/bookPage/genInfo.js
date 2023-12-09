@@ -104,7 +104,7 @@ export default async function genInfo({searchParams, userInfo}){
                             </div>
                             
                             <div className="flex flex-col md1:flex-row  md1:justify-between">
-                                <RateBut bookID={bookInfo.bookID} userID={parseInt(userInfo.usr)}></RateBut>
+                                {/* <RateBut bookID={bookInfo.bookID} userID={parseInt(userInfo.usr)}></RateBut> */}
                                 <div className="h-[10px] md1:h-0"></div>
                                 <FaveButton userInfo={userInfo} bookInfo={bookInfo}></FaveButton>
                                 <div className="h-[10px] md1:h-0"></div>
