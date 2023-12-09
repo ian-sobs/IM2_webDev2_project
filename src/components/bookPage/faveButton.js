@@ -13,7 +13,7 @@ export default function faveButton(props){
     }
 
     useEffect(()=>{
-        fetch(`/user/book/api/favoriteFirstRender?userID=${props.userInfo.userID}&bookID=${props.bookInfo.bookID}`)
+        fetch(`/user/book/api/favoriteFirstRender?userID=${props.userInfo.usr}&bookID=${props.bookInfo.bookID}`)
         .then((result)=>result.json())
         .then((parsedResult)=>{
             if(parsedResult.faved > 0){
@@ -27,7 +27,7 @@ export default function faveButton(props){
     }
 
     function fave(){
-        fetch(`/user/book/api/fave?userID=${props.userInfo.userID}&bookID=${props.bookInfo.bookID}`)
+        fetch(`/user/book/api/fave?userID=${props.userInfo.usr}&bookID=${props.bookInfo.bookID}`)
         .then((result)=>result.json())
         .then((parsedResult)=>{
             if(parsedResult.length > 0){
@@ -39,7 +39,7 @@ export default function faveButton(props){
     }
 
     function unFave(){
-        fetch(`/user/book/api/unFave?userID=${props.userInfo.userID}&bookID=${props.bookInfo.bookID}`)
+        fetch(`/user/book/api/unFave?userID=${props.userInfo.usr}&bookID=${props.bookInfo.bookID}`)
         .then((result)=>result.json())
         .then((parsedResult)=>{
             if(parsedResult.length <= 0){

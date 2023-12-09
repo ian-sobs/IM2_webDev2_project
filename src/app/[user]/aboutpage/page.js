@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 const DeveloperCard = ({ imgSrc, name, role }) => (
@@ -85,3 +86,4 @@ const AboutPage = () => {
 };
 
 export default AboutPage;
+

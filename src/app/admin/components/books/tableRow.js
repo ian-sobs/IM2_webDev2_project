@@ -6,10 +6,7 @@ export function HeadRow({colNames, ndxToShorten, rowsCopy}){
     return (
         <>
             <tr >
-                {colNames.map((col, index)=>{
-                    console.log(index)
-                    return (ndxToShorten == index) ? <th key={index} >{col}</th> : <th key={index} >{col}</th> 
-                })}
+                {colNames.map((col, index)=><th key={index} >{col}</th>)}
                 <th>Actions</th>
             </tr>
         </>
@@ -18,7 +15,7 @@ export function HeadRow({colNames, ndxToShorten, rowsCopy}){
 
 export function BodyRow({rowObj, bookID_in_form, setBookID_in_form, ndxLink, ndxDesc, deleteBook, editBook}){
     let colData = Object.keys(rowObj)
-    let bookID = rowObj.ID
+    let bookID = rowObj['DB Index']
     console.log("rowObj", rowObj)
 
     

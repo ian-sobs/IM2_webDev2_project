@@ -17,7 +17,7 @@ export function HeadRow({colNames, ndxToShorten, rowsCopy}){
     )
 }
 
-export function BodyRow({rowObj, deleteRow, openUpdateModal}){
+export function BodyRow({rowObj, reject, approve}){
     let colData = Object.keys(rowObj)
     let rowID = rowObj.ID
     console.log("rowObj", rowObj)
@@ -40,8 +40,8 @@ export function BodyRow({rowObj, deleteRow, openUpdateModal}){
     // ]
 
     const actions = [
-        new actionDetails('Edit', openUpdateModal, 'bg-blue-500', 'text-white'),
-        new actionDetails('Delete', deleteRow, 'bg-rose-500', 'text-white')
+        new actionDetails('Approve', approve, 'bg-blue-500', 'text-white'),
+        new actionDetails('Reject', reject, 'bg-rose-500', 'text-white')
     ]
     return (
         <>    

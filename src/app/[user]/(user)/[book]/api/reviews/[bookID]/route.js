@@ -9,7 +9,7 @@ export async function GET(request, { params }) {
     
     const [rows, fields] = await conn.execute("SELECT usr.email, usr.username, r.content, r.rating, r.datePosted FROM (review r INNER JOIN `user` usr ON usr.userID = r.userID) WHERE r.bookID = ? ORDER BY r.datePosted DESC", [bookID])
     console.log(`Reviews for book ${bookID}`, rows)
-    await poolPromise.releaseConnection(conn)
+    poolPromise.releaseConnection(conn)
 
     return Response.json(rows)
 }

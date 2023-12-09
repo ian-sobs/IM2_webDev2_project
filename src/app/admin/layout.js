@@ -4,16 +4,20 @@ export default function AdminNav({children}){
     // const user = userCookie()
     const navFields = [
         {
-            name: "BOOKS",
+            name: "DORM",
             linkTo: `/admin/books`
         },
         {
-            name: "GENRES",
+            name: "ACCOMODATION",
             linkTo: `/admin/genres`
         },
         {
-            name: "ORDERS",
-            linkTo: `/admin/orders`
+            name: "REQUESTS",
+            linkTo: `/admin/requests`
+        },
+        {
+            name: "ASSGINMENTS",
+            linkTo: `/admin/assginments`
         },
         {
             name: "USERS",
@@ -24,8 +28,8 @@ export default function AdminNav({children}){
         <>
         <div>
             
-            <Navbar fields={navFields} styles="h-14 bg-orange-300 fixed w-full z-30"> </Navbar>
-            <div className="h-14 "></div>
+            <Navbar fields={navFields} styles="h-14 bg-[#eab308] fixed w-full z-40"> </Navbar>
+            
             {/* <div className="h-[25px] bg-white"></div> */}
             
             {children}

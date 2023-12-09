@@ -1,32 +1,34 @@
 import Navbar from "@/components/navbar"
 import userCookie  from '@/components/getUsrCookie'
+import {auth} from '@/components/authentication/authUser'
 
 export default function BookiiLayout({children}){
-    const user = userCookie()
+    let usrInfo = auth()
+
     const navFields = [
         {
-            name: "MARKET",
-            linkTo: `/${user["username"]}/market`
+            name: "DORMS",
+            linkTo: `/${usrInfo.unm}/market`
         },
         {
             name: "WISH LIST",
-            linkTo: `/${user["username"]}/favorites`
+            linkTo: `/${usrInfo.unm}/favorites`
         },
+        // {
+        //     name: "REQUEST",
+        //     linkTo: `/${usrInfo.unm}/shoppingCart`
+        // },
+        // {
+        //     name: "REQUEST",
+        //     linkTo: `/${usrInfo.unm}/orders`
+        // },
         {
-            name: "SHOPPING CART",
-            linkTo: `/${user["username"]}/shoppingCart`
-        },
-        {
-            name: "ORDERS",
-            linkTo: `/${user["username"]}/orders`
-        },
-        {
-            name: `${user["username"].toUpperCase()}`,
-            linkTo: `/${user["username"]}/userInfo`
+            name: `PROFILE`,
+            linkTo: `/${usrInfo.unm}/userInfo`
         },
         {
             name: `ABOUT`,
-            linkTo: `/${user["username"]}/aboutpage`
+            linkTo: `/${usrInfo.unm}/aboutpage`
         }
     ]
     
@@ -34,8 +36,8 @@ export default function BookiiLayout({children}){
     return (
         <div>
             
-            <Navbar fields={navFields} styles="h-14 bg-orange-300 fixed w-full z-40"> </Navbar>
-            <div className="h-14 "></div>
+            <Navbar fields={navFields} styles="h-30 bg-[#eab308] fixed w-full z-40"> </Navbar>
+            <div className="h-28 bg-[#ffedd5]"></div>
             {/* <div className="h-[25px] bg-white"></div> */}
             
             {children}

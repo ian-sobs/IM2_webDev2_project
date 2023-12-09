@@ -10,10 +10,8 @@ export async function POST(request) {
     let returnData = {}
     let temp = {}
 
-    let insertStatement = ''
-    let insertGenreID = []
-    // if(imgFile)
 
+    console.log("formdata", data)
     
     bookData['bookImgFile'] = data.get('bookImgFile')
     returnData['bookImgFile'] = new VldtMssg(-1, ['Enter a URL to the image or upload an image', 'Invalid filetype', 'Image must have an aspect ratio of...'])
@@ -23,9 +21,6 @@ export async function POST(request) {
     returnData['bookImgLink'] = new VldtMssg(-1, ['Enter a URL to the image or upload an image', 'URL is invalid'])
     data.delete('bookImgLink')
 
-    bookData['genreIDs'] = JSON.parse(data.get('genreIDs'))
-    returnData['genreIDs'] = new VldtMssg(-1, ['Choose at least 1 genre'])
-    data.delete('genreIDs')
 
     for(const fieldName of data.keys()){
         bookData[fieldName] = data.get(fieldName)
@@ -44,10 +39,6 @@ export async function POST(request) {
     }
     console.log("imgSrc", imgSrc)
     
-    console.log("bookData['genreIDs'].length", bookData['genreIDs'].length)
-    // if(bookData['genreIDs'].length == 0){
-    //     returnData['genreIDs'].invalidField(0)
-    // }
 
     for(const fieldName of data.keys()){
         returnData[fieldName] = new VldtMssg(-1, ['This field must not be empty'])  
@@ -61,9 +52,7 @@ export async function POST(request) {
 
     console.log('returnData', returnData)
 
-    // for(const fieldName of fieldNames){
-    //     console.log(fieldName, data.get(fieldName))
-    // }
+
     temp.vldtInfo = returnData
     temp.bookData = bookData
 
@@ -77,28 +66,37 @@ export async function POST(request) {
     }
 
     const poolPromise = pool.promise()
-    const conn = await poolPromise.getConnection({multipleStatements: true})
+    const conn = await poolPromise.getConnection()
 
-    let bookInsertedID
+    const [accArr, accArrFields] = await conn.execute("SELECT * FROM genre")
+    const [accomodations] = accArr
 
-    const [result, fields] = await conn.execute('INSERT INTO book (title, description, img, priceUSD, avgRating, author) VALUES (?, ?, ?, ?, ?, ?)', [bookData["bookTitle"], bookData["bookDesc"], imgSrc, parseFloat(parseFloat(bookData["bookPrice"]).toFixed(2)), 0, bookData["bookAuthors"]])
+    Object.keys(bookData).forEach((key)=>console.log(`bookData[${key}]`, bookData[key]))
+
+    console.log('bookData["bookTitle"]',bookData["bookTitle"])
+    console.log('bookData["bookDesc"]',bookData["bookDesc"])
+    console.log('imgSrc',imgSrc)
+    console.log('bookData["bookAuthors"]',bookData["bookAuthors"])
+    console.log('bookData["accommodation"]',bookData["accommodation"])
+    console.log('bookData', bookData)
+
+
+    const [slot, slotFields] = await conn.execute("SELECT slots FROM genre WHERE genreID=?", [bookData["accommodation"]])
+    const [genreObj] = slot
+
+    console.log('genreObj', genreObj)
+    
+    const [result, fields] = await conn.execute('INSERT INTO book (title, description, img, avgRating, author, slots, genreID) VALUES (?, ?, ?, ?, ?, ?, ?)', [bookData["bookTitle"], bookData["bookDesc"], imgSrc, 0, bookData["bookAuthors"], genreObj.slots, bookData["accommodation"]]);
     console.log(result)
     
-    bookInsertedID = result.insertId
+    console.log("ResultOBJ", result)
+    let bookInsertedID = result.insertId
 
-    for(const genreID of bookData["genreIDs"]){
-        await conn.execute('INSERT INTO book_genre_relation (bookID, genreID) VALUES (?, ?)', [bookInsertedID, genreID])
-        // insertStatement = insertStatement + 'INSERT INTO book_genre_relation (bookID, genreID) VALUES (' + bookInsertedID + ', ' + genreID + ' ); '
-        insertGenreID.push(result.insertId)
-        insertGenreID.push(genreID)
-    }
 
-    const [justInserted, fieldsNewlyInserted] = await conn.execute("SELECT bk.bookID AS 'ID', bk.title AS 'Title', GROUP_CONCAT(gnr.name ORDER BY bk.bookID SEPARATOR ', ') AS 'Genre(s)', bk.description AS 'Description', bk.img AS 'Image', bk.priceUSD AS 'Price (USD)', bk.avgRating AS 'Avrg. Rating', bk.author AS 'Author/s' FROM ((book bk LEFT JOIN book_genre_relation bgr ON bk.bookID = bgr.bookID) LEFT JOIN genre gnr ON gnr.genreID = bgr.genreID) WHERE bk.bookID=? GROUP BY bk.bookID", [bookInsertedID])
+    const [justInserted, fieldsNewlyInserted] = await conn.execute("SELECT bk.bookID AS 'DB Index', bk.title AS 'Dorm Room ID', bk.author AS 'Location', gnr.name AS 'Accomodation', bk.slots AS 'Slots left', bk.description AS 'Description', bk.img AS 'Image', bk.avgRating AS 'Avrg. Rating' FROM (book bk LEFT JOIN genre gnr ON gnr.genreID = bk.genreID) WHERE bk.bookID=?", [bookInsertedID])
     const [newlyInserted] = justInserted
     temp.bookDisplay = newlyInserted
-    // console.log("insertStatement", insertStatement)
-    // const [inserted, insertedFields] = await conn.execute(insertStatement)
-    // console.log('inserted', inserted)
+
 
     poolPromise.releaseConnection(conn)
 
