@@ -1,11 +1,20 @@
 'use client'
 import {HeadRow, BodyRow} from './tableRow'
-import { useState } from 'react'
-import RowAction from '../rowAction'
+import { useState, useEffect } from 'react'
+// import RowAction from './rowAction'
+// import GenreForm from './genreForm'
 
-export default function TableFull({colNames, rowsData, caption}){
-    const [rows, setRows] = useState(rowsData)
-    const [isOpen, setIsOpen] = useState(false)
+export default function TableFull({rowID}){
+    const [rows, setRows] = useState([])
+    const colNames = ["Email", "First name", "Last name"]
+    useEffect(()=>{
+        fetch(`/admin/assginments/api/getDormmates?rowID=${rowID}`)
+        .then((result)=>result.json())
+        .then((output)=>{
+            setRows(output)
+        })
+
+    }, [])
 
     const [forEditing, setForEditing] = useState(false)
     const [rowID_in_form, setRowID_in_form] = useState(0)
@@ -17,41 +26,25 @@ export default function TableFull({colNames, rowsData, caption}){
     //     setRows(newRows)
     // }
 
-    function reject(rowID){
-        fetch('/admin/requests/api/reject', {
-            method: "POST",
-            headers: new Headers({'content-type': 'application/json'}),
-            body: JSON.stringify({rowID: rowID})
-        })
-        .then((result)=>result.json())
-        .then((parsedRes)=>{
+    // function deleteRow(rowID){
+    //     fetch('/admin/genres/api/deleteGenre', {
+    //         method: "POST",
+    //         headers: new Headers({'content-type': 'application/json'}),
+    //         body: JSON.stringify({rowID: rowID})
+    //     })
+    //     .then((result)=>result.json())
+    //     .then((parsedRes)=>{
+    //         if(parsedRes.affectedRows == 1){
+    //             let newBody = rowsCopy.filter((rowCopy)=>rowCopy.ID != rowID)
+    //             setRows(newBody)
+    //             if(newBody.length == 0){
+    //                 location.reload()
+    //             }
+    //         }
+    //     })
+    // }
 
-                location.reload()
-                
-            
-        })
-    }
- 
-    function approve(rowID){
-        fetch('/admin/requests/api/approve', {
-            method: "POST",
-            headers: new Headers({'content-type': 'application/json'}),
-            body: JSON.stringify({rowID: rowID})
-        })
-        .then((result)=>result.json())
-        .then((parsedRes)=>{
-            location.reload()
-            if(parsedRes.approve){
-                let newBody = rowsCopy.filter((rowCopy)=>rowCopy.ID != rowID)
-                setRows(newBody)
-                
-                    location.reload()
-                
-            }
-        })
-    }
-
-    // function approve(newRow){
+    // function addRow(newRow){
     //     fetch('/admin/genres/api/newGenre', {
     //         method: "POST",
     //         headers: {
@@ -119,21 +112,21 @@ export default function TableFull({colNames, rowsData, caption}){
         
         {/* <RowAction actions={genreList} positioning='absolute'>Select genre</RowAction> */}
         <table className="mx-auto shadow-lg table-fixed text-black bg-white border-separate border-spacing-y-[50px] border-spacing-x-9 z-1">
-            <caption className="caption-top mb-5 text-slate-400">
+            {/* <caption className="caption-top mb-5 text-slate-400">
                 {caption}
-            </caption>
+            </caption> */}
             <thead>
                 <HeadRow colNames={colNames} ndxToShorten={4}></HeadRow>
             </thead>
             <tbody>
-                {rows.map((rowObj, index)=><BodyRow rowsCopy={rowsCopy} reject={reject} approve={approve} key={index} rowObj={rowObj}></BodyRow>)}
+                {rows.map((rowObj, index)=><BodyRow rowObj={rowObj}></BodyRow>)}
             </tbody>
         </table>        
         
 
-        <div className='bg-inherit h-20'></div>
+        <div className='bg-inherit h-32'></div>
                     {/* <button onClick={GenreForm}></button> */}
-        {/* <GenreForm rowID_in_form={rowID_in_form} setRowID_in_form={setRowID_in_form} forEditing={forEditing} setForEditing={setForEditing} addRow={addRow} updateRow={updateRow} isOpen={isOpen} setIsOpen={setIsOpen} className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'>Add a new genre </GenreForm> */}
+        {/* <GenreForm rowID_in_form={rowID_in_form} setRowID_in_form={setRowID_in_form} forEditing={forEditing} setForEditing={setForEditing} addRow={addRow} updateRow={updateRow} isOpen={isOpen} setIsOpen={setIsOpen} className='text-slate-200 fixed bottom-7 left-14 bg-green-400 p-4 rounded-md font-semibold'>Add a new accommodation </GenreForm> */}
 
         
         </>

@@ -29,7 +29,7 @@ export default function AdminNav({children}){
         <div>
             
             <Navbar fields={navFields} styles="h-14 bg-[#eab308] fixed w-full z-40"> </Navbar>
-            <div className="h-14 "></div>
+            
             {/* <div className="h-[25px] bg-white"></div> */}
             
             {children}
