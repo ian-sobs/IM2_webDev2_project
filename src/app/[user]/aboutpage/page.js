@@ -26,7 +26,7 @@ const AboutPage = () => {
       flexDirection: 'column', 
       alignItems: 'center', 
       padding: '20px', 
-      backgroundColor: '#f5f5f5', 
+      backgroundColor: '#ffedd5', 
       fontFamily: 'Arial, sans-serif', 
       color: '#333' 
     }}>
