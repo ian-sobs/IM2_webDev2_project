@@ -1,4 +1,6 @@
 import {auth} from '@/components/authentication/authUser'
+import { cookies } from 'next/headers'
+// import signOutButton from '@/app/[user]/(user)/userInfo/signout'
 // import userCookie  from '@/components/getUsrCookie'
 // import emailCookie  from '@/components/getEmail'
 // import firstN  from '@/components/getFirstName'
@@ -8,6 +10,10 @@ import {auth} from '@/components/authentication/authUser'
 
 
 export default function Page(){
+    const cookieStore = cookies()
+    
+
+
     const userInfo = auth()
 
     const sectionGridStyle = {
@@ -74,6 +80,7 @@ export default function Page(){
                                 <span className='px-60 py-8 text-left font-normal	text-xl	'>
                                     
                                 </span>
+                                {/* <signOutButton></signOutButton> */}
                             </div>
     
                         </div>
