@@ -6,8 +6,9 @@ export async function GET(request) {
     const poolPromise = pool.promise()
     const conn = await poolPromise.getConnection()
 
-    const [result, fields] = await conn.execute('SELECT user.email AS Email, user.firstName AS `First name`, user.lastName AS `Last name` FROM ((`user` INNER JOIN `order` ON `order`.userID = `user`.userID) INNER JOIN book ON `order`.bookID=book.bookID)')
+    const [result, fields] = await conn.execute('SELECT title FROM book WHERE bookID=?',[rowID])
+    const [roomName] = result
     console.log(result)
    
-    return Response.json(result)
+    return Response.json(roomName)
   }

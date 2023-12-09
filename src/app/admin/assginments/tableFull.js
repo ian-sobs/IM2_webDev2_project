@@ -18,7 +18,8 @@ export default function TableFull({rowID}){
         fetch(`/admin/assginments/api/getRoom?rowID=${rowID}`)
         .then((result)=>result.json())
         .then((output)=>{
-            setCaption(output)
+            
+            setCaption(output.title)
         })
 
     }, [])
@@ -119,9 +120,9 @@ export default function TableFull({rowID}){
         
         {/* <RowAction actions={genreList} positioning='absolute'>Select genre</RowAction> */}
         <table className="mx-auto shadow-lg table-fixed text-black bg-white border-separate border-spacing-y-[50px] border-spacing-x-9 z-1">
-            {/* <caption className="caption-top mb-5 text-slate-400">
-                {caption}
-            </caption> */}
+            <caption className="caption-top mb-5 text-slate-400">
+                {caption +" occupant/s"}
+            </caption>
             <thead>
                 <HeadRow colNames={colNames} ndxToShorten={4}></HeadRow>
             </thead>
