@@ -6,12 +6,19 @@ import { useState, useEffect } from 'react'
 
 export default function TableFull({rowID}){
     const [rows, setRows] = useState([])
+    const [caption, setCaption] = useState("")
     const colNames = ["Email", "First name", "Last name"]
     useEffect(()=>{
         fetch(`/admin/assginments/api/getDormmates?rowID=${rowID}`)
         .then((result)=>result.json())
         .then((output)=>{
             setRows(output)
+        })
+
+        fetch(`/admin/assginments/api/getRoom?rowID=${rowID}`)
+        .then((result)=>result.json())
+        .then((output)=>{
+            setCaption(output)
         })
 
     }, [])
