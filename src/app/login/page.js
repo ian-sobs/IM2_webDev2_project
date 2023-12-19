@@ -16,25 +16,25 @@ export default async function Login(){
         {
             fieldName: "Log in",
             nameAttr: "logInHeading",
-            fieldType: "H1",
+            fieldType: "h1",
             
         },
         {
             fieldName: "Email",
             nameAttr: "email",
-            fieldType: "EMAIL",
+            fieldType: "email",
             label: "Email"
         },
         {
             fieldName: "Password",
             nameAttr: "password",
-            fieldType: "PASSWORD",
+            fieldType: "password",
             label: "Password"
         },
         {
             fieldName: "Log in",
             nameAttr: "logIn",
-            fieldType: "SUBMIT"
+            fieldType: "submit"
         }
     ]
     // action='/api/auth/callback/credentials'

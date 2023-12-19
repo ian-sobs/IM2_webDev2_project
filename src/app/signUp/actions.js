@@ -1,13 +1,15 @@
+'use server'
 import pool from '@/dbConn'
-export async function POST(request) {
+export async function create(currState , formData) {
+
     // console.log("signUp server action pool config", pool.config.connectionConfig)
-    const res = await request.formData()
 
     let ret ={
-        email: "Looks good!",
-        username: "Looks good!",
-        password: "Looks good!"
-    }
+      email: "Email looks good!",
+      username: "Username looks good!",
+      password: "Password looks good!",
+      confirmPassword: "Is a match with the inputted password!"
+  }
 
     let isValid = true
 
@@ -17,7 +19,7 @@ export async function POST(request) {
     const poolPromise = pool.promise()
     const db =  await poolPromise.getConnection()
 
-    formData.delete("signUp")
+    // formData.delete("signUp")
     const email = formData.get("email")
     const username = formData.get("username")
     const password = formData.get("password")
@@ -28,22 +30,42 @@ export async function POST(request) {
     // const address = formData.get("address")
     // const country = formData.get("country")
     
-    const [rows, fields] = await db.execute('SELECT COUNT(email), COUNT(username) FROM user WHERE email = ? AND username = ?', [email, username])
+    const [rows, fields] = await db.execute('SELECT COUNT(email) FROM user WHERE email = ?', [email])
+    const [userEmail] = rows
+
+    const [newRows, newFields] = await db.execute('SELECT COUNT(username) FROM user WHERE username = ?', [username])
+    const [userName] = newRows
     
     const [queriedForObj] = rows
     // console.log("formdata", formData)
 
     //modify the code to allow redirects and check if the input fields are empty
-    if(queriedForObj["COUNT(email)"] >= 1){
+      //modify the code to allow redirects and check if the input fields are empty
+    if(email.length == 0){
+        ret.email = "Email must not be empty"
+        isValid = false
+    }
+    if(username.length == 0){
+        ret.username = "Username must not be empty"
+        isValid = false
+    }
+
+
+    if(userEmail["COUNT(email)"] >= 1){
         ret.email = "Email is taken"
         isValid = false
     }
-    if(queriedForObj["COUNT(username)"] >= 1){
+    if(userName["COUNT(username)"] >= 1){
         ret.username = "Username is taken"
         isValid = false
     }
     if(password != formData.get("confirmPassword")){
-        ret.password = "Passwords do not match"
+        ret.confirmPassword = "Passwords do not match"
+        isValid = false
+    }
+
+    if(password.length == 0){
+        ret.password = "Password must not be empty"
         isValid = false
     }
     // if(queriedForObj["COUNT(email)"] < 1 && queriedForObj["COUNT(username)"] < 1 && password == formData.get("confirmPassword")){
@@ -69,6 +91,6 @@ export async function POST(request) {
         })
         
     }
-    return Response.json(ret)
+    return ret
 
-}
+  }

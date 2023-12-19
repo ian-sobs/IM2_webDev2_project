@@ -1,12 +1,20 @@
 'use client'
-import { useRef } from 'react';
+import { useRef , useState} from 'react';
+import { useFormState } from "react-dom";
+import {create} from "@/app/signUp/actions"
 // 'use client'
-function inputField(field, options){
+
+let initialState = {
+    email: "",
+    username: "",
+    password: ""
+}
+function inputField(field, options, message){
     const styles = "text-black caret-[#9F9F9F] p-[3px] rounded-sm bg-slate-200 focus:outline-none focus:ring-2 ring-[#FFB169] "
     const ref = useRef(0)
 
     switch(field.fieldType){
-        case "H1":
+        case "h1":
             return(
                     <div className="py-[15px] bg-transparent">
                         <h1 className="text-center text-2xl text-black font-semibold">
@@ -15,34 +23,8 @@ function inputField(field, options){
                         
                     </div>
             )
-        case "TEXT":
-            return (
-            <>
-                <div className="py-[15px] bg-transparent flex flex-col">
-                    <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label>
-                    <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="text" id={field.nameAttr} name={field.nameAttr}></input>
-                    <p ref={ref}></p>
-                </div>
-            </>)
-        case "EMAIL":
-            return (
-            <>
-                <div className="py-[15px] bg-transparent flex flex-col">
-                    <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label>
-                    <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="email" id={field.nameAttr} name={field.nameAttr} label={field.label}></input>
-                    <p ref={ref}></p>
-                </div>
-            </>)
-        case "PASSWORD":
-            return(
-            <>
-                <div className="py-[15px] bg-transparent flex flex-col">
-                    <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label>
-                    <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="password" id={field.nameAttr} name={field.nameAttr} label={field.label}></input>
-                    <p ref={ref}></p>
-                </div>
-            </>)
-        case "SELECT":
+
+        case "select":
             return (
                 <div className="py-[15px] bg-transparent flex flex-col">
                     <div className="flex space-x-[7px]">
@@ -53,18 +35,8 @@ function inputField(field, options){
                     </div>
                     <p ref={ref}></p>
                 </div>)
-        case "DATE":
-            return (
-                <div className="py-[15px] bg-transparent flex flex-col">
-                    <div className="flex space-x-[7px]">
-                        <label className="text-black p-[3px]" htmlFor={field.nameAttr}>{field.fieldName}</label>
-                        <input className={styles + "focus:ring-2 ring-[#FFB169]"} type="date" id={field.nameAttr} name={field.nameAttr}></input>
-                    </div>
-                    <p ref={ref}></p>
-                </div>
-            )
-            
-        case "SUBMIT":
+
+        case "submit":
             return (
             <>
                 <div className="py-[15px] bg-transparent">
@@ -82,33 +54,43 @@ function inputField(field, options){
             )
         default:
             return (
-            <>
-                <div className="py-[15px] bg-transparent"></div>
-                    <h5 className="text-black p-[3px]">{field.fieldName}</h5>
-                <input className={styles + " w-full focus:ring-2 ring-[#FFB169] text-white"} type="text"></input>
-            </>)
+                <div className="py-[7px] bg-transparent ">
+                    <div className="flex flex-col">
+                        <label className="text-black p-[3px]" htmlFor={field.nameAttr}>{field.fieldName}</label>
+                        <input className={styles + "focus:ring-2 ring-[#FFB169]"} type={field.fieldType} id={field.nameAttr} name={field.nameAttr}></input>
+                    </div>
+                    <div className='text-left text-black font-semibold'>{message[field.nameAttr]} </div>
+                </div>
+            )
     }
         
 }
 
-export default function form({fields, options, action, ...props}){
+export default function form({fields, options, ...props}){
+    const [message, formAction] = useFormState(create, initialState);
+
     
     return(
         <>
-        <form {...props} className="container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-t-lg" action={action}>
-        <div className="flex flex-wrap justify-center">
-            <div className="container w-5/6 ">
-                {fields.map((field, index)=>
-                    <div key={index}>
-                    
+        <form {...props} className="container p-[10px] h-fit w-11/12 sm:w-[390px] md:w-[510px] lg:w-[410px] xl:w-[600px] bg-gray-50 rounded-t-lg" action={formAction}>
+
+            <div className="flex flex-wrap justify-center">
+                <div className="container w-5/6 ">
+                    {fields.map((field, index)=>
+                        <div key={index}>
                         
-                        {inputField(field, options)}
-                    
-                    </div>
-                )}
+                            
+                            {inputField(field, options, message)}
+                        
+                        </div>
+                    )}
+                </div>
+                
             </div>
+           
+            {/* {Object.keys(message).map((property)=> <div className='text-center text-black'>{message[property]} </div>)} */}
             
-        </div>
+        
         </form>
         </>
     )
