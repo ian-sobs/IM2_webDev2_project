@@ -1,7 +1,7 @@
 'use client'
 import { useRef , useState} from 'react';
 import { useFormState } from "react-dom";
-import {create} from "@/app/signUp/actions"
+// import {create} from "@/app/signUp/actions"
 // 'use client'
 
 let initialState = {
@@ -37,14 +37,26 @@ function inputField(field, options, message){
                 </div>)
 
         case "submit":
-            return (
-            <>
-                <div className="py-[15px] bg-transparent">
-                    <div className="flex justify-center">
-                        <button className="text-xl w-32 font-medium p-[5px] rounded-full text-center  bg-[#65a30d]  text-white" id={field.nameAttr} name={field.nameAttr} type="submit">{field.fieldName}</button>
+            if(message.isValid){
+                return (
+                <>
+                    <div className="py-[15px] bg-transparent">
+                        <div className='text-black font-semibold text-center'>Successful!</div>
+                        <div className="flex justify-center">
+                            <button className="text-xl w-32 font-medium p-[5px] rounded-full text-center  bg-[#65a30d]  text-white" id={field.nameAttr} name={field.nameAttr} type="submit">{field.fieldName}</button>
+                        </div>
                     </div>
-                </div>
-            </> )
+                </> )
+            }
+            return (
+                <>
+                    <div className="py-[15px] bg-transparent">
+                        {/* <div className='text-black font-semibold text-center'>Unsuccessful!</div> */}
+                        <div className="flex justify-center">
+                            <button className="text-xl w-32 font-medium p-[5px] rounded-full text-center  bg-[#65a30d]  text-white" id={field.nameAttr} name={field.nameAttr} type="submit">{field.fieldName}</button>
+                        </div>
+                    </div>
+                </> )
         case "hidden":
             return(
                 <>
@@ -66,8 +78,8 @@ function inputField(field, options, message){
         
 }
 
-export default function form({fields, options, ...props}){
-    const [message, formAction] = useFormState(create, initialState);
+export default function form({fields, action, options, ...props}){
+    const [message, formAction] = useFormState(action, initialState);
 
     
     return(
