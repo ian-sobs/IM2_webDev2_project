@@ -8,10 +8,11 @@ export async function create(currState , formData) {
       email: "Email looks good!",
       username: "Username looks good!",
       password: "Password looks good!",
-      confirmPassword: "Is a match with the inputted password!"
+      confirmPassword: "Is a match with the inputted password!",
+      isValid: true
   }
 
-    let isValid = true
+    // let ret.isValid = true
 
     const bcrypt = require('bcrypt');
     const saltRounds = 10;
@@ -43,35 +44,35 @@ export async function create(currState , formData) {
       //modify the code to allow redirects and check if the input fields are empty
     if(email.length == 0){
         ret.email = "Email must not be empty"
-        isValid = false
+        ret.isValid = false
     }
     if(username.length == 0){
         ret.username = "Username must not be empty"
-        isValid = false
+        ret.isValid = false
     }
 
 
     if(userEmail["COUNT(email)"] >= 1){
         ret.email = "Email is taken"
-        isValid = false
+        ret.isValid = false
     }
     if(userName["COUNT(username)"] >= 1){
         ret.username = "Username is taken"
-        isValid = false
+        ret.isValid = false
     }
     if(password != formData.get("confirmPassword")){
         ret.confirmPassword = "Passwords do not match"
-        isValid = false
+        ret.isValid = false
     }
 
     if(password.length == 0){
         ret.password = "Password must not be empty"
-        isValid = false
+        ret.isValid = false
     }
     // if(queriedForObj["COUNT(email)"] < 1 && queriedForObj["COUNT(username)"] < 1 && password == formData.get("confirmPassword")){
     poolPromise.releaseConnection(db)
 
-    if(isValid){
+    if(ret.isValid){
         bcrypt.hash(password, saltRounds, function(err, hash) {
             // Store hash in your password DB.
             pool.getConnection(function(err, conn){

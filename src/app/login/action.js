@@ -3,12 +3,12 @@ import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
 import pool from '@/dbConn'
 
-export async function submitLogin(formData) {
+export async function submitLogin(currState, formData) {
     const jwt = require('jsonwebtoken')
     
 
 
-    console.log("login pool config: action.js", pool.config.connectionConfig)   
+    // console.log("login pool config: action.js", pool.config.connectionConfig)   
     const bcrypt = require('bcrypt');
     const saltRounds = 10;
 
@@ -16,12 +16,43 @@ export async function submitLogin(formData) {
     const db =  await poolPromise.getConnection()
 
     formData.delete("logIn")
-    // console.log(formData)
+    console.log(formData)
+
+    let ret = {
+        email: "",
+        password: "",
+        isValid: true
+    }
 
     const password = formData.get("password")
+    const email = formData.get("email")
 
-    const [rows, fields] = await db.execute("SELECT `user`.`userID` AS usr, `user`.`email` AS email, `user`.`username` AS unm, `user`.`firstName` AS given_name, `user`.`midName` AS middle_name, `user`.`lastName` AS family_name, `user`.`password_bcrypt` AS `password`, `user`.`birthdate` FROM `user` WHERE `email`= ?", [formData.get("email")])
+    if(email.length == 0){
+        ret.email = "Email must not be empty"
+        ret.isValid = false
+    }
+
+    if(password.length == 0){
+        ret.password = "Password must not be empty"
+        ret.isValid = false
+    }
+
+    if(!ret.isValid){ 
+        poolPromise.releaseConnection(db)
+        return ret
+    }
+
+    const [rows, fields] = await db.execute("SELECT `user`.`userID` AS usr, `user`.`email` AS email, `user`.`username` AS unm, `user`.`firstName` AS given_name, `user`.`midName` AS middle_name, `user`.`lastName` AS family_name, `user`.`password_bcrypt` AS `password`, `user`.`birthdate` FROM `user` WHERE `email`= ?", [email])
     const [queryObj] = rows
+
+    if(rows.length <= 0){
+        ret.email = "User does not exist"
+        ret.isValid = false
+        poolPromise.releaseConnection(db)
+        
+    }
+
+    if(!ret.isValid) return ret
 
     let jwt_payload = {
         usr: queryObj['usr'],
@@ -36,10 +67,7 @@ export async function submitLogin(formData) {
     
 
 
-    if(rows.length <= 0){
-        poolPromise.releaseConnection(db)
-        return
-    }
+
     
    
     // console.log("User exists!")
