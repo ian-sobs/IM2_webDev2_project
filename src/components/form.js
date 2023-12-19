@@ -1,7 +1,9 @@
 'use client'
+import { useRef } from 'react';
 // 'use client'
 function inputField(field, options){
     const styles = "text-black caret-[#9F9F9F] p-[3px] rounded-sm bg-slate-200 focus:outline-none focus:ring-2 ring-[#FFB169] "
+    const ref = useRef(0)
 
     switch(field.fieldType){
         case "H1":
@@ -10,49 +12,55 @@ function inputField(field, options){
                         <h1 className="text-center text-2xl text-black font-semibold">
                             {field.fieldName}
                         </h1>
+                        
                     </div>
             )
         case "TEXT":
             return (
             <>
-                <div className="py-[15px] bg-transparent">
-                    <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label> <br></br>
+                <div className="py-[15px] bg-transparent flex flex-col">
+                    <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label>
                     <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="text" id={field.nameAttr} name={field.nameAttr}></input>
+                    <p ref={ref}></p>
                 </div>
             </>)
         case "EMAIL":
             return (
             <>
-                <div className="py-[15px] bg-transparent">
-                    <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label> <br></br>
+                <div className="py-[15px] bg-transparent flex flex-col">
+                    <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label>
                     <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="email" id={field.nameAttr} name={field.nameAttr} label={field.label}></input>
+                    <p ref={ref}></p>
                 </div>
             </>)
         case "PASSWORD":
             return(
             <>
-                <div className="py-[15px] bg-transparent">
-                    <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label> <br></br>
+                <div className="py-[15px] bg-transparent flex flex-col">
+                    <label htmlFor={field.nameAttr} className="text-black p-[3px]">{field.fieldName}</label>
                     <input className={styles + " w-full focus:ring-2 ring-[#FFB169]"} type="password" id={field.nameAttr} name={field.nameAttr} label={field.label}></input>
+                    <p ref={ref}></p>
                 </div>
             </>)
         case "SELECT":
             return (
-                <div className="py-[15px] bg-transparent">
+                <div className="py-[15px] bg-transparent flex flex-col">
                     <div className="flex space-x-[7px]">
                         <label className="text-black p-[3px]" htmlFor={field.nameAttr}>{field.fieldName}</label>
                         <select className={styles + "focus:ring-2 ring-[#FFB169] w-28"} id={field.nameAttr} name={field.nameAttr} defaultValue="">
                             {options}
                         </select>
                     </div>
+                    <p ref={ref}></p>
                 </div>)
         case "DATE":
             return (
-                <div className="py-[15px] bg-transparent">
+                <div className="py-[15px] bg-transparent flex flex-col">
                     <div className="flex space-x-[7px]">
                         <label className="text-black p-[3px]" htmlFor={field.nameAttr}>{field.fieldName}</label>
                         <input className={styles + "focus:ring-2 ring-[#FFB169]"} type="date" id={field.nameAttr} name={field.nameAttr}></input>
                     </div>
+                    <p ref={ref}></p>
                 </div>
             )
             
@@ -99,7 +107,7 @@ export default function form({fields, options, action, ...props}){
                     </div>
                 )}
             </div>
-
+            
         </div>
         </form>
         </>
