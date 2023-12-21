@@ -8,6 +8,11 @@ export async function POST(request) {
     const [reqRoom] = result
     console.log("reqRoom", result)
 
+    const [bookRow, bookFields] = await conn.execute("SELECT slots FROM book WHERE bookID=?", [reqRoom.bookID])
+    const [book] = bookRow
+
+    if(book.slots <= 0) return Response.json({approved: false})
+    
     const [delRes, delResFields] = await conn.execute("DELETE FROM shopping_cart WHERE shoppingCartID=?", [rowID])
     // const [destruct] = delRes
     console.log("delRes", delRes)
@@ -17,7 +22,7 @@ export async function POST(request) {
     const [insert, insertFields] = await conn.execute("INSERT INTO `order` (userID, bookID) VALUES (?, ?)", [reqRoom.userID, reqRoom.bookID])
     console.log("insert", insert)
 
-
+    await conn.execute("UPDATE `book` SET `slots` = `slots`-1 WHERE `bookID`=?", [reqRoom.bookID])
     // if(insert.insertID <= 0) return Response.json({approved: false})
     return Response.json({approved: true})
 }

@@ -1,6 +1,6 @@
 'use client'
-// import RowAction from "../rowAction"
-// import actionDetails from "../actionButDetails"
+import RowAction from "@/app/admin/components/rowAction"
+import actionDetails from "@/app/admin/components/actionButDetails"
 // import GenreForm from "./genreForm"
 
 export function HeadRow({colNames}){
@@ -14,20 +14,35 @@ export function HeadRow({colNames}){
     )
 }
 
-export function BodyRow({rowObj}){
+// function removeUser(rowID){
+//     fetch("/admin/assginments/api/removeUser", {            
+//         method: "POST",
+//         headers: new Headers({'content-type': 'application/json'}),
+//         body: JSON.stringify({usrID: rowID})
+//     })
+//     .then((result)=>result.json())
+//     .then((output)=>{
+//         if(output.removedProperly){
+
+//         }
+//     })
+// }
+
+
+export function BodyRow({removeUser, rowObj}){
     let colData = Object.keys(rowObj)
     console.log("rowObj", rowObj)
 
-    // const actions = [
-    //     new actionDetails('Suspend', suspendUser, 'bg-blue-500', 'text-white'),
-    //     new actionDetails('Delete', deleteUser, 'bg-rose-500', 'text-white')
-    // ]
+    const actions = [
+        new actionDetails('Remove', removeUser, 'bg-blue-500', 'text-white')
+    ]
     return (
         <>    
             <tr className="z-1">     
                 {colData.map((objProp, index)=><td key={index} >{rowObj[objProp]}</td>)}
-                {/* <td className='z-1'><RowAction rowID={rowID} positioning='absolute' actions={actions}>Action</RowAction></td> */}
-                        
+                <td key="actions">
+                    <RowAction rowID={rowObj["usrID"]} positioning='absolute' actions={actions} >Actions</RowAction>
+                </td>
             </tr>        
         </>
     )
