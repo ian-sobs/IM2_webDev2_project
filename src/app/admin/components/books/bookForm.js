@@ -30,7 +30,7 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
         // console.log(genreIDs)
         const data =  new FormData(formBook.current)
         console.log("formData_in_dorm_rooms", data)
-        data.set('bookImgFile', imageFile.current.files[0])
+        // data.set('bookImgFile', imageFile.current.files[0])
 
         // genres.forEach((genre)=>{
         //     data.delete(genre.name)
@@ -108,8 +108,8 @@ export default function BookForm({bookID_in_form, setBookID_in_form, updateBook,
                             <div className='flex flex-col my-3'>
                                 <label >Image</label>
                                 <div className='flex flex-col mt-2'>
-                                    <input ref={imageFile} className="bg-slate-200 mb-1" id='bookImgFile' name='bookImgFile' type='file' accept='.png, .jpeg, .jpg, .svg'/> 
-                                    <p className='text-justify'>Or</p>
+                                    {/* <input ref={imageFile} className="bg-slate-200 mb-1" id='bookImgFile' name='bookImgFile' type='file' accept='.png, .jpeg, .jpg, .svg'/> 
+                                    <p className='text-justify'>Or</p> */}
                                     <input className="bg-slate-200 mt-1" id='bookImgLink' name='bookImgLink' type='text' placeholder="Enter a URL to an image"/> 
                                 </div>
                                  
