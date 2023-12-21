@@ -9,6 +9,8 @@ export async function GET(request) {
     const [result, fields] = await conn.execute('SELECT title FROM book WHERE bookID=?',[rowID])
     const [roomName] = result
     console.log(result)
+
+    poolPromise.releaseConnection(conn)
    
     return Response.json(roomName)
   }

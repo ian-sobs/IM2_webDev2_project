@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
 export default function TableFull({rowID}){
     const [rows, setRows] = useState([])
     const [caption, setCaption] = useState("")
-    const colNames = ["Email", "First name", "Last name"]
+    const colNames = ["User ID", "Email", "First name", "Last name", "Actions"]
     useEffect(()=>{
         fetch(`/admin/assginments/api/getDormmates?rowID=${rowID}`)
         .then((result)=>result.json())
@@ -114,6 +114,21 @@ export default function TableFull({rowID}){
             
     //     }) 
     // }
+    function removeUser(rowID){
+        fetch("/admin/assginments/api/removeUser", {            
+            method: "POST",
+            headers: new Headers({'content-type': 'application/json'}),
+            body: JSON.stringify({usrID: rowID})
+        })
+        .then((result)=>result.json())
+        .then((output)=>{
+            if(output.removedProperly){
+                let newArr = rowsCopy.filter((row)=>row.usrID != rowID)
+                setRows(newArr)
+            }
+        })
+    }
+
 
     return(
         <>
@@ -127,7 +142,7 @@ export default function TableFull({rowID}){
                 <HeadRow colNames={colNames} ndxToShorten={4}></HeadRow>
             </thead>
             <tbody>
-                {rows.map((rowObj, index)=><BodyRow rowObj={rowObj}></BodyRow>)}
+                {rows.map((rowObj, index)=><BodyRow removeUser={removeUser} rowObj={rowObj}></BodyRow>)}
             </tbody>
         </table>        
         
