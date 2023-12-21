@@ -54,6 +54,15 @@ export async function submitLogin(currState, formData) {
 
     if(!ret.isValid) return ret
 
+    const result = await bcrypt.compare(password, queryObj["password"])
+
+    if(!result){
+        ret.password = "Wrong password"
+        ret.isValid = false
+        poolPromise.releaseConnection(db)
+        return ret
+    } 
+
     let jwt_payload = {
         usr: queryObj['usr'],
         email: queryObj['email'],
@@ -64,21 +73,6 @@ export async function submitLogin(currState, formData) {
         birthdate: queryObj['birthdate']
     }
 
-    
-
-
-
-    
-   
-    // console.log("User exists!")
-    // console.log(queryObj["password_bcrypt"])
-
-    const result = await bcrypt.compare(password, queryObj["password"])
-
-    if(!result){
-        poolPromise.releaseConnection(db)
-        return
-    } 
     console.log("Password was correct") 
 
     //creates the JWT token and stores it as an HTTP cookie
