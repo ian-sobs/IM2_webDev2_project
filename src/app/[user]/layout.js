@@ -22,10 +22,10 @@ export default function BookiiLayout({children}){
         //     name: "REQUEST",
         //     linkTo: `/${usrInfo.unm}/orders`
         // },
-        {
-            name: `BOOKING HISTORY`,
-            linkTo: `/${usrInfo.unm}/orders`
-        },
+        // {
+        //     name: `BOOKING HISTORY`,
+        //     linkTo: `/${usrInfo.unm}/orders`
+        // },
         {
             name: `PROFILE`,
             linkTo: `/${usrInfo.unm}/userInfo`
